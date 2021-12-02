@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
+        "state": {
+          "branch": "master",
+          "revision": "c874e5ef178a65b6a2b6a04d5981652d4fa95e22",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
