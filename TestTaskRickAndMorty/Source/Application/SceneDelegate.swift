@@ -9,6 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
+    private lazy var appDependency: AppDependency = AppDependency.makeDefault()
     private var appCoordinator: AppCoordinator?
     
     var window: UIWindow?
@@ -19,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let window = window else { return }
         window.windowScene = windowScene
         
-        appCoordinator = AppCoordinator(window: window)
+        appCoordinator = AppCoordinator(window: window, appDependency: appDependency)
         appCoordinator?.start()
     }
 }

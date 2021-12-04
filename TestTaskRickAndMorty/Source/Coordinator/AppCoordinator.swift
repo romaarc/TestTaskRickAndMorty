@@ -12,11 +12,12 @@ class AppCoordinator {
     private let window: UIWindow
     private lazy var tabBarController = UITabBarController()
     private lazy var navigationControllers = AppCoordinator.makeNavigationControllers()
-    //private lazy var networkService = NetworkService()
+    private let appDependency: AppDependency
     //private lazy var persistentProvider = PersistentProvider()
     
-    init(window: UIWindow) {
+    init(window: UIWindow, appDependency: AppDependency) {
         self.window = window
+        self.appDependency = appDependency
         navigationControllers = AppCoordinator.makeNavigationControllers()
     }
     
@@ -60,7 +61,7 @@ private extension AppCoordinator {
         guard let navController = self.navigationControllers[.characters] else {
             fatalError("something wrong with appCoordinator")
         }
-        let context = CharacterContext(moduleOutput: nil)
+        let context = CharacterContext(moduleDependencies: appDependency, moduleOutput: nil)
         let container = CharacterContainer.assemble(with: context)
         let characterVC = container.viewController
         characterVC.navigationItem.title = Localize.characters
