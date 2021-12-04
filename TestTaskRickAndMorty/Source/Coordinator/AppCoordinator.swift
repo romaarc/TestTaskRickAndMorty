@@ -82,7 +82,8 @@ private extension AppCoordinator {
         
         UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = .black
-        
+        UITabBarItem.appearance().setTitleTextAttributes([.font: Font.sber(ofSize: Font.Size.ten, weight: .bold)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.font: Font.sber(ofSize: Font.Size.ten, weight: .bold)], for: .selected)
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x: controller.tabBar.frame.width, y: 0))
