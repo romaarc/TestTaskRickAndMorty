@@ -12,7 +12,7 @@ enum APIConstants {
 }
 
 enum APIType {
-    static let popular = "popular"
+    static let getCharacters = "/api/character/"
 }
 
 enum LoadingDataType {

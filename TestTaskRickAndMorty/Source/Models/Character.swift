@@ -21,3 +21,10 @@ struct Character: Decodable {
         case imageURL = "image"
     }
 }
+
+struct CharacterURLParametrs {
+    let page: String?
+    let name: String?
+    let status: String?
+    let gender: String?
+}
