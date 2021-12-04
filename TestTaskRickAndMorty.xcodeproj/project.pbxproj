@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB6B6196275BA49B00658921 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6195275BA49B00658921 /* APIConstants.swift */; };
+		BB6B6198275BA57100658921 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6197275BA57100658921 /* Info.swift */; };
+		BB6B619A275BA5E900658921 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6199275BA5E900658921 /* Response.swift */; };
+		BB6B619C275BA63700658921 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B619B275BA63700658921 /* Character.swift */; };
 		BB9E2B622757B94100CC6A98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9E2B612757B94100CC6A98 /* AppDelegate.swift */; };
 		BB9E2B642757B94100CC6A98 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9E2B632757B94100CC6A98 /* SceneDelegate.swift */; };
 		BB9E2B6B2757B94200CC6A98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E2B6A2757B94200CC6A98 /* Assets.xcassets */; };
@@ -33,6 +37,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB6B6195275BA49B00658921 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		BB6B6197275BA57100658921 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		BB6B6199275BA5E900658921 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		BB6B619B275BA63700658921 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		BB9E2B5E2757B94100CC6A98 /* TestTaskRickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTaskRickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9E2B612757B94100CC6A98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB9E2B632757B94100CC6A98 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +79,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB6B6193275BA43F00658921 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BB6B6194275BA47700658921 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
 		BB9E2B552757B94100CC6A98 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +224,9 @@
 		BB9E2BA62757DCF700CC6A98 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BB6B619B275BA63700658921 /* Character.swift */,
+				BB6B6197275BA57100658921 /* Info.swift */,
+				BB6B6199275BA5E900658921 /* Response.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +250,9 @@
 		BB9E2BAB2757DDED00CC6A98 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BB6B6194275BA47700658921 /* Core Data */,
+				BB6B6193275BA43F00658921 /* Network */,
+				BB6B6195275BA49B00658921 /* APIConstants.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -312,6 +340,7 @@
 				BB9E2B962757BD7D00CC6A98 /* CharacterProtocols.swift in Sources */,
 				BB9E2BA02757BF7500CC6A98 /* Cacher.swift in Sources */,
 				BB9E2B7D2757BAB400CC6A98 /* Colors.swift in Sources */,
+				BB6B6196275BA49B00658921 /* APIConstants.swift in Sources */,
 				BB9E2B7F2757BAEC00CC6A98 /* Localize.swift in Sources */,
 				BB9E2B892757BC9400CC6A98 /* UIColor+Extension.swift in Sources */,
 				BB9E2B972757BD7D00CC6A98 /* CharacterInteractor.swift in Sources */,
@@ -319,6 +348,9 @@
 				BB9E2B872757BBB800CC6A98 /* Font.swift in Sources */,
 				BB9E2B932757BD7D00CC6A98 /* CharacterPresenter.swift in Sources */,
 				BB9E2B9D2757BF0B00CC6A98 /* UIImageView+Extension.swift in Sources */,
+				BB6B619C275BA63700658921 /* Character.swift in Sources */,
+				BB6B619A275BA5E900658921 /* Response.swift in Sources */,
+				BB6B6198275BA57100658921 /* Info.swift in Sources */,
 				BB9E2B812757BB3100CC6A98 /* GlobalConstants.swift in Sources */,
 				BB9E2B642757B94100CC6A98 /* SceneDelegate.swift in Sources */,
 				BB9E2B982757BD7D00CC6A98 /* CharacterContainer.swift in Sources */,
