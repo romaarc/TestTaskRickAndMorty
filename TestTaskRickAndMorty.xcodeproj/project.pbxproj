@@ -111,6 +111,20 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		BB6B61A9275BB9F100658921 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB6B61AA275BB9F800658921 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		BB9E2B552757B94100CC6A98 = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +236,8 @@
 		BB9E2B8B2757BD4800CC6A98 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				BB6B61A9275BB9F100658921 /* Cell */,
+				BB6B61AA275BB9F800658921 /* ViewModels */,
 				BB9E2B8D2757BD7D00CC6A98 /* CharacterPresenter.swift */,
 				BB9E2B8E2757BD7D00CC6A98 /* CharacterRouter.swift */,
 				BB9E2B8F2757BD7D00CC6A98 /* CharacterViewController.swift */,

@@ -102,6 +102,7 @@ private extension AppCoordinator {
                                                        .font : Font.sber(ofSize: Font.Size.twenty, weight: .bold)]
         navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black,
                                                             .font : Font.sber(ofSize: Font.Size.twentyEight, weight: .bold)]
+        UINavigationBar.appearance().tintColor = .gray
         controller.navigationBar.standardAppearance = navigationBarAppearance
         controller.navigationBar.compactAppearance = navigationBarAppearance
         controller.navigationBar.scrollEdgeAppearance = navigationBarAppearance
@@ -122,7 +123,7 @@ fileprivate enum NavigationControllersType: Int, CaseIterable {
     var image: UIImage {
         switch self {
         case .characters:
-            return Localize.Images.moviesIcon
+            return Localize.Images.charactersIcon
         case .favorites:
             return Localize.Images.favoritesIcon
         }

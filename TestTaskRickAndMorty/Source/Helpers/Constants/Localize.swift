@@ -12,8 +12,9 @@ enum Localize {
     static let favorites = "Избранное"
     
     enum Images {
-        static let moviesIcon = UIImage(systemName: "person")!
+        static let charactersIcon = UIImage(systemName: "person.3")!
         static let favoritesIcon = UIImage(systemName: "heart.circle.fill")!
+        static let characterFilterSymbol = UIImage(systemName: "line.horizontal.3.decrease.circle")
     }
 }
 

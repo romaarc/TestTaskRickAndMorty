@@ -10,6 +10,7 @@ import UIKit
 
 final class CharacterViewController: UIViewController {
 	private let output: CharacterViewOutput
+    private let searchController = UISearchController()
 
     init(output: CharacterViewOutput) {
         self.output = output
@@ -23,8 +24,36 @@ final class CharacterViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         view.backgroundColor = .white
+        configureSearchController()
 	}
 }
-
+//MARK: - CharacterViewInput from Presenter
 extension CharacterViewController: CharacterViewInput {
+}
+
+//MARK: - Filter VC
+private extension CharacterViewController {
+    @objc func filterButtonClicked() {
+    }
+}
+
+// MARK: - Search bar methods
+extension CharacterViewController: UISearchBarDelegate {
+    private func configureSearchController(){
+        navigationItem.searchController = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style: .plain, target: self, action: #selector(filterButtonClicked))
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Найти героя"
+        searchController.obscuresBackgroundDuringPresentation = false
+    }
+
+    private func setSearchController() {
+
+    }
+    
+    private func getCharactersBySearchQuery(searchQuery: String) {
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    }
 }
