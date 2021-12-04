@@ -42,9 +42,17 @@ extension CharacterViewController: UISearchBarDelegate {
     private func configureSearchController(){
         navigationItem.searchController = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style: .plain, target: self, action: #selector(filterButtonClicked))
+        
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Найти героя"
+        searchController.searchBar.searchTextField.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
         searchController.obscuresBackgroundDuringPresentation = false
+        
+        let attributes:[NSAttributedString.Key: Any] = [
+            .font: Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
+        ]
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Отмена"
     }
 
     private func setSearchController() {

@@ -12,6 +12,7 @@ enum Font {
         static let twenty: CGFloat = 20.0
         static let twentyEight: CGFloat = 28.0
         static let fouthteen: CGFloat = 14.0
+        static let seventeen: CGFloat = 17.0
     }
     
     enum Weight {
