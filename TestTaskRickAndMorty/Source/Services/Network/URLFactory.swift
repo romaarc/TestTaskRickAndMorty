@@ -19,7 +19,7 @@ enum URLFactory {
         return urlComponents
     }()
     
-    static func getCharacter(params: CharacterURLParametrs) -> String {
+    static func getCharacter(params: CharacterURLParameters) -> String {
         var urlComponents = baseURLComponents
         let params = [
             URLQueryItem(name: "page", value: String(params.page ?? "")),

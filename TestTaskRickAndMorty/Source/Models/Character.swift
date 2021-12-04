@@ -22,7 +22,7 @@ struct Character: Decodable {
     }
 }
 
-struct CharacterURLParametrs {
+struct CharacterURLParameters {
     let page: String?
     let name: String?
     let status: String?

@@ -8,7 +8,7 @@
 import Foundation
 
 enum APIConstants {
-    static let rickMortyURL = "https://rickandmortyapi.com/api"
+    static let rickMortyURL = "https://rickandmortyapi.com"
 }
 
 enum APIType {
