@@ -26,11 +26,12 @@ protocol CharacterViewInput: AnyObject {
 
 protocol CharacterViewOutput: AnyObject {
     func viewDidLoad()
-    //func willDisplay(at index: Int)
+    func willDisplay(at index: Int)
 }
 
 protocol CharacterInteractorInput: AnyObject {
     func reload()
+    func loadNext()
 }
 
 protocol CharacterInteractorOutput: AnyObject {

@@ -35,6 +35,14 @@ extension CharacterPresenter: CharacterViewOutput {
         interactor.reload()
     }
     
+    func willDisplay(at index: Int) {
+        if !isReloading, !isNextPageLoading, index == (characters.count - 1) {
+            isNextPageLoading = true
+            interactor.loadNext()
+        } else {
+            return
+        }
+    }
 }
 
 extension CharacterPresenter: CharacterInteractorOutput {
