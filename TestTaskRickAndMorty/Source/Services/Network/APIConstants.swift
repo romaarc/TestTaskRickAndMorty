@@ -14,8 +14,3 @@ enum APIConstants {
 enum APIType {
     static let getCharacters = "/api/character/"
 }
-
-enum LoadingDataType {
-    case nextPage
-    case reload
-}

@@ -48,7 +48,7 @@ final class NetworkService {
             let decoder = JSONDecoder()
             do {
                 let decodedModel = try decoder.decode(T.self, from: data)
-                    completion(.success(decodedModel))
+                completion(.success(decodedModel))
             } catch {
                     completion(.failure(NetworkErrors.decodeIsFail))
             }

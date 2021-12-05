@@ -13,6 +13,7 @@ struct GlobalConstants {
     static let collectionCellWidth = 342
     static let collectionCellHeight = 513
     static let raitingSlogan = "рейтинг: "
+    static let initialPage = 1
 }
 
 //struct FavoriteConstants {
@@ -50,19 +51,19 @@ struct GlobalConstants {
 //    }
 //}
 //
-//struct MovieConstants {
-//    struct Layout {
-//        static let cornerRadius: CGFloat = 15
+struct CharacterConstants {
+    struct Layout {
+        static let cornerRadius: CGFloat = 15
 //        static let size: CGFloat = 50
 //        static let starButtonImageInsets: CGFloat = 5
 //        static let labelCornerRadius: CGFloat = 2
 //        static let labelBorderWidth: CGFloat = 2
 //        static let freeSlogan = "бесплатно".uppercased()
-//    }
+    }
 //    struct Images {
 //        static let playButton = UIImage(systemName: "play.circle")?.withTintColor(UIColor.white)
 //        static let starButton = UIImage(systemName: "star")?.withTintColor(.systemYellow).withRenderingMode(.alwaysOriginal)
 //        static let starFillButton = UIImage(systemName: "star.fill")?.withTintColor(.systemYellow).withRenderingMode(.alwaysOriginal)
 //    }
-//}
+}
 

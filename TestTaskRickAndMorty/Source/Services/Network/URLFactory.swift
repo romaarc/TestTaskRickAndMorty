@@ -16,18 +16,19 @@ enum URLFactory {
     private static let baseURLComponents: URLComponents = {
         let url = URL(string: APIConstants.rickMortyURL)!
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        urlComponents.queryItems = []
         return urlComponents
     }()
     
     static func getCharacter(params: CharacterURLParameters) -> String {
         var urlComponents = baseURLComponents
-        let params = [
-            URLQueryItem(name: "page", value: String(params.page ?? "")),
-            URLQueryItem(name: "name", value: params.name ?? ""),
+        let paramsQueryItem = [
+            URLQueryItem(name: "page", value: params.page ?? ""),
+            URLQueryItem(name: "name", value:  params.name ?? ""),
             URLQueryItem(name: "status", value: params.status ?? ""),
             URLQueryItem(name: "gender", value: params.gender ?? "")
         ]
-        urlComponents.queryItems?.append(contentsOf: params)
+        urlComponents.queryItems?.append(contentsOf: paramsQueryItem)
         return urlComponents.url!.appendingPathComponent(APIType.getCharacters).absoluteString
     }
 }
