@@ -14,7 +14,7 @@ struct Character: Decodable {
     let species: String
     let gender: String
     let imageURL: String
-    let created: String
+    let created: Date
     
     private enum CodingKeys: String, CodingKey {
         case id, name, status, species, gender, created

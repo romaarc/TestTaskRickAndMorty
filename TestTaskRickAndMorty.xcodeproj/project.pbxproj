@@ -19,6 +19,7 @@
 		BB6B61A4275BACC200658921 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B61A3275BACC200658921 /* Reachability.swift */; };
 		BB6B61A6275BB0B200658921 /* NetworkService+Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B61A5275BB0B200658921 /* NetworkService+Characters.swift */; };
 		BB6B61A8275BB1E500658921 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B61A7275BB1E500658921 /* AppDependency.swift */; };
+		BB82867A275F71F0003100E4 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB828679275F71F0003100E4 /* Decoder.swift */; };
 		BB9E2B622757B94100CC6A98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9E2B612757B94100CC6A98 /* AppDelegate.swift */; };
 		BB9E2B642757B94100CC6A98 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9E2B632757B94100CC6A98 /* SceneDelegate.swift */; };
 		BB9E2B6B2757B94200CC6A98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E2B6A2757B94200CC6A98 /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		BB6B61A3275BACC200658921 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		BB6B61A5275BB0B200658921 /* NetworkService+Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Characters.swift"; sourceTree = "<group>"; };
 		BB6B61A7275BB1E500658921 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		BB828679275F71F0003100E4 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		BB9E2B5E2757B94100CC6A98 /* TestTaskRickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTaskRickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9E2B612757B94100CC6A98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB9E2B632757B94100CC6A98 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				BB6B61A1275BAC9800658921 /* NetworkServiceProtocol.swift */,
 				BB6B61A3275BACC200658921 /* Reachability.swift */,
 				BB6B619D275BA90F00658921 /* URLFactory.swift */,
+				BB828679275F71F0003100E4 /* Decoder.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				BB6B61A2275BAC9800658921 /* NetworkServiceProtocol.swift in Sources */,
 				BB591DA8275CBD2700F0A0B2 /* CharacterCell.swift in Sources */,
 				BB9E2B9D2757BF0B00CC6A98 /* UIImageView+Extension.swift in Sources */,
+				BB82867A275F71F0003100E4 /* Decoder.swift in Sources */,
 				BB6B619C275BA63700658921 /* Character.swift in Sources */,
 				BB6B619A275BA5E900658921 /* Response.swift in Sources */,
 				BB6B6198275BA57100658921 /* Info.swift in Sources */,

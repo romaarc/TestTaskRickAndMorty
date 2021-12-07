@@ -19,7 +19,8 @@ class AppDependency {
     }
 
     static func makeDefault() -> AppDependency {
-        let networkService = NetworkService(reachability: Reachability())
+        let networkService = NetworkService(reachability: Reachability(),
+                                            customDecoder: JSONDecoderCustom())
         return AppDependency(networkService: networkService)
     }
 }

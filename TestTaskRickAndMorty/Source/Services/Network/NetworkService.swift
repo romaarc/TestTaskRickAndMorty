@@ -17,9 +17,11 @@ enum NetworkErrors: Error {
 final class NetworkService {
     
     private let reachability: ReachabilityProtocol
+    private let customDecoder: CustomDecoder
     
-    init(reachability: ReachabilityProtocol) {
+    init(reachability: ReachabilityProtocol, customDecoder: CustomDecoder) {
         self.reachability = reachability
+        self.customDecoder = customDecoder
     }
     
     func baseRequest<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
@@ -45,7 +47,7 @@ final class NetworkService {
                 return
             }
             
-            let decoder = JSONDecoder()
+            let decoder = self.customDecoder.decoder
             do {
                 let decodedModel = try decoder.decode(T.self, from: data)
                 completion(.success(decodedModel))
