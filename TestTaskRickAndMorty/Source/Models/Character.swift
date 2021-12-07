@@ -23,8 +23,8 @@ struct Character: Decodable {
 }
 
 struct CharacterURLParameters {
-    let page: String?
+    var page: String?
     var name: String?
-    let status: String?
-    let gender: String?
+    var status: String?
+    var gender: String?
 }

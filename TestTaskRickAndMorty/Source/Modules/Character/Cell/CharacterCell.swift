@@ -101,4 +101,3 @@ extension CharacterCell {
         detailViewStatusLabel.text = "\(viewModel.status) - \(viewModel.species)"
     }
 }
-

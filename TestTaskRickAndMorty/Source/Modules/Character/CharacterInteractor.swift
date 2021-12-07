@@ -25,7 +25,13 @@ final class CharacterInteractor {
 
 extension CharacterInteractor: CharacterInteractorInput {
     func reload() {
-        page = GlobalConstants.initialPage
+        if params.page != "1" {
+            page = GlobalConstants.initialPage
+            params.page = String(page)
+        }
+        params.name = nil
+        params.status = nil
+        params.gender = nil
         load()
     }
     
@@ -36,6 +42,7 @@ extension CharacterInteractor: CharacterInteractorInput {
     func reload(with searchText: String?) {
         guard let searchText = searchText else { return }
         page = GlobalConstants.initialPage
+        params.page = String(page)
         params.name = searchText
         load()
     }
@@ -49,6 +56,7 @@ private extension CharacterInteractor {
             case.success(let response):
                 self.output?.didLoad(with: response.results, loadType: self.page == GlobalConstants.initialPage ? .reload : .nextPage)
                 self.page += 1
+                self.params.page = String(self.page)
             case .failure(let error):
                 self.output?.didError(with: error)
             }

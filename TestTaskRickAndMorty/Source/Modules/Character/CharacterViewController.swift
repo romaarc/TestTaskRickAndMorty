@@ -13,7 +13,7 @@ final class CharacterViewController: UIViewController {
     private let output: CharacterViewOutput
     private let searchController = UISearchController()
     private let collectionView: UICollectionView
-    private var viewModels = [CharacterViewModel]()
+    private var viewModels: [CharacterViewModel] = []
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(style: .large)
@@ -35,8 +35,8 @@ final class CharacterViewController: UIViewController {
     
     override func loadView() {
         let view = UIView()
-        view.addSubview(self.collectionView)
-        self.setupCollectionView()
+        view.addSubview(collectionView)
+        setupCollectionView()
         self.view = view
     }
     
@@ -62,15 +62,15 @@ final class CharacterViewController: UIViewController {
         collectionView.frame = view.frame
     }
 }
-//MARK: - Extensions CollectionsView
+//MARK: - Extensions CollectionsView, activityIndicator
 private extension CharacterViewController {
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(CharacterCell.self)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .white
         collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        collectionView.register(CharacterCell.self)
     }
     
     func stopActivityIndicator() {
@@ -120,11 +120,9 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
 //MARK: - CharacterViewInput from Presenter
 extension CharacterViewController: CharacterViewInput {
     func set(viewModels: [CharacterViewModel]) {
-        DispatchQueue.main.async {
-            self.startActivityIndicator()
-        }
         self.viewModels = viewModels
         DispatchQueue.main.async {
+            self.startActivityIndicator()
             self.collectionView.reloadData()
             self.stopActivityIndicator()
         }
@@ -153,6 +151,11 @@ extension CharacterViewController: UISearchBarDelegate {
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Отмена"
+        
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.definesPresentationContext = true
+
+        //searchController.searchBar.searchBarStyle = .prominent
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -160,11 +163,7 @@ extension CharacterViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text {
-            if text.isEmpty {
-                viewModels.removeAll()
-                self.output.viewDidLoad()
-            }
-        }
+        viewModels.removeAll()
+        self.output.viewDidLoad()
     }
 }
