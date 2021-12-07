@@ -11,8 +11,8 @@ enum Colors {
     static let lightWhite = UIColor.rgba(255, 255, 247)
     
     enum Gradient {
-        static let midColor = UIColor.rgba(70, 36, 70)
-        static let topColor = UIColor.rgba(65, 40, 80)
+        static let midColor = UIColor.rgba(216, 245, 240)
+        static let topColor = UIColor.rgba(211, 236, 242)
     }
 }
 

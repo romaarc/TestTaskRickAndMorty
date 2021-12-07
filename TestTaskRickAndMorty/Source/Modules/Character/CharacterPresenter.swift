@@ -71,7 +71,8 @@ private extension CharacterPresenter {
             CharacterViewModel(id: character.id,
                                name: character.name,
                                status: character.status,
-                               imageURL: character.imageURL)
+                               imageURL: character.imageURL,
+                               species: character.species)
         }
     }
 }

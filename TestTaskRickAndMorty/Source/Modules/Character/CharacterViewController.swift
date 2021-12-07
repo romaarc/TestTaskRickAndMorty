@@ -52,7 +52,7 @@ private extension CharacterViewController {
         collectionView.register(CharacterCell.self)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .white
-        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
 }
 
@@ -76,8 +76,7 @@ extension CharacterViewController: UICollectionViewDataSource {
 extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right
-        width = (width - 2 * 5) / 2
+        let width = (view.bounds.width - 3 * 10) / 3
         return CGSize(width: width, height: width + 50)
     }
     
@@ -89,7 +88,7 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
         self.output.willDisplay(at: indexPath.item)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        5
+        10
     }
 }
 

@@ -12,4 +12,5 @@ struct CharacterViewModel {
     let name: String
     let status: String
     let imageURL: String
+    let species: String
 }
