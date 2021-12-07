@@ -26,12 +26,14 @@ protocol CharacterViewInput: AnyObject {
 
 protocol CharacterViewOutput: AnyObject {
     func viewDidLoad()
+    func searchBarTextDidEndEditing(with text: String?)
     func willDisplay(at index: Int)
 }
 
 protocol CharacterInteractorInput: AnyObject {
     func reload()
     func loadNext()
+    func reload(with searchText: String?)
 }
 
 protocol CharacterInteractorOutput: AnyObject {

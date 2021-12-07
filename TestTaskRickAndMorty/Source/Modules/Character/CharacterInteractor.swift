@@ -12,9 +12,14 @@ final class CharacterInteractor {
     weak var output: CharacterInteractorOutput?
     private let rickAndMortyNetworkService: NetworkServiceProtocol
     private var page: Int = GlobalConstants.initialPage
+    private var params: CharacterURLParameters
     
     init(rickAndMortyNetworkService: NetworkServiceProtocol) {
         self.rickAndMortyNetworkService = rickAndMortyNetworkService
+        self.params = CharacterURLParameters(page: String(page),
+                                             name: nil,
+                                             status: nil,
+                                             gender: nil)
     }
 }
 
@@ -27,11 +32,17 @@ extension CharacterInteractor: CharacterInteractorInput {
     func loadNext() {
         load()
     }
+    
+    func reload(with searchText: String?) {
+        guard let searchText = searchText else { return }
+        page = GlobalConstants.initialPage
+        params.name = searchText
+        load()
+    }
 }
 
 private extension CharacterInteractor {
     func load() {
-        let params  = CharacterURLParameters(page: String(page), name: nil, status: nil, gender: nil)
         rickAndMortyNetworkService.requestCharacters(with: params) { [weak self] result  in
             guard let self = self else { return }
             switch result {

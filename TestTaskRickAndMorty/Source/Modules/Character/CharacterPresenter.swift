@@ -43,6 +43,13 @@ extension CharacterPresenter: CharacterViewOutput {
             return
         }
     }
+    
+    func searchBarTextDidEndEditing(with text: String?) {
+        guard let searchText = text else { return }
+        isReloading = true
+        characters.removeAll()
+        interactor.reload(with: searchText)
+    }
 }
 
 extension CharacterPresenter: CharacterInteractorOutput {

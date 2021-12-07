@@ -8,7 +8,7 @@
 import UIKit
 
 enum Localize {
-    static let characters = "Герои"
+    static let characters = "Персонажи"
     static let favorites = "Избранное"
     
     enum Images {

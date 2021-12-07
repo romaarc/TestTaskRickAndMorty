@@ -24,7 +24,7 @@ struct Character: Decodable {
 
 struct CharacterURLParameters {
     let page: String?
-    let name: String?
+    var name: String?
     let status: String?
     let gender: String?
 }
