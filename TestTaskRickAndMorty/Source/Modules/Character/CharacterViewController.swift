@@ -14,6 +14,14 @@ final class CharacterViewController: UIViewController {
     private let searchController = UISearchController()
     private let collectionView: UICollectionView
     private var viewModels = [CharacterViewModel]()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.hidesWhenStopped = true
+        activity.color = UIColor.black
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
 
     init(output: CharacterViewOutput) {
         self.output = output
@@ -34,10 +42,20 @@ final class CharacterViewController: UIViewController {
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        view.backgroundColor = .white
+        setupUI()
         self.output.viewDidLoad()
         configureSearchController()
 	}
+    
+    private func setupUI() {
+        view.backgroundColor = .white
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -54,6 +72,14 @@ private extension CharacterViewController {
         collectionView.backgroundColor = .white
         collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
+    
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
 }
 
 //MARK: - UICollectionViewDataSource
@@ -67,7 +93,6 @@ extension CharacterViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueCell(cellType: CharacterCell.self, for: indexPath)
         let viewModel = viewModels[indexPath.row]
         cell.update(with: viewModel)
-//        cell.characterImageView.image = UIImage(systemName: "star")!
         return cell
     }
 }
@@ -95,9 +120,13 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
 //MARK: - CharacterViewInput from Presenter
 extension CharacterViewController: CharacterViewInput {
     func set(viewModels: [CharacterViewModel]) {
+        DispatchQueue.main.async {
+            self.startActivityIndicator()
+        }
         self.viewModels = viewModels
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+            self.stopActivityIndicator()
         }
     }
 }
