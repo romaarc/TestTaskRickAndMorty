@@ -54,11 +54,14 @@ struct GlobalConstants {
 struct CharacterConstants {
     struct Layout {
         static let cornerRadius: CGFloat = 15
-//        static let size: CGFloat = 50
-//        static let starButtonImageInsets: CGFloat = 5
-//        static let labelCornerRadius: CGFloat = 2
-//        static let labelBorderWidth: CGFloat = 2
-//        static let freeSlogan = "бесплатно".uppercased()
+        static let shadowRadius: CGFloat = 6
+        static let shadowOpacity: Float = 0.4
+        static let shadowOffsetWidth: CGFloat = 0
+        static let shadowOffsetHeight: CGFloat = 5
+    }
+    
+    struct Design {
+        static var shadowColor = UIColor.black
     }
 //    struct Images {
 //        static let playButton = UIImage(systemName: "play.circle")?.withTintColor(UIColor.white)

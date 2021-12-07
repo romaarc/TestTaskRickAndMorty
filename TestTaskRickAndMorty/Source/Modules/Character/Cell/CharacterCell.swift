@@ -16,10 +16,15 @@ class CharacterCell: BaseUICollectionViewCell {
     }()
     
     override func setupView() {
-        layer.cornerRadius = CharacterConstants.Layout.cornerRadius
-        layer.masksToBounds = true
         contentView.addSubview(characterImageView)
         setupUI()
+        
+        shadowColor = CharacterConstants.Design.shadowColor
+        cornerRadius = CharacterConstants.Layout.cornerRadius
+        shadowRadius = CharacterConstants.Layout.shadowRadius
+        shadowOpacity = CharacterConstants.Layout.shadowOpacity
+        shadowOffsetWidth = CharacterConstants.Layout.shadowOffsetWidth
+        shadowOffsetHeight = CharacterConstants.Layout.shadowOffsetHeight
     }
 }
 
