@@ -90,7 +90,8 @@ extension CharacterCell {
             detailViewStatusImageView.widthAnchor.constraint(equalToConstant: 8),
             
             detailViewStatusLabel.leadingAnchor.constraint(equalTo: detailViewStatusImageView.trailingAnchor, constant: 5),
-            detailViewStatusLabel.topAnchor.constraint(equalTo: detailViewNameLabel.bottomAnchor, constant: 2)
+            detailViewStatusLabel.topAnchor.constraint(equalTo: detailViewNameLabel.bottomAnchor, constant: 2),
+            detailViewStatusLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -5)
         ])
     }
     //MARK: - Update with ViewModel
