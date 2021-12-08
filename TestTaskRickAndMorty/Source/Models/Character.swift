@@ -28,3 +28,20 @@ struct CharacterURLParameters {
     var status: String?
     var gender: String?
 }
+
+extension CharacterURLParameters {
+    
+    init(page: String, name: String) {
+        self.page = page
+        self.name = name
+        self.status = nil
+        self.gender = nil
+    }
+   
+    init(page: String) {
+        self.page = page
+        self.name = nil
+        self.status = nil
+        self.gender = nil
+    }
+}

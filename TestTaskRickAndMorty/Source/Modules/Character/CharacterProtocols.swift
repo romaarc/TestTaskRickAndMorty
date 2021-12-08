@@ -21,23 +21,24 @@ protocol CharacterModuleOutput: AnyObject {
 }
 
 protocol CharacterViewInput: AnyObject {
-    func set(viewModels: [CharacterViewModel])
+    func set(viewModels: [CharacterViewModel], isSearch: Bool)
 }
 
 protocol CharacterViewOutput: AnyObject {
     func viewDidLoad()
     func searchBarTextDidEndEditing(with text: String?)
+    func searchBarCancelButtonClicked()
     func willDisplay(at index: Int)
 }
 
 protocol CharacterInteractorInput: AnyObject {
     func reload()
     func loadNext()
-    func reload(with searchText: String?)
+    func reload(withParams params: CharacterURLParameters)
 }
 
 protocol CharacterInteractorOutput: AnyObject {
-    func didLoad(with characters: [Character], loadType: LoadingDataType)
+    func didLoad(with characters: [Character], loadType: LoadingDataType, isSearch: Bool)
     func didError(with error: Error)
 }
 

@@ -36,7 +36,7 @@ extension CharacterPresenter: CharacterViewOutput {
     }
     
     func willDisplay(at index: Int) {
-        if !isReloading, !isNextPageLoading, index == (characters.count - 1) {
+        if !isReloading, !isNextPageLoading, index == (characters.count - 1), index != 0 {
             isNextPageLoading = true
             interactor.loadNext()
         } else {
@@ -46,14 +46,22 @@ extension CharacterPresenter: CharacterViewOutput {
     
     func searchBarTextDidEndEditing(with text: String?) {
         guard let searchText = text else { return }
-        isReloading = true
         characters.removeAll()
-        interactor.reload(with: searchText)
+        isReloading = true
+        isNextPageLoading = false
+        interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage), name: searchText))
+    }
+    
+    func searchBarCancelButtonClicked() {
+        characters.removeAll()
+        isReloading = true
+        isNextPageLoading = false
+        interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage)))
     }
 }
 
 extension CharacterPresenter: CharacterInteractorOutput {
-    func didLoad(with characters: [Character], loadType: LoadingDataType) {
+    func didLoad(with characters: [Character], loadType: LoadingDataType, isSearch: Bool) {
         switch loadType {
         case .reload:
             isReloading = false
@@ -64,7 +72,7 @@ extension CharacterPresenter: CharacterInteractorOutput {
             self.characters.append(contentsOf: characters)
         }
         let viewModels: [CharacterViewModel] = makeViewModels(self.characters)
-        view?.set(viewModels: viewModels)
+        view?.set(viewModels: viewModels, isSearch: isSearch)
     }
     
     func didError(with error: Error) {

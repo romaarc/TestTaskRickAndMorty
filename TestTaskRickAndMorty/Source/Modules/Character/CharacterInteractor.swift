@@ -13,37 +13,32 @@ final class CharacterInteractor {
     private let rickAndMortyNetworkService: NetworkServiceProtocol
     private var page: Int = GlobalConstants.initialPage
     private var params: CharacterURLParameters
+    private var isSearch: Bool
     
     init(rickAndMortyNetworkService: NetworkServiceProtocol) {
         self.rickAndMortyNetworkService = rickAndMortyNetworkService
-        self.params = CharacterURLParameters(page: String(page),
-                                             name: nil,
-                                             status: nil,
-                                             gender: nil)
+        self.params = CharacterURLParameters(page: String(self.page))
+        self.isSearch = false
     }
 }
 
 extension CharacterInteractor: CharacterInteractorInput {
     func reload() {
-        if params.page != "1" {
-            page = GlobalConstants.initialPage
-            params.page = String(page)
-        }
-        params.name = nil
-        params.status = nil
-        params.gender = nil
+        isSearch = false
+        page = GlobalConstants.initialPage
+        params = CharacterURLParameters(page: String(page))
         load()
     }
     
     func loadNext() {
+        isSearch = false
         load()
     }
     
-    func reload(with searchText: String?) {
-        guard let searchText = searchText else { return }
+    func reload(withParams params: CharacterURLParameters) {
+        isSearch = true
         page = GlobalConstants.initialPage
-        params.page = String(page)
-        params.name = searchText
+        self.params = params
         load()
     }
 }
@@ -54,7 +49,7 @@ private extension CharacterInteractor {
             guard let self = self else { return }
             switch result {
             case.success(let response):
-                self.output?.didLoad(with: response.results, loadType: self.page == GlobalConstants.initialPage ? .reload : .nextPage)
+                self.output?.didLoad(with: response.results, loadType: self.page == GlobalConstants.initialPage ? .reload : .nextPage, isSearch: self.isSearch)
                 self.page += 1
                 self.params.page = String(self.page)
             case .failure(let error):

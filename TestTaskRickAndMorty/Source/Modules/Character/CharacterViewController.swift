@@ -119,11 +119,16 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
 
 //MARK: - CharacterViewInput from Presenter
 extension CharacterViewController: CharacterViewInput {
-    func set(viewModels: [CharacterViewModel]) {
+    func set(viewModels: [CharacterViewModel], isSearch: Bool) {
         self.viewModels = viewModels
         DispatchQueue.main.async {
             self.startActivityIndicator()
-            self.collectionView.reloadData()
+            if isSearch {
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                self.collectionView.reloadData()
+            } else {
+                self.collectionView.reloadData()
+            }
             self.stopActivityIndicator()
         }
     }
@@ -151,19 +156,17 @@ extension CharacterViewController: UISearchBarDelegate {
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Отмена"
-        
-        searchController.hidesNavigationBarDuringPresentation = true
-        searchController.definesPresentationContext = true
-
-        //searchController.searchBar.searchBarStyle = .prominent
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.output.searchBarTextDidEndEditing(with: searchBar.text!)
+        if !searchBar.text!.isEmpty {
+            viewModels.removeAll()
+            self.output.searchBarTextDidEndEditing(with: searchBar.text!)
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModels.removeAll()
-        self.output.viewDidLoad()
+        self.output.searchBarCancelButtonClicked()
     }
 }

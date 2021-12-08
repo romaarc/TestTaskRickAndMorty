@@ -52,6 +52,7 @@ private extension AppCoordinator {
                                                         tag: navigationControllerKey.rawValue)
             navigationController.tabBarItem = tabBarItem
             navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.sizeToFit()
             result[navigationControllerKey] = navigationController
         }
         return result
@@ -109,6 +110,7 @@ private extension AppCoordinator {
         controller.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         controller.navigationBar.setBackgroundImage(UIImage(), for: .default)
         controller.navigationBar.shadowImage = UIImage()
+        controller.navigationBar.isTranslucent = true
     }
 }
 
