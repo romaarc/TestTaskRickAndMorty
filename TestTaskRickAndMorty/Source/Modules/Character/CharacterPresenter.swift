@@ -77,6 +77,7 @@ extension CharacterPresenter: CharacterInteractorOutput {
     
     func didError(with error: Error) {
         print(error)
+        view?.didError()
     }
 }
 

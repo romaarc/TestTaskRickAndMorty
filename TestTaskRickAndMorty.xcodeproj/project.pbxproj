@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB132F2127612AF90014C944 /* UICollectionView+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB132F2027612AF90014C944 /* UICollectionView+Empty.swift */; };
 		BB591DA8275CBD2700F0A0B2 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */; };
 		BB591DAA275CCC0600F0A0B2 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */; };
 		BB6B6196275BA49B00658921 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6195275BA49B00658921 /* APIConstants.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB132F2027612AF90014C944 /* UICollectionView+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Empty.swift"; sourceTree = "<group>"; };
 		BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		BB6B6195275BA49B00658921 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				BB9E2B862757BBB800CC6A98 /* Font.swift */,
 				BB9E2B882757BC9400CC6A98 /* UIColor+Extension.swift */,
 				BB9E2B9C2757BF0B00CC6A98 /* UIImageView+Extension.swift */,
+				BB132F2027612AF90014C944 /* UICollectionView+Empty.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				BB9E2B972757BD7D00CC6A98 /* CharacterInteractor.swift in Sources */,
 				BB9E2B622757B94100CC6A98 /* AppDelegate.swift in Sources */,
 				BB6B61A0275BABDD00658921 /* NetworkService.swift in Sources */,
+				BB132F2127612AF90014C944 /* UICollectionView+Empty.swift in Sources */,
 				BB9E2B872757BBB800CC6A98 /* Font.swift in Sources */,
 				BB6B61A4275BACC200658921 /* Reachability.swift in Sources */,
 				BB9E2B932757BD7D00CC6A98 /* CharacterPresenter.swift in Sources */,

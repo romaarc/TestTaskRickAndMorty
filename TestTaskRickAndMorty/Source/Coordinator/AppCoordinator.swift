@@ -110,7 +110,6 @@ private extension AppCoordinator {
         controller.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         controller.navigationBar.setBackgroundImage(UIImage(), for: .default)
         controller.navigationBar.shadowImage = UIImage()
-        controller.navigationBar.isTranslucent = true
     }
 }
 

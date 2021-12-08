@@ -119,13 +119,23 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
 
 //MARK: - CharacterViewInput from Presenter
 extension CharacterViewController: CharacterViewInput {
+    func didError() {
+        DispatchQueue.main.async {
+            if self.viewModels.isEmpty {
+                self.collectionView.deleteItems(at: self.collectionView.indexPathsForVisibleItems)
+                self.collectionView.setEmptyMessage(message: "Не найдено персонажей")
+            }
+        }
+    }
+    
     func set(viewModels: [CharacterViewModel], isSearch: Bool) {
         self.viewModels = viewModels
         DispatchQueue.main.async {
+            self.collectionView.restore()
             self.startActivityIndicator()
             if isSearch {
-                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 self.collectionView.reloadData()
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             } else {
                 self.collectionView.reloadData()
             }

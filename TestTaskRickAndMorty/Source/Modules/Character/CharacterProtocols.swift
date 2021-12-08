@@ -22,6 +22,7 @@ protocol CharacterModuleOutput: AnyObject {
 
 protocol CharacterViewInput: AnyObject {
     func set(viewModels: [CharacterViewModel], isSearch: Bool)
+    func didError()
 }
 
 protocol CharacterViewOutput: AnyObject {
