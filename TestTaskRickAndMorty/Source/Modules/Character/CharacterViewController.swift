@@ -11,7 +11,7 @@ import UIKit
 final class CharacterViewController: UIViewController {
 	
     private let output: CharacterViewOutput
-    private let searchController = UISearchController()
+    private let searchController = UISearchController(searchResultsController: nil)
     private let collectionView: UICollectionView
     private var viewModels: [CharacterViewModel] = []
     private var status: String?
@@ -148,12 +148,13 @@ extension CharacterViewController: CharacterFilterDelegate {
     
 }
 // MARK: - Search bar methods
-extension CharacterViewController: UISearchBarDelegate {
+extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating {
     private func setupSearchController() {
         navigationItem.searchController = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style: .plain, target: self, action: #selector(filterButtonClicked))
         
         searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Найти персонажа"
         searchController.searchBar.searchTextField.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
         searchController.obscuresBackgroundDuringPresentation = false
@@ -165,10 +166,11 @@ extension CharacterViewController: UISearchBarDelegate {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Отменить"
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if !searchBar.text!.isEmpty {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        if !text.isEmpty {
             viewModels.removeAll()
-            output.searchBarTextDidEndEditing(with: searchBar.text!, withStatus: status ?? "", withGender: gender ?? "")
+            output.searchBarTextDidEndEditing(with: text, withStatus: status ?? "", withGender: gender ?? "")
         }
     }
     
