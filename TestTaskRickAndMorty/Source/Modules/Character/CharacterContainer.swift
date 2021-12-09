@@ -24,6 +24,8 @@ final class CharacterContainer {
         
         interactor.output = presenter
         
+        router.viewController = viewController
+        
         return CharacterContainer(view: viewController, input: presenter, router: router)
     }
     

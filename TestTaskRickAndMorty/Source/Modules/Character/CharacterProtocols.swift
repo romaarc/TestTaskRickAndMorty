@@ -30,6 +30,7 @@ protocol CharacterViewOutput: AnyObject {
     func searchBarTextDidEndEditing(with text: String?)
     func searchBarCancelButtonClicked()
     func willDisplay(at index: Int)
+    func onFilterButtonTap()
 }
 
 protocol CharacterInteractorInput: AnyObject {
@@ -44,4 +45,5 @@ protocol CharacterInteractorOutput: AnyObject {
 }
 
 protocol CharacterRouterInput: AnyObject {
+    func showFilter()
 }

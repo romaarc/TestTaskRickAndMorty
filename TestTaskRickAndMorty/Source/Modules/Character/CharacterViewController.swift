@@ -43,7 +43,7 @@ final class CharacterViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         setupUI()
-        self.output.viewDidLoad()
+        output.viewDidLoad()
         configureSearchController()
 	}
     
@@ -110,7 +110,7 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.output.willDisplay(at: indexPath.item)
+        output.willDisplay(at: indexPath.item)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         10
@@ -147,6 +147,7 @@ extension CharacterViewController: CharacterViewInput {
 //MARK: - Filter VC
 private extension CharacterViewController {
     @objc func filterButtonClicked() {
+        output.onFilterButtonTap()
     }
 }
 
@@ -171,12 +172,12 @@ extension CharacterViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if !searchBar.text!.isEmpty {
             viewModels.removeAll()
-            self.output.searchBarTextDidEndEditing(with: searchBar.text!)
+            output.searchBarTextDidEndEditing(with: searchBar.text!)
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModels.removeAll()
-        self.output.searchBarCancelButtonClicked()
+        output.searchBarCancelButtonClicked()
     }
 }

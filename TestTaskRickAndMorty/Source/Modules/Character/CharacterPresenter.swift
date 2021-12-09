@@ -58,6 +58,10 @@ extension CharacterPresenter: CharacterViewOutput {
         isNextPageLoading = false
         interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage)))
     }
+    
+    func onFilterButtonTap() {
+        router.showFilter()
+    }
 }
 
 extension CharacterPresenter: CharacterInteractorOutput {
