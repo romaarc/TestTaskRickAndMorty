@@ -59,8 +59,17 @@ extension CharacterPresenter: CharacterViewOutput {
         interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage)))
     }
     
-    func onFilterButtonTap() {
-        router.showFilter()
+    func onFilterButtonTap(withStatus status: String, withGender gender: String) {
+        router.showFilter(withStatus: status, withGender: gender)
+    }
+    
+    func didFilterTapped(withStatus status: String, withGender gender: String) {
+        characters.removeAll()
+        isReloading = true
+        isNextPageLoading = false
+        interactor.reloadFilter(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage),
+                                                             status: status,
+                                                             gender: gender))
     }
 }
 

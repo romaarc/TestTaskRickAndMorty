@@ -17,6 +17,9 @@
 		BB132F312761F9020014C944 /* DismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB132F302761F9020014C944 /* DismissAnimation.swift */; };
 		BB132F332761F9510014C944 /* CGPoint+Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB132F322761F9510014C944 /* CGPoint+Velocity.swift */; };
 		BB132F352761F98C0014C944 /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB132F342761F98C0014C944 /* InstantPanGestureRecognizer.swift */; };
+		BB132F3727620F430014C944 /* CharacterFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB132F3627620F430014C944 /* CharacterFilterViewController.swift */; };
+		BB132F3A276211410014C944 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB132F39276211410014C944 /* UITextField+Extension.swift */; };
+		BB132F3C276224120014C944 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB132F3B276224120014C944 /* ToolbarPickerView.swift */; };
 		BB591DA8275CBD2700F0A0B2 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */; };
 		BB591DAA275CCC0600F0A0B2 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */; };
 		BB6B6196275BA49B00658921 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6195275BA49B00658921 /* APIConstants.swift */; };
@@ -68,6 +71,9 @@
 		BB132F302761F9020014C944 /* DismissAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimation.swift; sourceTree = "<group>"; };
 		BB132F322761F9510014C944 /* CGPoint+Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Velocity.swift"; sourceTree = "<group>"; };
 		BB132F342761F98C0014C944 /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		BB132F3627620F430014C944 /* CharacterFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterViewController.swift; sourceTree = "<group>"; };
+		BB132F39276211410014C944 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		BB132F3B276224120014C944 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
 		BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		BB6B6195275BA49B00658921 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -135,6 +141,22 @@
 				BB132F342761F98C0014C944 /* InstantPanGestureRecognizer.swift */,
 			);
 			path = Transition;
+			sourceTree = "<group>";
+		};
+		BB132F3827620F520014C944 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				BB132F3627620F430014C944 /* CharacterFilterViewController.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		BB132F3D27623C990014C944 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				BB132F3B276224120014C944 /* ToolbarPickerView.swift */,
+			);
+			path = Picker;
 			sourceTree = "<group>";
 		};
 		BB6B6193275BA43F00658921 /* Network */ = {
@@ -279,6 +301,7 @@
 				BB9E2B882757BC9400CC6A98 /* UIColor+Extension.swift */,
 				BB9E2B9C2757BF0B00CC6A98 /* UIImageView+Extension.swift */,
 				BB132F2027612AF90014C944 /* UICollectionView+Empty.swift */,
+				BB132F39276211410014C944 /* UITextField+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -294,6 +317,7 @@
 		BB9E2B8B2757BD4800CC6A98 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				BB132F3827620F520014C944 /* Filter */,
 				BB6B61A9275BB9F100658921 /* Cell */,
 				BB6B61AA275BB9F800658921 /* ViewModels */,
 				BB9E2B8D2757BD7D00CC6A98 /* CharacterPresenter.swift */,
@@ -330,6 +354,7 @@
 				BB9E2BA82757DD3C00CC6A98 /* Cell */,
 				BB82867E275FDDEF003100E4 /* CustomFlowLayout.swift */,
 				BB82867B275F888C003100E4 /* Gradient */,
+				BB132F3D27623C990014C944 /* Picker */,
 				BB132F2227613BE10014C944 /* Transition */,
 			);
 			path = Components;
@@ -442,6 +467,8 @@
 				BB9E2B7D2757BAB400CC6A98 /* Colors.swift in Sources */,
 				BB6B6196275BA49B00658921 /* APIConstants.swift in Sources */,
 				BB6B61A8275BB1E500658921 /* AppDependency.swift in Sources */,
+				BB132F3C276224120014C944 /* ToolbarPickerView.swift in Sources */,
+				BB132F3727620F430014C944 /* CharacterFilterViewController.swift in Sources */,
 				BB6B61A6275BB0B200658921 /* NetworkService+Characters.swift in Sources */,
 				BB9E2B7F2757BAEC00CC6A98 /* Localize.swift in Sources */,
 				BB9E2B892757BC9400CC6A98 /* UIColor+Extension.swift in Sources */,
@@ -454,6 +481,7 @@
 				BB6B61A4275BACC200658921 /* Reachability.swift in Sources */,
 				BB9E2B932757BD7D00CC6A98 /* CharacterPresenter.swift in Sources */,
 				BB132F312761F9020014C944 /* DismissAnimation.swift in Sources */,
+				BB132F3A276211410014C944 /* UITextField+Extension.swift in Sources */,
 				BB591DAA275CCC0600F0A0B2 /* CharacterViewModel.swift in Sources */,
 				BB6B619E275BA90F00658921 /* URLFactory.swift in Sources */,
 				BB132F292761F82A0014C944 /* TransitionDirection.swift in Sources */,

@@ -30,13 +30,15 @@ protocol CharacterViewOutput: AnyObject {
     func searchBarTextDidEndEditing(with text: String?)
     func searchBarCancelButtonClicked()
     func willDisplay(at index: Int)
-    func onFilterButtonTap()
+    func onFilterButtonTap(withStatus status: String, withGender gender: String)
+    func didFilterTapped(withStatus status: String, withGender gender: String)
 }
 
 protocol CharacterInteractorInput: AnyObject {
     func reload()
     func loadNext()
     func reload(withParams params: CharacterURLParameters)
+    func reloadFilter(withParams params: CharacterURLParameters)
 }
 
 protocol CharacterInteractorOutput: AnyObject {
@@ -45,5 +47,5 @@ protocol CharacterInteractorOutput: AnyObject {
 }
 
 protocol CharacterRouterInput: AnyObject {
-    func showFilter()
+    func showFilter(withStatus status: String, withGender gender: String)
 }

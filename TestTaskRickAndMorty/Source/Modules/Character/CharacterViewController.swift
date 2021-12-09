@@ -14,6 +14,8 @@ final class CharacterViewController: UIViewController {
     private let searchController = UISearchController()
     private let collectionView: UICollectionView
     private var viewModels: [CharacterViewModel] = []
+    private var status: String?
+    private var gender: String?
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(style: .large)
@@ -44,7 +46,7 @@ final class CharacterViewController: UIViewController {
 		super.viewDidLoad()
         setupUI()
         output.viewDidLoad()
-        configureSearchController()
+        setupSearchController()
 	}
     
     private func setupUI() {
@@ -147,13 +149,20 @@ extension CharacterViewController: CharacterViewInput {
 //MARK: - Filter VC
 private extension CharacterViewController {
     @objc func filterButtonClicked() {
-        output.onFilterButtonTap()
+        output.onFilterButtonTap(withStatus: status ?? "", withGender: gender ?? "")
     }
 }
-
+// MARK: - Filter Delegate
+extension CharacterViewController: CharacterFilterDelegate {
+    func didFilterTapped(status: String, gender: String) {
+        output.didFilterTapped(withStatus: status, withGender: gender)
+        self.status = status
+        self.gender = gender
+    }
+}
 // MARK: - Search bar methods
 extension CharacterViewController: UISearchBarDelegate {
-    private func configureSearchController(){
+    private func setupSearchController() {
         navigationItem.searchController = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style: .plain, target: self, action: #selector(filterButtonClicked))
         
@@ -166,7 +175,7 @@ extension CharacterViewController: UISearchBarDelegate {
             .font: Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Отмена"
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Отменить"
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

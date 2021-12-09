@@ -44,4 +44,11 @@ extension CharacterURLParameters {
         self.status = nil
         self.gender = nil
     }
+    
+    init(page: String, status: String, gender: String) {
+        self.page = page
+        self.name = nil
+        self.status = status
+        self.gender = gender
+    }
 }

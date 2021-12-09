@@ -41,6 +41,13 @@ extension CharacterInteractor: CharacterInteractorInput {
         self.params = params
         load()
     }
+    
+    func reloadFilter(withParams params: CharacterURLParameters) {
+        isSearch = true
+        page = GlobalConstants.initialPage
+        self.params = params
+        load()
+    }
 }
 
 private extension CharacterInteractor {

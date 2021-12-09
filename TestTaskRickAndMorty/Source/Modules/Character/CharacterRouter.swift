@@ -14,10 +14,9 @@ final class CharacterRouter {
 }
 
 extension CharacterRouter: CharacterRouterInput {
-    func showFilter() {
-        let child = UIViewController()
-        child.view.backgroundColor = .white
-        child.view.layer.cornerRadius = 24
+    func showFilter(withStatus status: String, withGender gender: String) {
+        let child = CharacterFilterViewController(currentStatus: status, currentGender: gender)
+        child.delegate = viewController as? CharacterFilterDelegate
         child.transitioningDelegate = transition
         child.modalPresentationStyle = .custom
         viewController?.present(child, animated: true)
