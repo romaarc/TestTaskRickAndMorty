@@ -19,6 +19,7 @@ final class CharacterPresenter {
     private var isReloading = false
     private var hasNextPage = true
     private var characters: [Character] = []
+    private var count: Int = 0
     
     init(router: CharacterRouterInput, interactor: CharacterInteractorInput) {
         self.router = router
@@ -36,20 +37,21 @@ extension CharacterPresenter: CharacterViewOutput {
     }
     
     func willDisplay(at index: Int) {
-        if !isReloading, !isNextPageLoading, index == (characters.count - 1), index != 0 {
-            isNextPageLoading = true
-            interactor.loadNext()
-        } else {
+        guard !isReloading, !isNextPageLoading, index == (characters.count - 1), index >= 19, characters.count != self.count else {
             return
         }
+        isNextPageLoading = true
+        interactor.loadNext()
     }
     
-    func searchBarTextDidEndEditing(with text: String?) {
-        guard let searchText = text else { return }
+    func searchBarTextDidEndEditing(with searchText: String, withStatus status: String, withGender gender: String) {
         characters.removeAll()
         isReloading = true
         isNextPageLoading = false
-        interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage), name: searchText))
+        interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage),
+                                                             name: searchText,
+                                                             status: status,
+                                                             gender: gender))
     }
     
     func searchBarCancelButtonClicked() {
@@ -74,7 +76,7 @@ extension CharacterPresenter: CharacterViewOutput {
 }
 
 extension CharacterPresenter: CharacterInteractorOutput {
-    func didLoad(with characters: [Character], loadType: LoadingDataType, isSearch: Bool) {
+    func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isSearch: Bool) {
         switch loadType {
         case .reload:
             isReloading = false
@@ -84,6 +86,7 @@ extension CharacterPresenter: CharacterInteractorOutput {
             hasNextPage = characters.count > 0
             self.characters.append(contentsOf: characters)
         }
+        self.count = count
         let viewModels: [CharacterViewModel] = makeViewModels(self.characters)
         view?.set(viewModels: viewModels, isSearch: isSearch)
     }

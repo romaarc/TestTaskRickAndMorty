@@ -9,6 +9,7 @@ import UIKit
 
 protocol CharacterFilterDelegate: AnyObject {
     func didFilterTapped(status: String, gender: String)
+    func didClearTapped()
 }
 
 class CharacterFilterViewController: UIViewController {
@@ -158,7 +159,7 @@ func setupButtons() {
         dismiss(animated: true)
     }
     @objc private func buttonCleaFilterClicked() {
-        delegate?.didFilterTapped(status: "", gender: "")
+        delegate?.didClearTapped()
         dismiss(animated: true)
     }
 }

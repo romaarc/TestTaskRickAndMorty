@@ -56,8 +56,14 @@ private extension CharacterInteractor {
             guard let self = self else { return }
             switch result {
             case.success(let response):
-                self.output?.didLoad(with: response.results, loadType: self.page == GlobalConstants.initialPage ? .reload : .nextPage, isSearch: self.isSearch)
-                self.page += 1
+                let maxPage = response.info.pages
+                let maxCount = response.info.count
+                self.output?.didLoad(with: response.results, loadType: self.page == GlobalConstants.initialPage ? .reload : .nextPage, count: maxCount, isSearch: self.isSearch)
+                if self.page == maxPage {
+                    self.page = maxPage
+                } else {
+                    self.page += 1
+                }
                 self.params.page = String(self.page)
             case .failure(let error):
                 self.output?.didError(with: error)

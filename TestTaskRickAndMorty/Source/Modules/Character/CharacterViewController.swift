@@ -16,14 +16,6 @@ final class CharacterViewController: UIViewController {
     private var viewModels: [CharacterViewModel] = []
     private var status: String?
     private var gender: String?
-    
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .large)
-        activity.hidesWhenStopped = true
-        activity.color = UIColor.black
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        return activity
-    }()
 
     init(output: CharacterViewOutput) {
         self.output = output
@@ -51,20 +43,15 @@ final class CharacterViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(activityIndicator)
-        
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.frame
     }
+    
 }
-//MARK: - Extensions CollectionsView, activityIndicator
+//MARK: - Extensions CollectionsView
 private extension CharacterViewController {
     func setupCollectionView() {
         collectionView.delegate = self
@@ -73,14 +60,6 @@ private extension CharacterViewController {
         collectionView.backgroundColor = .white
         collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         collectionView.register(CharacterCell.self)
-    }
-    
-    func stopActivityIndicator() {
-        activityIndicator.stopAnimating()
-    }
-
-    func startActivityIndicator() {
-        activityIndicator.startAnimating()
     }
 }
 
@@ -134,14 +113,14 @@ extension CharacterViewController: CharacterViewInput {
         self.viewModels = viewModels
         DispatchQueue.main.async {
             self.collectionView.restore()
-            self.startActivityIndicator()
             if isSearch {
+//                self.navigationController?.view.setNeedsLayout()
+//                self.navigationController?.view.layoutIfNeeded()
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             } else {
                 self.collectionView.reloadData()
             }
-            self.stopActivityIndicator()
         }
     }
 }
@@ -155,10 +134,18 @@ private extension CharacterViewController {
 // MARK: - Filter Delegate
 extension CharacterViewController: CharacterFilterDelegate {
     func didFilterTapped(status: String, gender: String) {
-        output.didFilterTapped(withStatus: status, withGender: gender)
-        self.status = status
-        self.gender = gender
+        if !status.isEmpty || !gender.isEmpty {
+            output.didFilterTapped(withStatus: status, withGender: gender)
+            self.status = status
+            self.gender = gender
+        }
     }
+    func didClearTapped() {
+        self.status = ""
+        self.gender = ""
+        output.didFilterTapped(withStatus: status ?? "", withGender: gender ?? "")
+    }
+    
 }
 // MARK: - Search bar methods
 extension CharacterViewController: UISearchBarDelegate {
@@ -181,12 +168,22 @@ extension CharacterViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if !searchBar.text!.isEmpty {
             viewModels.removeAll()
-            output.searchBarTextDidEndEditing(with: searchBar.text!)
+            output.searchBarTextDidEndEditing(with: searchBar.text!, withStatus: status ?? "", withGender: gender ?? "")
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModels.removeAll()
-        output.searchBarCancelButtonClicked()
+        if let status = status, let gender = gender {
+            if status.isEmpty, gender.isEmpty {
+                viewModels.removeAll()
+                output.searchBarCancelButtonClicked()
+            } else {
+                viewModels.removeAll()
+                output.searchBarTextDidEndEditing(with: "", withStatus: status, withGender: gender)
+            }
+        } else {
+            viewModels.removeAll()
+            output.searchBarCancelButtonClicked()
+        }
     }
 }

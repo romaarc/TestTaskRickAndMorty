@@ -27,7 +27,7 @@ protocol CharacterViewInput: AnyObject {
 
 protocol CharacterViewOutput: AnyObject {
     func viewDidLoad()
-    func searchBarTextDidEndEditing(with text: String?)
+    func searchBarTextDidEndEditing(with searchText: String, withStatus status: String, withGender gender: String)
     func searchBarCancelButtonClicked()
     func willDisplay(at index: Int)
     func onFilterButtonTap(withStatus status: String, withGender gender: String)
@@ -42,7 +42,7 @@ protocol CharacterInteractorInput: AnyObject {
 }
 
 protocol CharacterInteractorOutput: AnyObject {
-    func didLoad(with characters: [Character], loadType: LoadingDataType, isSearch: Bool)
+    func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isSearch: Bool)
     func didError(with error: Error)
 }
 

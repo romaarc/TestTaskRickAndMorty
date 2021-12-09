@@ -20,18 +20,16 @@ class ToolbarPickerView: UIPickerView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.commonInit()
+        self.setupToolbar()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.commonInit()
     }
 
-    private func commonInit() {
+    private func setupToolbar() {
         let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
+        toolBar.barStyle = .default
         toolBar.isTranslucent = true
         toolBar.tintColor = .black
         toolBar.sizeToFit()
