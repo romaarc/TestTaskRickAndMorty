@@ -24,7 +24,12 @@ final class CharacterContainer {
         
         interactor.output = presenter
         
-        router.viewController = viewController
+        router.viewControllerProvider = { [weak viewController] in
+            viewController
+        }
+        router.navigationControllerProvider = { [weak viewController] in
+            viewController?.navigationController
+        }
         
         return CharacterContainer(view: viewController, input: presenter, router: router)
     }

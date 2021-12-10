@@ -64,8 +64,7 @@ class CharacterCell: BaseUICollectionViewCell {
         shadowOffsetHeight = CharacterConstants.Layout.shadowOffsetHeight
     }
 }
-
-//MARK: - UI
+    //MARK: - UI
 extension CharacterCell {
     private func setupUI() {
         NSLayoutConstraint.activate([

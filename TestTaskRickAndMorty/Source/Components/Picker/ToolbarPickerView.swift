@@ -20,7 +20,7 @@ class ToolbarPickerView: UIPickerView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setupToolbar()
+        setupToolbar()
     }
 
     required init?(coder aDecoder: NSCoder) {

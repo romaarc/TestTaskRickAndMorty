@@ -58,7 +58,7 @@ class CharacterFilterViewController: UIViewController {
         let btn = UIButton(type: .custom)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.layer.cornerRadius = 10
-        btn.backgroundColor = .white
+        btn.backgroundColor = Colors.lightWhite
         btn.layer.borderWidth = 1
         btn.layer.borderColor = UIColor.black.cgColor
         btn.setTitle("Фильтр", for: .normal)
@@ -71,7 +71,7 @@ class CharacterFilterViewController: UIViewController {
         let btn = UIButton(type: .custom)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.layer.cornerRadius = 10
-        btn.backgroundColor = .white
+        btn.backgroundColor = Colors.lightWhite
         btn.layer.borderWidth = 1
         btn.layer.borderColor = UIColor.black.cgColor
         btn.setTitle("Очистить", for: .normal)
@@ -91,11 +91,9 @@ class CharacterFilterViewController: UIViewController {
     
     init(currentStatus: String, currentGender: String) {
         super.init(nibName: nil, bundle: nil)
-        
         if currentStatus != "" {
             self.statusTextField.text = currentStatus
         }
-        
         if currentGender != "" {
             self.genderTextField.text = currentGender
         }
@@ -108,7 +106,7 @@ class CharacterFilterViewController: UIViewController {
 //MARK: - CharacterFilterViewController
 private extension CharacterFilterViewController {
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.lightWhite
         view.layer.cornerRadius = 24
         
         statusTextField.inputView = statusPickerView

@@ -13,7 +13,6 @@ class AppCoordinator {
     private lazy var tabBarController = UITabBarController()
     private lazy var navigationControllers = AppCoordinator.makeNavigationControllers()
     private let appDependency: AppDependency
-    //private lazy var persistentProvider = PersistentProvider()
     
     init(window: UIWindow, appDependency: AppDependency) {
         self.window = window
@@ -99,7 +98,7 @@ private extension AppCoordinator {
     
     func setupAppearanceNavigationBar(with controller: UINavigationController) {
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = .white
+        navigationBarAppearance.backgroundColor = Colors.lightWhite
         navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black,
                                                        .font : Font.sber(ofSize: Font.Size.twenty, weight: .bold)]
         navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black,

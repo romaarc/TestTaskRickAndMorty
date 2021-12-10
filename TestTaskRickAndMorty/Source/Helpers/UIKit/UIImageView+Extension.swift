@@ -9,9 +9,15 @@ import UIKit.UIImageView
 import Kingfisher
 
 extension UIImageView {
+    
     func setImage(with url: URL?) {
         self.kf.indicatorType = .activity
         self.kf.setImage(with: url)
+    }
+    
+    func setImageOffline(with url: URL?) {
+        self.kf.indicatorType = .activity
+        self.kf.setImage(with: url, options: [.fromMemoryCacheOrRefresh])
     }
 }
 

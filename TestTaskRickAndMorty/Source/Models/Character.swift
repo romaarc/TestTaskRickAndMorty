@@ -21,7 +21,8 @@ struct Character: Decodable {
         case imageURL = "image"
     }
 }
-
+    
+    //MARK: - CharacterURLParameters
 struct CharacterURLParameters {
     var page: String?
     var name: String?

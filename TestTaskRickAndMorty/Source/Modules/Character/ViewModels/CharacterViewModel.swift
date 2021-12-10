@@ -10,6 +10,7 @@ import Foundation
 struct CharacterViewModel {
     let id: Int
     let name: String
+    let gender: String
     let status: String
     let imageURL: String
     let species: String

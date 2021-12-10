@@ -27,8 +27,7 @@ final class CharacterPresenter {
     }
 }
 
-extension CharacterPresenter: CharacterModuleInput {
-}
+extension CharacterPresenter: CharacterModuleInput {}
 
 extension CharacterPresenter: CharacterViewOutput {
     func viewDidLoad() {
@@ -73,6 +72,10 @@ extension CharacterPresenter: CharacterViewOutput {
                                                              status: status,
                                                              gender: gender))
     }
+    
+    func onCellTap(with viewModel: CharacterViewModel) {
+        router.showDetail(with: viewModel)
+    }
 }
 
 extension CharacterPresenter: CharacterInteractorOutput {
@@ -102,6 +105,7 @@ private extension CharacterPresenter {
         return characters.map { character in
             CharacterViewModel(id: character.id,
                                name: character.name,
+                               gender: character.gender,
                                status: character.status,
                                imageURL: character.imageURL,
                                species: character.species)

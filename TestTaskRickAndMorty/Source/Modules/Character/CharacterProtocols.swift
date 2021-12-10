@@ -32,6 +32,7 @@ protocol CharacterViewOutput: AnyObject {
     func willDisplay(at index: Int)
     func onFilterButtonTap(withStatus status: String, withGender gender: String)
     func didFilterTapped(withStatus status: String, withGender gender: String)
+    func onCellTap(with viewModel: CharacterViewModel)
 }
 
 protocol CharacterInteractorInput: AnyObject {
@@ -47,5 +48,6 @@ protocol CharacterInteractorOutput: AnyObject {
 }
 
 protocol CharacterRouterInput: AnyObject {
+    func showDetail(with viewModel: CharacterViewModel)
     func showFilter(withStatus status: String, withGender gender: String)
 }

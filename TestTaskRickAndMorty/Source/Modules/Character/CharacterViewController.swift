@@ -9,7 +9,6 @@
 import UIKit
 
 final class CharacterViewController: UIViewController {
-	
     private let output: CharacterViewOutput
     private let searchController = UISearchController(searchResultsController: nil)
     private let collectionView: UICollectionView
@@ -42,7 +41,7 @@ final class CharacterViewController: UIViewController {
 	}
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.lightWhite
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,7 +56,7 @@ private extension CharacterViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = Colors.lightWhite
         collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         collectionView.register(CharacterCell.self)
     }
@@ -87,7 +86,8 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      //showDetailVCFullscreen(indexPath: indexPath)
+        let viewModel = viewModels[indexPath.row]
+        output.onCellTap(with: viewModel)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -114,8 +114,6 @@ extension CharacterViewController: CharacterViewInput {
         DispatchQueue.main.async {
             self.collectionView.restore()
             if isSearch {
-//                self.navigationController?.view.setNeedsLayout()
-//                self.navigationController?.view.layoutIfNeeded()
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             } else {
