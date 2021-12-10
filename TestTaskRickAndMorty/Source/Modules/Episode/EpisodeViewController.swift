@@ -75,10 +75,10 @@ extension EpisodeViewController: UITableViewDelegate {
     }
     
     private func setupDataSource(){
-        dataSource = UITableViewDiffableDataSource<Section, Episode>(tableView: tableView) {(tableView, indexPath, locationModel) -> UITableViewCell? in
+        dataSource = UITableViewDiffableDataSource<Section, Episode>(tableView: tableView) {(tableView, indexPath, episodeModel) -> UITableViewCell? in
             let cell = UITableViewCell()
             cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.textLabel?.text = locationModel.name
+            cell.textLabel?.text = "\(episodeModel.episode) - \(episodeModel.name)"
             cell.textLabel?.font = Font.sber(ofSize: Font.Size.twenty, weight: .regular)
             return cell
         }
