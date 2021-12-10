@@ -31,4 +31,24 @@ enum URLFactory {
         urlComponents.queryItems?.append(contentsOf: paramsQueryItem)
         return urlComponents.url!.appendingPathComponent(APIType.getCharacters).absoluteString
     }
+    
+    static func getLocation(params: LocationURLParameters) -> String {
+        var urlComponents = baseURLComponents
+        let paramsQueryItem = [
+            URLQueryItem(name: "page", value: params.page ?? ""),
+            URLQueryItem(name: "name", value:  params.name ?? "")
+        ]
+        urlComponents.queryItems?.append(contentsOf: paramsQueryItem)
+        return urlComponents.url!.appendingPathComponent(APIType.getLocations).absoluteString
+    }
+    
+    static func getEpisode(params: EpisodeURLParameters) -> String {
+        var urlComponents = baseURLComponents
+        let paramsQueryItem = [
+            URLQueryItem(name: "page", value: params.page ?? ""),
+            URLQueryItem(name: "name", value:  params.name ?? "")
+        ]
+        urlComponents.queryItems?.append(contentsOf: paramsQueryItem)
+        return urlComponents.url!.appendingPathComponent(APIType.getEpisodes).absoluteString
+    }
 }

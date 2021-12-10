@@ -13,4 +13,6 @@ enum APIConstants {
 
 enum APIType {
     static let getCharacters = "/api/character/"
+    static let getLocations = "/api/location/"
+    static let getEpisodes = "/api/episode/"
 }

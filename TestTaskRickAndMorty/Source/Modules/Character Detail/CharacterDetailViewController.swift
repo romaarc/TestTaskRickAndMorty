@@ -92,4 +92,5 @@ extension CharacterDetailViewController: UITableViewDataSource, UITableViewDeleg
         }
         return CharacterDetailConstants.Layout.tableDescriptionCellHeight
     }
+    
 }

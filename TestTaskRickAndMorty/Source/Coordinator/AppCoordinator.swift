@@ -29,7 +29,8 @@ class AppCoordinator {
         }
         
         setupCharacter()
-        //setupFavorites()
+        setupLocation()
+        setupEpisode()
         
         let navigationControllers = NavigationControllersType.allCases.compactMap {
             self.navigationControllers[$0]
@@ -66,6 +67,30 @@ private extension AppCoordinator {
         let characterVC = container.viewController
         characterVC.navigationItem.title = Localize.characters
         navController.setViewControllers([characterVC], animated: false)
+        setupAppearanceNavigationBar(with: navController)
+    }
+    
+    func setupLocation() {
+        guard let navController = self.navigationControllers[.locations] else {
+            fatalError("something wrong with appCoordinator")
+        }
+        let context = LocationContext(moduleDependencies: appDependency, moduleOutput: nil)
+        let container = LocationContainer.assemble(with: context)
+        let locationVC = container.viewController
+        locationVC.navigationItem.title = Localize.locations
+        navController.setViewControllers([locationVC], animated: false)
+        setupAppearanceNavigationBar(with: navController)
+    }
+    
+    func setupEpisode() {
+        guard let navController = self.navigationControllers[.episodes] else {
+            fatalError("something wrong with appCoordinator")
+        }
+        let context = EpisodeContext(moduleDependencies: appDependency, moduleOutput: nil)
+        let container = EpisodeContainer.assemble(with: context)
+        let episodeVC = container.viewController
+        episodeVC.navigationItem.title = Localize.episodes
+        navController.setViewControllers([episodeVC], animated: false)
         setupAppearanceNavigationBar(with: navController)
     }
     
@@ -113,13 +138,15 @@ private extension AppCoordinator {
 }
 
 fileprivate enum NavigationControllersType: Int, CaseIterable {
-    case characters, favorites
+    case characters, locations, episodes
     var title: String {
         switch self {
         case .characters:
             return Localize.characters
-        case .favorites:
-            return Localize.favorites
+        case .locations:
+            return Localize.locations
+        case .episodes:
+            return Localize.episodes
         }
     }
     
@@ -127,8 +154,10 @@ fileprivate enum NavigationControllersType: Int, CaseIterable {
         switch self {
         case .characters:
             return Localize.Images.charactersIcon
-        case .favorites:
-            return Localize.Images.favoritesIcon
+        case .locations:
+            return Localize.Images.locationIcon
+        case .episodes:
+            return Localize.Images.episodesIcon
         }
     }
 }

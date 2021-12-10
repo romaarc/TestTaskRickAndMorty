@@ -33,4 +33,3 @@ struct CharacterConstants {
         static var shadowColor = UIColor.black
     }
 }
-
