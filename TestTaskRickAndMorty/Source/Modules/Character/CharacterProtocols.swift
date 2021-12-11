@@ -23,6 +23,8 @@ protocol CharacterModuleOutput: AnyObject {
 protocol CharacterViewInput: AnyObject {
     func set(viewModels: [CharacterViewModel], isSearch: Bool)
     func didError()
+    func stopActivityIndicator()
+    func startActivityIndicator()
 }
 
 protocol CharacterViewOutput: AnyObject {

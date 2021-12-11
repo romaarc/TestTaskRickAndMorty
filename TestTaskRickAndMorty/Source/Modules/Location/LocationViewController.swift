@@ -10,12 +10,20 @@ import UIKit
 
 final class LocationViewController: UIViewController {
 	private let output: LocationViewOutput
-    private var tableView = UITableView(frame: .zero, style: .insetGrouped)
-    private var dataSource: UITableViewDiffableDataSource<Section, Location>!
+    private let collectionView: UICollectionView
     private var viewModels: [LocationViewModel] = []
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .medium)
+        activity.hidesWhenStopped = true
+        activity.color = .black
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
     
     init(output: LocationViewOutput) {
         self.output = output
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,76 +31,118 @@ final class LocationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        let view = UIView()
+        collectionView.addSubview(activityIndicator)
+        view.addSubview(collectionView)
+        setupCollectionView()
+        self.view = view
+    }
+    
     override func viewDidLoad() {
 		super.viewDidLoad()
         setupUI()
-        setupTableView()
-        setupDataSource()
         output.viewDidLoad()
 	}
     
     private func setupUI() {
-        view.backgroundColor = Colors.lightWhite
-    }
-}
-
-// MARK: - LocationViewInput from Presenter
-extension LocationViewController: LocationViewInput {
-    func set(viewModels: [LocationViewModel], locations: [Location]) {
-        self.viewModels = viewModels
-        DispatchQueue.main.async {
-            self.tableView.restore()
-            self.createSnapshot(from: locations)
-        }
-    }
-    
-    func didError() {
-        DispatchQueue.main.async {
-            if self.viewModels.isEmpty {
-                guard let indexPathsForVisibleRows = self.tableView.indexPathsForVisibleRows else { return }
-                self.tableView.deleteRows(at: indexPathsForVisibleRows, with: .automatic)
-                self.tableView.setEmptyMessage(message: "Не найдено локаций")
-            }
-        }
-    }
-}
-
-// MARK: - TableView DataSource
-extension LocationViewController: UITableViewDelegate {
-    private func setupTableView(){
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = Colors.Gradient.topColor
-        tableView.delegate = self
-        tableView.allowsSelection = false
-        tableView.contentInset = UIEdgeInsets(top: 10, left: .zero, bottom: .zero, right: .zero)
-        view.addSubview(tableView)
-        
+        view.backgroundColor = .white
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
-    private func setupDataSource(){
-        dataSource = UITableViewDiffableDataSource<Section, Location>(tableView: tableView) {(tableView, indexPath, locationModel) -> UITableViewCell? in
-            let cell = UITableViewCell()
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.textLabel?.text = locationModel.name
-            cell.textLabel?.font = Font.sber(ofSize: Font.Size.twenty, weight: .regular)
-            return cell
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.frame
+    }
+}
+// MARK: - LocationViewInput from Presenter
+extension LocationViewController: LocationViewInput {
+    func didError() {
+        DispatchQueue.main.async {
+            if self.viewModels.isEmpty {
+                self.collectionView.deleteItems(at: self.collectionView.indexPathsForVisibleItems)
+                self.collectionView.setEmptyMessage(message: "Не найдено локаций")
+            }
         }
     }
     
-    private func createSnapshot(from addedLocations: [Location]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Location>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(addedLocations)
-        dataSource.apply(snapshot, animatingDifferences: true)
+    func set(viewModels: [LocationViewModel]) {
+        self.viewModels = viewModels
+        DispatchQueue.main.async {
+            self.collectionView.restore()
+            self.collectionView.reloadData()
+        }
+    }
+}
+//MARK: - Extensions CollectionsView
+private extension LocationViewController {
+    func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .white
+        collectionView.register(LocationCell.self)
+    }
+}
+//MARK: - UICollectionViewDataSource
+extension LocationViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModels.count
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueCell(cellType: LocationCell.self, for: indexPath)
+        let viewModel = viewModels[indexPath.row]
+        cell.update(with: viewModel)
+        return cell
+    }
+}
+//MARK: - UICollectionViewDelegateFlowLayout
+extension LocationViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = itemWidth(for: view.bounds.width, spacing: LocationConstants.Layout.spacing)
+        return CGSize(width: width, height: LocationConstants.Layout.heightCardDescription)
+    }
+    
+    func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
+        let totalSpacing: CGFloat = (LocationConstants.Layout.itemsInRow * LocationConstants.Layout.spacingLeft + (LocationConstants.Layout.itemsInRow - 1) * LocationConstants.Layout.spacingRight) + LocationConstants.Layout.minimumInteritemSpacingForSectionAt - LocationConstants.Layout.spacing
+        let finalWidth = (width - totalSpacing) / LocationConstants.Layout.itemsInRow
+        return floor(finalWidth)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //let viewModel = viewModels[indexPath.row]
+        //output.onCellTap(with: viewModel)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         output.willDisplay(at: indexPath.item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: LocationConstants.Layout.spacingTop, left: LocationConstants.Layout.spacingLeft, bottom: LocationConstants.Layout.spacingBottom, right: LocationConstants.Layout.spacingRight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return LocationConstants.Layout.spacingBottom
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return LocationConstants.Layout.minimumInteritemSpacingForSectionAt
+    }
+}
+//MARK: - activityIndicator
+extension LocationViewController {
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
     }
 }

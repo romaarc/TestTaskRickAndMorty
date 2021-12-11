@@ -9,14 +9,15 @@ import UIKit
 
 class CharacterCell: BaseUICollectionViewCell {
     private let characterImageView: UIImageView = {
-        let image = UIImageView()
+        let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         return image
     }()
     
-    private let detailView: GradientView = {
-        let view = GradientView()
+    private let detailView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -28,40 +29,44 @@ class CharacterCell: BaseUICollectionViewCell {
         label.textAlignment = .natural
         label.lineBreakMode = .byTruncatingTail
         label.adjustsFontSizeToFitWidth = true
-        label.font = Font.sber(ofSize: Font.Size.fouthteen, weight: .bold)
+        label.font = Font.sber(ofSize: Font.Size.seventeen, weight: .bold)
         return label
     }()
     
     private let detailViewStatusImageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = Localize.Images.statusSymbol
         return imageView
     }()
     
     private let detailViewStatusLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.textColor = .black
+//        label.textAlignment = .natural
+//        label.lineBreakMode = .byTruncatingTail
+//        label.adjustsFontSizeToFitWidth = true
+//        label.font = Font.sber(ofSize: Font.Size.eleven, weight: .regular)
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.textAlignment = .natural
-        label.lineBreakMode = .byTruncatingTail
-        label.adjustsFontSizeToFitWidth = true
-        label.font = Font.sber(ofSize: Font.Size.ten, weight: .regular)
+        label.textColor = UIColor.gray
+        label.font = Font.sber(ofSize: Font.Size.eleven, weight: .regular)
+        
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 0.99
+        
+        label.attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.kern: 0.07, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        
         return label
     }()
     
     override func setupView() {
         [characterImageView, detailView].forEach { contentView.addSubview($0) }
-        [detailViewNameLabel, detailViewStatusImageView, detailViewStatusLabel].forEach { detailView.addSubview($0) }
-        
+        [detailViewStatusImageView, detailViewStatusLabel, detailViewNameLabel].forEach { detailView.addSubview($0) }
         setupUI()
-        
-        shadowColor = CharacterConstants.Design.shadowColor
         cornerRadius = CharacterConstants.Layout.cornerRadius
-        shadowRadius = CharacterConstants.Layout.shadowRadius
-        shadowOpacity = CharacterConstants.Layout.shadowOpacity
-        shadowOffsetWidth = CharacterConstants.Layout.shadowOffsetWidth
-        shadowOffsetHeight = CharacterConstants.Layout.shadowOffsetHeight
     }
 }
     //MARK: - UI
@@ -71,26 +76,28 @@ extension CharacterCell {
             characterImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             characterImageView.topAnchor.constraint(equalTo: topAnchor),
             characterImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            characterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            characterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -79),
             
             detailView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
             detailView.leadingAnchor.constraint(equalTo: leadingAnchor),
             detailView.trailingAnchor.constraint(equalTo: trailingAnchor),
             detailView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        
+            detailViewStatusImageView.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 12),
+            detailViewStatusImageView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 12),
+            detailViewStatusImageView.heightAnchor.constraint(equalToConstant: 13),
+            detailViewStatusImageView.widthAnchor.constraint(equalToConstant: 13),
             
-            detailViewNameLabel.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 8),
-            detailViewNameLabel.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 8),
-            detailViewNameLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -8),
-            detailViewNameLabel.heightAnchor.constraint(equalToConstant: 20),
+            detailViewStatusLabel.leadingAnchor.constraint(equalTo: detailViewStatusImageView.trailingAnchor, constant: 6),
+            detailViewStatusLabel.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 12),
+            detailViewStatusLabel.heightAnchor.constraint(equalToConstant: 13),
+            detailViewStatusLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -12),
             
-            detailViewStatusImageView.topAnchor.constraint(equalTo: detailViewNameLabel.bottomAnchor, constant: 5),
-            detailViewStatusImageView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 8),
-            detailViewStatusImageView.heightAnchor.constraint(equalToConstant: 8),
-            detailViewStatusImageView.widthAnchor.constraint(equalToConstant: 8),
-            
-            detailViewStatusLabel.leadingAnchor.constraint(equalTo: detailViewStatusImageView.trailingAnchor, constant: 5),
-            detailViewStatusLabel.topAnchor.constraint(equalTo: detailViewNameLabel.bottomAnchor, constant: 2),
-            detailViewStatusLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -5)
+            detailViewNameLabel.topAnchor.constraint(equalTo: detailViewStatusImageView.topAnchor, constant: 10),
+            detailViewNameLabel.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 12),
+            detailViewNameLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -12),
+            detailViewNameLabel.heightAnchor.constraint(equalToConstant: 42)
+                        
         ])
     }
     //MARK: - Update with ViewModel

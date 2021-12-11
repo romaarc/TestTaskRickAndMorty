@@ -15,13 +15,13 @@ protocol EpisodeModuleInput {
 protocol EpisodeModuleOutput: AnyObject {}
 
 protocol EpisodeViewInput: AnyObject {
-    func set(viewModels: [EpisodeViewModel], episodes: [Episode])
+    func set(viewModels: [EpisodeViewModel], seasons: [Int: Int])
     func didError()
 }
 
 protocol EpisodeViewOutput: AnyObject {
     func viewDidLoad()
-    func willDisplay(at index: Int)
+    func willDisplay(at index: Int, on section: Int)
 }
 
 protocol EpisodeInteractorInput: AnyObject {

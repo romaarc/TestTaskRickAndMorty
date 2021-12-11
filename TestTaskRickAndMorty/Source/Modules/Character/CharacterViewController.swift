@@ -15,6 +15,14 @@ final class CharacterViewController: UIViewController {
     private var viewModels: [CharacterViewModel] = []
     private var status: String?
     private var gender: String?
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .medium)
+        activity.hidesWhenStopped = true
+        activity.color = .black
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
 
     init(output: CharacterViewOutput) {
         self.output = output
@@ -28,6 +36,7 @@ final class CharacterViewController: UIViewController {
     
     override func loadView() {
         let view = UIView()
+        collectionView.addSubview(activityIndicator)
         view.addSubview(collectionView)
         setupCollectionView()
         self.view = view
@@ -41,7 +50,11 @@ final class CharacterViewController: UIViewController {
 	}
     
     private func setupUI() {
-        view.backgroundColor = Colors.lightWhite
+        view.backgroundColor = .white
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     override func viewDidLayoutSubviews() {
@@ -56,12 +69,10 @@ private extension CharacterViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = Colors.lightWhite
-        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        collectionView.backgroundColor = .white
         collectionView.register(CharacterCell.self)
     }
 }
-
 //MARK: - UICollectionViewDataSource
 extension CharacterViewController: UICollectionViewDataSource {
     
@@ -81,8 +92,14 @@ extension CharacterViewController: UICollectionViewDataSource {
 extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (view.bounds.width - 3 * 10) / 3
-        return CGSize(width: width, height: width + 50)
+        let width = itemWidth(for: view.bounds.width, spacing: CharacterConstants.Layout.spacing)
+        return CGSize(width: width, height: width + CharacterConstants.Layout.heightCardDescription)
+    }
+    
+    func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
+        let totalSpacing: CGFloat = (CharacterConstants.Layout.itemsInRow * CharacterConstants.Layout.spacingLeft + (CharacterConstants.Layout.itemsInRow - 1) * CharacterConstants.Layout.spacingRight) + CharacterConstants.Layout.minimumInteritemSpacingForSectionAt - CharacterConstants.Layout.spacing
+        let finalWidth = (width - totalSpacing) / CharacterConstants.Layout.itemsInRow
+        return floor(finalWidth)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -93,8 +110,17 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         output.willDisplay(at: indexPath.item)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: CharacterConstants.Layout.spacingTop, left: CharacterConstants.Layout.spacingLeft, bottom: CharacterConstants.Layout.spacingBottom, right: CharacterConstants.Layout.spacingRight)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        10
+        return CharacterConstants.Layout.spacingBottom
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return CharacterConstants.Layout.minimumInteritemSpacingForSectionAt
     }
 }
 
@@ -185,5 +211,15 @@ extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating 
             viewModels.removeAll()
             output.searchBarCancelButtonClicked()
         }
+    }
+}
+//MARK: - activityIndicator
+extension CharacterViewController {
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
     }
 }

@@ -31,11 +31,13 @@ extension LocationPresenter: LocationModuleInput {}
 
 extension LocationPresenter: LocationViewOutput {
     func viewDidLoad() {
+        view?.startActivityIndicator()
         isReloading = true
         interactor.reload()
     }
     
     func loadNext() {
+        view?.startActivityIndicator()
         isNextPageLoading = true
         interactor.loadNext()
     }
@@ -45,6 +47,7 @@ extension LocationPresenter: LocationViewOutput {
             return
         }
         isNextPageLoading = true
+        view?.startActivityIndicator()
         interactor.loadNext()
     }
 }
@@ -62,11 +65,17 @@ extension LocationPresenter: LocationInteractorOutput {
         }
         self.count = count
         let viewModels: [LocationViewModel] = makeViewModels(self.locations)
-        view?.set(viewModels: viewModels, locations: self.locations)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
+        view?.set(viewModels: viewModels)
     }
     
     func didError(with error: Error) {
         print(error)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
         view?.didError()
     }
     
@@ -83,4 +92,3 @@ private extension LocationPresenter {
         }
     }
 }
-

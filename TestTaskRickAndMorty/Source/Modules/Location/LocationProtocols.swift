@@ -15,7 +15,9 @@ protocol LocationModuleInput {
 protocol LocationModuleOutput: AnyObject {}
 
 protocol LocationViewInput: AnyObject {
-    func set(viewModels: [LocationViewModel], locations: [Location])
+    func set(viewModels: [LocationViewModel])
+    func stopActivityIndicator()
+    func startActivityIndicator()
     func didError()
 }
 

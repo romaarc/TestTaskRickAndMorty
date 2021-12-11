@@ -60,6 +60,11 @@
 		BB6B61A4275BACC200658921 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B61A3275BACC200658921 /* Reachability.swift */; };
 		BB6B61A6275BB0B200658921 /* NetworkService+Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B61A5275BB0B200658921 /* NetworkService+Characters.swift */; };
 		BB6B61A8275BB1E500658921 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B61A7275BB1E500658921 /* AppDependency.swift */; };
+		BB77E0112764E8AD00E3A8A9 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77E0102764E8AD00E3A8A9 /* LocationCell.swift */; };
+		BB77E0142765137A00E3A8A9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77E0132765137A00E3A8A9 /* UILabel+Extension.swift */; };
+		BB77E017276518EF00E3A8A9 /* EpisodeHeaderSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77E016276518EF00E3A8A9 /* EpisodeHeaderSectionView.swift */; };
+		BB77E0192765197700E3A8A9 /* BaseUITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77E0182765197700E3A8A9 /* BaseUITableViewHeaderFooterView.swift */; };
+		BB77E01B27651BF700E3A8A9 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77E01A27651BF700E3A8A9 /* EpisodeCell.swift */; };
 		BB82867A275F71F0003100E4 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB828679275F71F0003100E4 /* Decoder.swift */; };
 		BB82867D275F889A003100E4 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82867C275F889A003100E4 /* GradientView.swift */; };
 		BB82867F275FDDEF003100E4 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82867E275FDDEF003100E4 /* CustomFlowLayout.swift */; };
@@ -142,6 +147,11 @@
 		BB6B61A3275BACC200658921 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		BB6B61A5275BB0B200658921 /* NetworkService+Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Characters.swift"; sourceTree = "<group>"; };
 		BB6B61A7275BB1E500658921 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		BB77E0102764E8AD00E3A8A9 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		BB77E0132765137A00E3A8A9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		BB77E016276518EF00E3A8A9 /* EpisodeHeaderSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeHeaderSectionView.swift; sourceTree = "<group>"; };
+		BB77E0182765197700E3A8A9 /* BaseUITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		BB77E01A27651BF700E3A8A9 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		BB828679275F71F0003100E4 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		BB82867C275F889A003100E4 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		BB82867E275FDDEF003100E4 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
@@ -257,6 +267,7 @@
 		BB4743572763BC870030FA9D /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				BB77E00F2764E89000E3A8A9 /* Cell */,
 				BB47437A2763CD410030FA9D /* ViewModels */,
 				BB4743592763BCBB0030FA9D /* LocationPresenter.swift */,
 				BB47435A2763BCBB0030FA9D /* LocationRouter.swift */,
@@ -271,6 +282,7 @@
 		BB4743582763BC900030FA9D /* Episode */ = {
 			isa = PBXGroup;
 			children = (
+				BB77E01227650A7E00E3A8A9 /* Cell */,
 				BB47437F2763E57A0030FA9D /* ViewModels */,
 				BB4743652763BCE60030FA9D /* EpisodePresenter.swift */,
 				BB4743662763BCE60030FA9D /* EpisodeRouter.swift */,
@@ -352,6 +364,31 @@
 				BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BB77E00F2764E89000E3A8A9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB77E0102764E8AD00E3A8A9 /* LocationCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB77E01227650A7E00E3A8A9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB77E01A27651BF700E3A8A9 /* EpisodeCell.swift */,
+				BB77E015276518DA00E3A8A9 /* Header */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB77E015276518DA00E3A8A9 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				BB77E016276518EF00E3A8A9 /* EpisodeHeaderSectionView.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		BB82867B275F888C003100E4 /* Gradient */ = {
@@ -461,6 +498,7 @@
 				BB132F2027612AF90014C944 /* UICollectionView+Empty.swift */,
 				BB132F39276211410014C944 /* UITextField+Extension.swift */,
 				BB47437D2763D2820030FA9D /* UITableView+Empry.swift */,
+				BB77E0132765137A00E3A8A9 /* UILabel+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -528,6 +566,7 @@
 			children = (
 				BB9E2BA92757DDA400CC6A98 /* BaseUICollectionViewCell.swift */,
 				BB4743762763C2D10030FA9D /* BaseUITableViewCell.swift */,
+				BB77E0182765197700E3A8A9 /* BaseUITableViewHeaderFooterView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -627,6 +666,7 @@
 				BB132F252761F78C0014C944 /* PanelTransition.swift in Sources */,
 				BB9E2BA02757BF7500CC6A98 /* Cacher.swift in Sources */,
 				BB47437C2763CD680030FA9D /* LocationViewModel.swift in Sources */,
+				BB77E0142765137A00E3A8A9 /* UILabel+Extension.swift in Sources */,
 				BB47437E2763D2820030FA9D /* UITableView+Empry.swift in Sources */,
 				BB3866F92762A92900E3155E /* CharacterDetailRouter.swift in Sources */,
 				BB132F2D2761F88A0014C944 /* DimmPresentationController.swift in Sources */,
@@ -636,12 +676,15 @@
 				BB6B6196275BA49B00658921 /* APIConstants.swift in Sources */,
 				BB6B61A8275BB1E500658921 /* AppDependency.swift in Sources */,
 				BB4743812763E58A0030FA9D /* EpisodeViewModel.swift in Sources */,
+				BB77E0192765197700E3A8A9 /* BaseUITableViewHeaderFooterView.swift in Sources */,
 				BB4743642763BCBB0030FA9D /* LocationContainer.swift in Sources */,
 				BB132F3C276224120014C944 /* ToolbarPickerView.swift in Sources */,
 				BB47435F2763BCBB0030FA9D /* LocationPresenter.swift in Sources */,
 				BB3866FC2762A92900E3155E /* CharacterDetailInteractor.swift in Sources */,
+				BB77E0112764E8AD00E3A8A9 /* LocationCell.swift in Sources */,
 				BB4743602763BCBB0030FA9D /* LocationRouter.swift in Sources */,
 				BB132F3727620F430014C944 /* CharacterFilterViewController.swift in Sources */,
+				BB77E017276518EF00E3A8A9 /* EpisodeHeaderSectionView.swift in Sources */,
 				BB6B61A6275BB0B200658921 /* NetworkService+Characters.swift in Sources */,
 				BB9E2B7F2757BAEC00CC6A98 /* Localize.swift in Sources */,
 				BB9E2B892757BC9400CC6A98 /* UIColor+Extension.swift in Sources */,
@@ -664,6 +707,7 @@
 				BB47436C2763BCE60030FA9D /* EpisodeRouter.swift in Sources */,
 				BB47436B2763BCE60030FA9D /* EpisodePresenter.swift in Sources */,
 				BB3866FD2762A92900E3155E /* CharacterDetailContainer.swift in Sources */,
+				BB77E01B27651BF700E3A8A9 /* EpisodeCell.swift in Sources */,
 				BB132F292761F82A0014C944 /* TransitionDirection.swift in Sources */,
 				BB3866FA2762A92900E3155E /* CharacterDetailViewController.swift in Sources */,
 				BB132F352761F98C0014C944 /* InstantPanGestureRecognizer.swift in Sources */,

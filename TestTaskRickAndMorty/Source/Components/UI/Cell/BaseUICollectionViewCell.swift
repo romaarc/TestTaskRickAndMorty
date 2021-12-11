@@ -38,7 +38,10 @@ class BaseUICollectionViewCell: UICollectionViewCell {
     func setupView() {}
     
     func setupShadow() {
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = Colors.borderLightGray.cgColor
         contentView.layer.cornerRadius = cornerRadius
+        contentView.backgroundColor = .white
         contentView.layer.masksToBounds = true
        
         layer.cornerRadius = cornerRadius

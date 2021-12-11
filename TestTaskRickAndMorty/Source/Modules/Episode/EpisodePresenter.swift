@@ -19,6 +19,7 @@ final class EpisodePresenter {
     private var isReloading = false
     private var hasNextPage = true
     private var episodes: [Episode] = []
+    private var dictEpisodes: [Int: Int] = [:]
     private var count: Int = 0
     
     init(router: EpisodeRouterInput, interactor: EpisodeInteractorInput) {
@@ -41,8 +42,9 @@ extension EpisodePresenter: EpisodeViewOutput {
         interactor.loadNext()
     }
     
-    func willDisplay(at index: Int) {
-        guard !isReloading, !isNextPageLoading, index == (episodes.count - 1), index >= 19, episodes.count != self.count else {
+    func willDisplay(at index: Int, on section: Int) {
+        guard let countEpisodesOfSeason = dictEpisodes[section] else { return }
+        guard !isReloading, !isNextPageLoading, index == (countEpisodesOfSeason - 1), episodes.count != self.count else {
             return
         }
         isNextPageLoading = true
@@ -61,9 +63,14 @@ extension EpisodePresenter: EpisodeInteractorOutput {
             hasNextPage = episodes.count > 0
             self.episodes.append(contentsOf: episodes)
         }
+        let episodesSeason = self.episodes.map({ String($0.episode.dropLast(3)) })
+        let seasons = Array(Set(episodesSeason)).sorted()
+        for (index, season) in seasons.enumerated() {
+            dictEpisodes[index] = episodesSeason.filter({ $0.contains(season) }).count
+        }
         self.count = count
         let viewModels: [EpisodeViewModel] = makeViewModels(self.episodes)
-        view?.set(viewModels: viewModels, episodes: self.episodes)
+        view?.set(viewModels: viewModels, seasons: dictEpisodes)
     }
     
     func didError(with error: Error) {

@@ -31,6 +31,7 @@ extension CharacterPresenter: CharacterModuleInput {}
 
 extension CharacterPresenter: CharacterViewOutput {
     func viewDidLoad() {
+        view?.startActivityIndicator()
         isReloading = true
         interactor.reload()
     }
@@ -39,11 +40,13 @@ extension CharacterPresenter: CharacterViewOutput {
         guard !isReloading, !isNextPageLoading, index == (characters.count - 1), index >= 19, characters.count != self.count else {
             return
         }
+        view?.startActivityIndicator()
         isNextPageLoading = true
         interactor.loadNext()
     }
     
     func searchBarTextDidEndEditing(with searchText: String, withStatus status: String, withGender gender: String) {
+        view?.startActivityIndicator()
         characters.removeAll()
         isReloading = true
         isNextPageLoading = false
@@ -54,6 +57,7 @@ extension CharacterPresenter: CharacterViewOutput {
     }
     
     func searchBarCancelButtonClicked() {
+        view?.startActivityIndicator()
         characters.removeAll()
         isReloading = true
         isNextPageLoading = false
@@ -65,6 +69,7 @@ extension CharacterPresenter: CharacterViewOutput {
     }
     
     func didFilterTapped(withStatus status: String, withGender gender: String) {
+        view?.startActivityIndicator()
         characters.removeAll()
         isReloading = true
         isNextPageLoading = false
@@ -91,11 +96,17 @@ extension CharacterPresenter: CharacterInteractorOutput {
         }
         self.count = count
         let viewModels: [CharacterViewModel] = makeViewModels(self.characters)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
         view?.set(viewModels: viewModels, isSearch: isSearch)
     }
     
     func didError(with error: Error) {
         print(error)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
         view?.didError()
     }
 }

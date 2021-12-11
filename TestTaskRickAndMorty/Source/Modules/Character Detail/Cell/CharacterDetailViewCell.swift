@@ -10,7 +10,7 @@ import UIKit
 final class CharacterDetailViewCell: BaseUITableViewCell {
     
     private let characterImageView: UIImageView = {
-        let image = UIImageView()
+        let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         return image

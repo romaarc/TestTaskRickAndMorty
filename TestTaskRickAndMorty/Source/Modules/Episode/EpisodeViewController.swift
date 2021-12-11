@@ -10,13 +10,20 @@ import UIKit
 
 final class EpisodeViewController: UIViewController {
 	private let output: EpisodeViewOutput
-    private var tableView = UITableView(frame: .zero, style: .insetGrouped)
-    private var dataSource: UITableViewDiffableDataSource<Section, Episode>!
+    private var tableView = UITableView(frame: .zero, style: .grouped)
     private var viewModels: [EpisodeViewModel] = []
+    private var seasons: [Int: Int] = [:]
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .medium)
+        activity.hidesWhenStopped = true
+        activity.color = .black
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
 
     init(output: EpisodeViewOutput) {
         self.output = output
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,7 +35,6 @@ final class EpisodeViewController: UIViewController {
 		super.viewDidLoad()
         setupUI()
         setupTableView()
-        setupDataSource()
         output.viewDidLoad()
 	}
     
@@ -36,13 +42,14 @@ final class EpisodeViewController: UIViewController {
         view.backgroundColor = Colors.lightWhite
     }
 }
-// MARK: - LocationViewInput from Presenter
+// MARK: - EpisodeViewInput from Presenter
 extension EpisodeViewController: EpisodeViewInput {
-    func set(viewModels: [EpisodeViewModel], episodes: [Episode]) {
+    func set(viewModels: [EpisodeViewModel], seasons: [Int: Int]) {
         self.viewModels = viewModels
+        self.seasons = seasons
         DispatchQueue.main.async {
             self.tableView.restore()
-            self.createSnapshot(from: episodes)
+            self.tableView.reloadData()
         }
     }
     
@@ -56,14 +63,23 @@ extension EpisodeViewController: EpisodeViewInput {
         }
     }
 }
-// MARK: - TableView DataSource
-extension EpisodeViewController: UITableViewDelegate {
-    private func setupTableView(){
+
+private extension EpisodeViewController {
+    func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = Colors.Gradient.topColor
+        tableView.isUserInteractionEnabled = true
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .white
         tableView.delegate = self
-        tableView.allowsSelection = false
-        tableView.contentInset = UIEdgeInsets(top: 10, left: .zero, bottom: .zero, right: .zero)
+        tableView.dataSource = self
+        tableView.register(EpisodeCell.self)
+        tableView.register(EpisodeHeaderSectionView.self)
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = .zero
+        }
+        tableView.sectionFooterHeight = .zero
+        
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -73,25 +89,51 @@ extension EpisodeViewController: UITableViewDelegate {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+}
+// MARK: - UITableViewDelegate
+extension EpisodeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueHeaderFooterViewCell(cellType: EpisodeHeaderSectionView.self)
+        header.update(with: Array(seasons.keys).sorted(), section: section)
+        return header
+    }
     
-    private func setupDataSource(){
-        dataSource = UITableViewDiffableDataSource<Section, Episode>(tableView: tableView) {(tableView, indexPath, episodeModel) -> UITableViewCell? in
-            let cell = UITableViewCell()
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.textLabel?.text = "\(episodeModel.episode) - \(episodeModel.name)"
-            cell.textLabel?.font = Font.sber(ofSize: Font.Size.twenty, weight: .regular)
-            return cell
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 54.5
+        default:
+            return 74.0
         }
     }
     
-    private func createSnapshot(from addedEpisodes: [Episode]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Episode>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(addedEpisodes)
-        dataSource.apply(snapshot, animatingDifferences: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let episodeDetailsController = EpisodeDetailsController(episode: self.episodes[indexPath.row])
+//        navigationController?.pushViewController(episodeDetailsController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        output.willDisplay(at: indexPath.item)
+        output.willDisplay(at: indexPath.item, on: indexPath.section)
+    }
+}
+// MARK: - UITableViewDataSource
+extension EpisodeViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return seasons.keys.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let countSeasons = seasons[section] else { return 0 }
+        return countSeasons
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueCell(cellType: EpisodeCell.self, for: indexPath)
+        let seasonsKeys = Array(seasons.keys).sorted()
+        let seasonEpisodes = viewModels.filter({ $0.episode.contains("S0" + String(seasonsKeys[indexPath.section] + 1)) })
+        cell.selectionStyle = .none
+        cell.update(with: seasonEpisodes, indexPath: indexPath)
+        return cell
     }
 }

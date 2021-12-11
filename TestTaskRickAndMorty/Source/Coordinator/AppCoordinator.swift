@@ -97,13 +97,14 @@ private extension AppCoordinator {
     func setupAppearanceTabBar(with controller: UITabBarController) {
         let tabBarAppearance = UITabBarAppearance()
         
-        tabBarAppearance.backgroundColor = Colors.lightWhite
+        tabBarAppearance.backgroundColor = Colors.lightGray
         
         if #available(iOS 15.0, *) {
             controller.tabBar.scrollEdgeAppearance = tabBarAppearance
         }
         controller.tabBar.standardAppearance = tabBarAppearance
-        controller.tabBar.backgroundColor = Colors.lightWhite
+        controller.tabBar.unselectedItemTintColor = Colors.grayTabBar
+        controller.selectedIndex = 0
         
         UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = .black
@@ -123,11 +124,15 @@ private extension AppCoordinator {
     
     func setupAppearanceNavigationBar(with controller: UINavigationController) {
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = Colors.lightWhite
+        navigationBarAppearance.backgroundColor = Colors.lightGray
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.01
         navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black,
                                                        .font : Font.sber(ofSize: Font.Size.twenty, weight: .bold)]
         navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black,
-                                                            .font : Font.sber(ofSize: Font.Size.twentyEight, weight: .bold)]
+                                                            .font : Font.sber(ofSize: Font.Size.thirdyFour, weight: .bold),
+                                                            .paragraphStyle: paragraphStyle,
+                                                            .kern: 0.41]
         UINavigationBar.appearance().tintColor = .gray
         controller.navigationBar.standardAppearance = navigationBarAppearance
         controller.navigationBar.compactAppearance = navigationBarAppearance
