@@ -33,11 +33,13 @@ extension EpisodePresenter: EpisodeModuleInput {
 
 extension EpisodePresenter: EpisodeViewOutput {
     func viewDidLoad() {
+        view?.startActivityIndicator()
         isReloading = true
         interactor.reload()
     }
     
     func loadNext() {
+        view?.startActivityIndicator()
         isNextPageLoading = true
         interactor.loadNext()
     }
@@ -47,6 +49,7 @@ extension EpisodePresenter: EpisodeViewOutput {
         guard !isReloading, !isNextPageLoading, index == (countEpisodesOfSeason - 1), episodes.count != self.count else {
             return
         }
+        view?.startActivityIndicator()
         isNextPageLoading = true
         interactor.loadNext()
     }
@@ -70,11 +73,17 @@ extension EpisodePresenter: EpisodeInteractorOutput {
         }
         self.count = count
         let viewModels: [EpisodeViewModel] = makeViewModels(self.episodes)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
         view?.set(viewModels: viewModels, seasons: dictEpisodes)
     }
     
     func didError(with error: Error) {
         print(error)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
         view?.didError()
     }
 }

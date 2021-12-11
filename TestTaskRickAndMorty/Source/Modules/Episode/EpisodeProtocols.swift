@@ -17,6 +17,8 @@ protocol EpisodeModuleOutput: AnyObject {}
 protocol EpisodeViewInput: AnyObject {
     func set(viewModels: [EpisodeViewModel], seasons: [Int: Int])
     func didError()
+    func stopActivityIndicator()
+    func startActivityIndicator()
 }
 
 protocol EpisodeViewOutput: AnyObject {

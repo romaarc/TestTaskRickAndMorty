@@ -39,7 +39,7 @@ final class EpisodeViewController: UIViewController {
 	}
     
     private func setupUI() {
-        view.backgroundColor = Colors.lightWhite
+        view.backgroundColor = .white
     }
 }
 // MARK: - EpisodeViewInput from Presenter
@@ -80,13 +80,18 @@ private extension EpisodeViewController {
         }
         tableView.sectionFooterHeight = .zero
         
+        tableView.addSubview(activityIndicator)
+        
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
@@ -135,5 +140,15 @@ extension EpisodeViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.update(with: seasonEpisodes, indexPath: indexPath)
         return cell
+    }
+}
+//MARK: - activityIndicator
+extension EpisodeViewController {
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
     }
 }

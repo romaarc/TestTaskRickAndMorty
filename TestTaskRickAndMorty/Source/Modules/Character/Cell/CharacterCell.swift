@@ -22,17 +22,6 @@ class CharacterCell: BaseUICollectionViewCell {
         return view
     }()
     
-    private let detailViewNameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.textAlignment = .natural
-        label.lineBreakMode = .byTruncatingTail
-        label.adjustsFontSizeToFitWidth = true
-        label.font = Font.sber(ofSize: Font.Size.seventeen, weight: .bold)
-        return label
-    }()
-    
     private let detailViewStatusImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,24 +30,42 @@ class CharacterCell: BaseUICollectionViewCell {
     }()
     
     private let detailViewStatusLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.gray
+        label.lineBreakMode = .byTruncatingTail
+        label.adjustsFontSizeToFitWidth = true
+        label.font = Font.sber(ofSize: Font.Size.eleven, weight: .regular)
+        
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 0.99
+        
+        label.attributedText = NSMutableAttributedString(string: "", attributes: [.kern: 0.07, .paragraphStyle: paragraphStyle])
+        
+        return label
+    }()
+    
+    private let detailViewNameLabel: TopAlignedLabel = {
 //        let label = UILabel()
 //        label.translatesAutoresizingMaskIntoConstraints = false
 //        label.textColor = .black
 //        label.textAlignment = .natural
 //        label.lineBreakMode = .byTruncatingTail
 //        label.adjustsFontSizeToFitWidth = true
-//        label.font = Font.sber(ofSize: Font.Size.eleven, weight: .regular)
+//        label.font = Font.sber(ofSize: Font.Size.seventeen, weight: .bold)
+//        return label
         
-        let label = UILabel()
+        let label = TopAlignedLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.gray
-        label.font = Font.sber(ofSize: Font.Size.eleven, weight: .regular)
+        label.textColor = .black
+        label.font = Font.sber(ofSize: Font.Size.seventeen, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
         
         var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 0.99
-        
-        label.attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.kern: 0.07, NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        
+        paragraphStyle.lineHeightMultiple = 0.90
+
+        label.attributedText = NSMutableAttributedString(string: "", attributes: [.kern: -0.41, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.numberOfLines = 0
         return label
     }()
     
@@ -93,7 +100,7 @@ extension CharacterCell {
             detailViewStatusLabel.heightAnchor.constraint(equalToConstant: 13),
             detailViewStatusLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -12),
             
-            detailViewNameLabel.topAnchor.constraint(equalTo: detailViewStatusImageView.topAnchor, constant: 10),
+            detailViewNameLabel.topAnchor.constraint(equalTo: detailViewStatusImageView.bottomAnchor, constant: 6),
             detailViewNameLabel.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 12),
             detailViewNameLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -12),
             detailViewNameLabel.heightAnchor.constraint(equalToConstant: 42)
