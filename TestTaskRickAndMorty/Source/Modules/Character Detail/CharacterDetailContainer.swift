@@ -15,7 +15,7 @@ final class CharacterDetailContainer {
 
     static func assemble(with context: CharacterDetailContext, withModel viewModel: CharacterViewModel) -> CharacterDetailContainer {
         let router = CharacterDetailRouter()
-        let interactor = CharacterDetailInteractor()
+        let interactor = CharacterDetailInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService)
         let presenter = CharacterDetailPresenter(router: router, interactor: interactor)
         let viewController = CharacterDetailViewController(output: presenter, viewModel: viewModel)
 
@@ -35,5 +35,7 @@ final class CharacterDetailContainer {
 }
 
 struct CharacterDetailContext {
-	weak var moduleOutput: CharacterDetailModuleOutput?
+    typealias ModuleDependencies = HasNetworkService
+    let moduleDependencies: ModuleDependencies
+    weak var moduleOutput: CharacterDetailModuleOutput?
 }

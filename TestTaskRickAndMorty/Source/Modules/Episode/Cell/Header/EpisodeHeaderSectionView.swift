@@ -34,8 +34,12 @@ extension EpisodeHeaderSectionView {
             label.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -9.5)
         ])
     }
-    //MARK: - Update with seasons
+    //MARK: - Update
     func update(with viewModel: [Int], section: Int) {
         label.text = "Season \(String(viewModel[section] + 1))"
+    }
+    
+    func update(someText text: String) {
+        label.text = text
     }
 }

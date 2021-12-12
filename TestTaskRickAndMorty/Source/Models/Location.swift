@@ -13,10 +13,11 @@ struct Location: Decodable, Hashable  {
     let name: String
     let type: String
     let dimension: String
+    let residents: [String]
     let created: Date
     
     enum CodingKeys: String, CodingKey {
-        case id, name, type, dimension, created
+        case id, name, type, dimension, residents, created
     }
     
     func hash(into hasher: inout Hasher) {

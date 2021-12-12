@@ -14,4 +14,8 @@ struct CharacterViewModel {
     let status: String
     let imageURL: String
     let species: String
+    let type: String
+    let origin: Origin
+    let location: CharacterLocation
+    let episodes: [String]
 }

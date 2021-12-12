@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias ModuleDependencies = HasNetworkService
+
 protocol HasNetworkService {
     var rickAndMortyNetworkService: NetworkServiceProtocol { get }
 }

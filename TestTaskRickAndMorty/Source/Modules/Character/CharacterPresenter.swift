@@ -119,7 +119,11 @@ private extension CharacterPresenter {
                                gender: character.gender,
                                status: character.status,
                                imageURL: character.imageURL,
-                               species: character.species)
+                               species: character.species,
+                               type: character.type,
+                               origin: character.origin,
+                               location: character.location,
+                               episodes: character.episode)
         }
     }
 }

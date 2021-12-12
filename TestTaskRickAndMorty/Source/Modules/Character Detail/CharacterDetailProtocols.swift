@@ -14,12 +14,24 @@ protocol CharacterDetailModuleInput {
 
 protocol CharacterDetailModuleOutput: AnyObject {}
 
-protocol CharacterDetailViewInput: AnyObject {}
+protocol CharacterDetailViewInput: AnyObject {
+    func set(viewModels: [EpisodeViewModel])
+    func didError()
+    func stopActivityIndicator()
+    func startActivityIndicator()
+}
 
-protocol CharacterDetailViewOutput: AnyObject {}
+protocol CharacterDetailViewOutput: AnyObject {
+    func viewDidLoad(with episodes: [String])
+}
 
-protocol CharacterDetailInteractorInput: AnyObject {}
+protocol CharacterDetailInteractorInput: AnyObject {
+    func reload(with episodes: [String])
+}
 
-protocol CharacterDetailInteractorOutput: AnyObject {}
+protocol CharacterDetailInteractorOutput: AnyObject {
+    func didLoad(with episodes: [Episode])
+    func didError(with error: Error)
+}
 
 protocol CharacterDetailRouterInput: AnyObject {}

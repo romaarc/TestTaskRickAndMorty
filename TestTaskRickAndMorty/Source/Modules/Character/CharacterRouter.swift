@@ -13,7 +13,8 @@ final class CharacterRouter: BaseRouter {}
 extension CharacterRouter: CharacterRouterInput {
     
     func showDetail(with viewModel: CharacterViewModel) {
-        let context = CharacterDetailContext(moduleOutput: self)
+        guard let moduleDependencies = moduleDependencies else { return }
+        let context = CharacterDetailContext(moduleDependencies: moduleDependencies, moduleOutput: self)
         let container = CharacterDetailContainer.assemble(with: context, withModel: viewModel)
         navigationController?.pushViewController(container.viewController, animated: true)
     }

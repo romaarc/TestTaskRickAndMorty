@@ -65,7 +65,7 @@ extension EpisodeViewController: EpisodeViewInput {
                     }
                     self.tableView.deleteRows(at: indexPaths, with: .automatic)
                 } completion: {_ in
-                    self.tableView.setEmptyMessage(message: "Не найдено эпизодов")
+                    self.tableView.setEmptyMessage(message: "Не найдено персонажей")
                 }
             }
         }

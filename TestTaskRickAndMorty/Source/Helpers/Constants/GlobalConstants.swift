@@ -13,10 +13,16 @@ struct GlobalConstants {
 
 struct CharacterDetailConstants {
     struct Layout {
-        static let tableDetailCellHeight: CGFloat = 390
+        static let heightCardDescription: CGFloat = 79
         static let tableDescriptionCellHeight: CGFloat = 105
         static let numberOfSections = 2
-        static let numberOfRowsInSection = 1
+        static let locationCellIndex: Int = 3
+        static let cellCount: Int = 4
+    }
+    
+    struct Strings {
+        static let headerInfo = "Informations"
+        static let headerEpi = "Episodes"
     }
 }
 

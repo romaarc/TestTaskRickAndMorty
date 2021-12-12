@@ -14,6 +14,7 @@ final class CharacterDetailPresenter {
     
 	private let router: CharacterDetailRouterInput
 	private let interactor: CharacterDetailInteractorInput
+    private var episodes: [Episode] = []
     
     init(router: CharacterDetailRouterInput, interactor: CharacterDetailInteractorInput) {
         self.router = router
@@ -23,6 +24,39 @@ final class CharacterDetailPresenter {
 
 extension CharacterDetailPresenter: CharacterDetailModuleInput {}
 
-extension CharacterDetailPresenter: CharacterDetailViewOutput {}
+extension CharacterDetailPresenter: CharacterDetailViewOutput {
+    func viewDidLoad(with episodes: [String]) {
+        view?.startActivityIndicator()
+        interactor.reload(with: episodes)
+    }
+}
 
-extension CharacterDetailPresenter: CharacterDetailInteractorOutput {}
+extension CharacterDetailPresenter: CharacterDetailInteractorOutput {
+    func didLoad(with episodes: [Episode]) {
+        self.episodes = episodes
+        let viewModels: [EpisodeViewModel] = makeViewModels(self.episodes)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
+        view?.set(viewModels: viewModels)
+    }
+    
+    func didError(with error: Error) {
+        print(error)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
+        view?.didError()
+    }
+}
+private extension CharacterDetailPresenter {
+    func makeViewModels(_ episodes: [Episode]) -> [EpisodeViewModel] {
+        return episodes.map { epi in
+            EpisodeViewModel(id: epi.id,
+                              name: epi.name,
+                              airDate: epi.airDate,
+                              episode: epi.episode,
+                              created: epi.created)
+        }
+    }
+}

@@ -13,10 +13,11 @@ struct Episode: Decodable, Hashable {
     let name: String
     let airDate: String
     let episode: String
+    let characters: [String]
     let created: Date
     
     enum CodingKeys: String, CodingKey {
-        case id, name, episode, created
+        case id, name, episode, characters, created
         case airDate = "air_date"
     }
     

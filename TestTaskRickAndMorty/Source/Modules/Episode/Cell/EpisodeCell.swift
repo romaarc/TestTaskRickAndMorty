@@ -88,4 +88,10 @@ extension EpisodeCell {
         subLabel.text = viewModel[indexPath.row].name
         dateLabel.text = viewModel[indexPath.row].airDate.uppercased()
     }
+    
+    func update(with viewModel: EpisodeViewModel) {
+        label.text = viewModel.episode
+        subLabel.text = viewModel.name
+        dateLabel.text = viewModel.airDate.uppercased()
+    }
 }

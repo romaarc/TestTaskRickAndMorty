@@ -12,16 +12,29 @@ struct Character: Decodable {
     let name: String
     let status: String
     let species: String
+    let type: String
     let gender: String
+    let origin: Origin
+    let location: CharacterLocation
+    let episode: [String]
     let imageURL: String
     let created: Date
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, status, species, gender, created
+        case id, name, status, species, type, gender, origin, location, episode, created
         case imageURL = "image"
     }
 }
-    
+
+struct Origin: Decodable {
+    let name: String
+    let url: String
+}
+
+struct CharacterLocation: Decodable {
+    let name: String
+    let url: String
+}
     //MARK: - CharacterURLParameters
 struct CharacterURLParameters: Decodable {
     var page: String?

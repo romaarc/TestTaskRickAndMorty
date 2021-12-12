@@ -31,6 +31,8 @@ final class CharacterContainer {
             viewController?.navigationController
         }
         
+        router.moduleDependencies = context.moduleDependencies
+        
         return CharacterContainer(view: viewController, input: presenter, router: router)
     }
     
@@ -42,7 +44,6 @@ final class CharacterContainer {
 }
 
 struct CharacterContext {
-    typealias ModuleDependencies = HasNetworkService
     let moduleDependencies: ModuleDependencies
     weak var moduleOutput: CharacterModuleOutput?
 }

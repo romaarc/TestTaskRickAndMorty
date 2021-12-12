@@ -9,6 +9,7 @@ import UIKit
 
 class BaseRouter {
     lazy var transition = PanelTransition()
+    var moduleDependencies: ModuleDependencies?
     
     var navigationControllerProvider: (() -> UINavigationController?)?
     var navigationController: UINavigationController? {
