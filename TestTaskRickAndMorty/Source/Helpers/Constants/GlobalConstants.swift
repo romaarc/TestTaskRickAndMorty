@@ -21,8 +21,8 @@ struct CharacterDetailConstants {
     }
     
     struct Strings {
-        static let headerInfo = "Informations"
-        static let headerEpi = "Episodes"
+        static let headerInfo = "Информация"
+        static let headerEpi = "Эпизоды"
     }
 }
 

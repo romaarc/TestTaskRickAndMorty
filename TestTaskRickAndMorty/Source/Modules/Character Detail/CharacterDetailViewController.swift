@@ -15,7 +15,7 @@ final class CharacterDetailViewController: UIViewController {
     private let locationViewModel: LocationViewModel?
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
-    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private lazy var tableView = UITableView(frame: .zero, style: .grouped)
     private lazy var characterDetailsHeaderView = CharacterDetailsHeaderView()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -78,7 +78,6 @@ extension CharacterDetailViewController: CharacterDetailViewInput {
         }
     }
 }
-
 //MARK: - TableView
 private extension CharacterDetailViewController {
     private func setupScrollView() {
