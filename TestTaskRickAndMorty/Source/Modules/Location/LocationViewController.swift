@@ -63,8 +63,17 @@ extension LocationViewController: LocationViewInput {
     func didError() {
         DispatchQueue.main.async {
             if self.viewModels.isEmpty {
-                self.collectionView.deleteItems(at: self.collectionView.indexPathsForVisibleItems)
-                self.collectionView.setEmptyMessage(message: "Не найдено локаций")
+                self.collectionView.performBatchUpdates {
+                    var indexPaths: [IndexPath] = []
+                    for s in 0..<self.collectionView.numberOfSections {
+                        for i in 0..<self.collectionView.numberOfItems(inSection: s) {
+                            indexPaths.append(IndexPath(row: i, section: s))
+                        }
+                    }
+                    self.collectionView.deleteItems(at: indexPaths)
+                } completion: {_ in
+                    self.collectionView.setEmptyMessage(message: "Не найдено локаций")
+                }
             }
         }
     }

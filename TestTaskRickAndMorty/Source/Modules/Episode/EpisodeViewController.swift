@@ -56,9 +56,17 @@ extension EpisodeViewController: EpisodeViewInput {
     func didError() {
         DispatchQueue.main.async {
             if self.viewModels.isEmpty {
-                guard let indexPathsForVisibleRows = self.tableView.indexPathsForVisibleRows else { return }
-                self.tableView.deleteRows(at: indexPathsForVisibleRows, with: .automatic)
-                self.tableView.setEmptyMessage(message: "Не найдено эпизодов")
+                self.tableView.performBatchUpdates {
+                    var indexPaths: [IndexPath] = []
+                    for s in 0..<self.tableView.numberOfSections {
+                        for i in 0..<self.tableView.numberOfRows(inSection: s) {
+                            indexPaths.append(IndexPath(row: i, section: s))
+                        }
+                    }
+                    self.tableView.deleteRows(at: indexPaths, with: .automatic)
+                } completion: {_ in
+                    self.tableView.setEmptyMessage(message: "Не найдено эпизодов")
+                }
             }
         }
     }
