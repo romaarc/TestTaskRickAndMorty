@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Episode: Decodable, Hashable {
-    var uuid = UUID()
+struct Episode: Decodable {
     let id: Int
     let name: String
     let airDate: String
@@ -19,10 +18,6 @@ struct Episode: Decodable, Hashable {
     enum CodingKeys: String, CodingKey {
         case id, name, episode, characters, created
         case airDate = "air_date"
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(uuid)
     }
 }
 //MARK: - LocationURLParameters

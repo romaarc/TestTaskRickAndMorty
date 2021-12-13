@@ -39,13 +39,13 @@ final class CharacterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
 		super.viewDidLoad()
-        view.backgroundColor = Colors.lightWhite
         setupNavBar()
         setupTableView()
         output.viewDidLoad(with: characterViewModel.episodes)
 	}
     
     private func setupNavBar() {
+        view.backgroundColor = .white
         navigationItem.largeTitleDisplayMode = .never
         title = characterViewModel.name
     }
@@ -107,7 +107,7 @@ private extension CharacterDetailViewController {
         contentViewHeightAnchor.priority = .defaultLow
         contentViewHeightAnchor.isActive = true
         
-        contentView.backgroundColor = .brown
+        contentView.backgroundColor = .white
     }
     
     private func setupHeaderView() {

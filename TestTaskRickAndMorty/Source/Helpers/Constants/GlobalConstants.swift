@@ -69,3 +69,69 @@ struct LocationConstants {
         static var shadowColor = UIColor.black
     }
 }
+
+struct LocationDetailConstants {
+    struct Layout {
+        static let heightCardDescription: CGFloat = 79
+        static let itemsInRow: CGFloat = 2
+        static let spacing: CGFloat = 16
+        static let spacingLeft: CGFloat = 16
+        static let spacingTop: CGFloat = 10
+        static let spacingBottom: CGFloat = 20
+        static let spacingRight: CGFloat = 16
+        static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        static let cornerRadius: CGFloat = 8
+        static let shadowRadius: CGFloat = 6
+        static let shadowOpacity: Float = 0.4
+        static let shadowOffsetWidth: CGFloat = 0
+        static let shadowOffsetHeight: CGFloat = 5
+    }
+    
+    struct Strings {
+        static var headerInfo = "Резиденты"
+    }
+}
+
+struct EpisodeConstants {
+    struct Layout {
+        static let heightCardDescription: CGFloat = 80
+        static let itemsInRow: CGFloat = 2
+        static let spacing: CGFloat = 16
+        static let spacingLeft: CGFloat = 16
+        static let spacingTop: CGFloat = 19
+        static let spacingBottom: CGFloat = 20
+        static let spacingRight: CGFloat = 16
+        static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        static let cornerRadius: CGFloat = 8
+        static let shadowRadius: CGFloat = 6
+        static let shadowOpacity: Float = 0.4
+        static let shadowOffsetWidth: CGFloat = 0
+        static let shadowOffsetHeight: CGFloat = 5
+    }
+    
+    struct String {
+        static var seasonTitle = "Сезоны"
+    }
+}
+
+struct EpisodeDetailConstants {
+    struct Layout {
+        static let heightCardDescription: CGFloat = 80
+        static let itemsInRow: CGFloat = 2
+        static let spacing: CGFloat = 16
+        static let spacingLeft: CGFloat = 16
+        static let spacingTop: CGFloat = 19
+        static let spacingBottom: CGFloat = 20
+        static let spacingRight: CGFloat = 16
+        static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        static let cornerRadius: CGFloat = 8
+        static let shadowRadius: CGFloat = 6
+        static let shadowOpacity: Float = 0.4
+        static let shadowOffsetWidth: CGFloat = 0
+        static let shadowOffsetHeight: CGFloat = 5
+    }
+    
+    struct String {
+        static var seasonTitle = "Сезоны"
+    }
+}

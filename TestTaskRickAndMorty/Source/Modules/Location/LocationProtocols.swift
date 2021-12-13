@@ -24,6 +24,7 @@ protocol LocationViewInput: AnyObject {
 protocol LocationViewOutput: AnyObject {
     func viewDidLoad()
     func willDisplay(at index: Int)
+    func onCellTap(with viewModel: LocationViewModel)
 }
 
 protocol LocationInteractorInput: AnyObject {
@@ -36,4 +37,6 @@ protocol LocationInteractorOutput: AnyObject {
     func didError(with error: Error)
 }
 
-protocol LocationRouterInput: AnyObject {}
+protocol LocationRouterInput: AnyObject {
+    func showDetail(with viewModel: LocationViewModel)
+}

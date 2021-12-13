@@ -35,7 +35,6 @@ final class CharacterDetailContainer {
 }
 
 struct CharacterDetailContext {
-    typealias ModuleDependencies = HasNetworkService
     let moduleDependencies: ModuleDependencies
     weak var moduleOutput: CharacterDetailModuleOutput?
 }

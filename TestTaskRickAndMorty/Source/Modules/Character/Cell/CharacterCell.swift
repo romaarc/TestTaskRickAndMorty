@@ -46,15 +46,6 @@ class CharacterCell: BaseUICollectionViewCell {
     }()
     
     private let detailViewNameLabel: TopAlignedLabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textColor = .black
-//        label.textAlignment = .natural
-//        label.lineBreakMode = .byTruncatingTail
-//        label.adjustsFontSizeToFitWidth = true
-//        label.font = Font.sber(ofSize: Font.Size.seventeen, weight: .bold)
-//        return label
-        
         let label = TopAlignedLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black

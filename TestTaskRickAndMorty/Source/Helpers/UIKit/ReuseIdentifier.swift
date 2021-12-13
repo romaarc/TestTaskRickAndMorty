@@ -31,9 +31,21 @@ extension UICollectionView {
         }
         return cell
     }
+    
+    func dequeueSectionHeaderCell<T: UICollectionReusableView>(cellType: T.Type, for indexPath: IndexPath) -> T {
+        guard let cell = self.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
+            fatalError("can't dequeue")
+        }
+        return cell
+    }
+    
 
     func register<T: UICollectionViewCell>(_ cellType: T.Type) {
         self.register(cellType, forCellWithReuseIdentifier: cellType.reuseIdentifier)
+    }
+    
+    func register<T: UICollectionReusableView>(_ cellType: T.Type) {
+        self.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: T.reuseIdentifier)
     }
 }
 

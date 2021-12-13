@@ -125,8 +125,8 @@ extension LocationViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //let viewModel = viewModels[indexPath.row]
-        //output.onCellTap(with: viewModel)
+        let viewModel = viewModels[indexPath.row]
+        output.onCellTap(with: viewModel)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

@@ -23,6 +23,15 @@ final class LocationContainer {
 		presenter.moduleOutput = context.moduleOutput
 
 		interactor.output = presenter
+        
+        router.viewControllerProvider = { [weak viewController] in
+            viewController
+        }
+        router.navigationControllerProvider = { [weak viewController] in
+            viewController?.navigationController
+        }
+        
+        router.moduleDependencies = context.moduleDependencies
 
         return LocationContainer(view: viewController, input: presenter, router: router)
 	}
@@ -35,7 +44,6 @@ final class LocationContainer {
 }
 
 struct LocationContext {
-    typealias ModuleDependencies = HasNetworkService
     let moduleDependencies: ModuleDependencies
     weak var moduleOutput: LocationModuleOutput?
 }

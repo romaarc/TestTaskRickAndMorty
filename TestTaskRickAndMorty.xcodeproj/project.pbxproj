@@ -45,7 +45,7 @@
 		BB4743772763C2D10030FA9D /* BaseUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4743762763C2D10030FA9D /* BaseUITableViewCell.swift */; };
 		BB4743792763C8900030FA9D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4743782763C8900030FA9D /* Section.swift */; };
 		BB47437C2763CD680030FA9D /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47437B2763CD680030FA9D /* LocationViewModel.swift */; };
-		BB47437E2763D2820030FA9D /* UITableView+Empry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47437D2763D2820030FA9D /* UITableView+Empry.swift */; };
+		BB47437E2763D2820030FA9D /* UITableView+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47437D2763D2820030FA9D /* UITableView+Empty.swift */; };
 		BB4743812763E58A0030FA9D /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4743802763E58A0030FA9D /* EpisodeViewModel.swift */; };
 		BB4798AE2766004700736C59 /* CharacterDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798AD2766004700736C59 /* CharacterDetailsHeaderView.swift */; };
 		BB4798B727665CB600736C59 /* LocationDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798B127665CB500736C59 /* LocationDetailPresenter.swift */; };
@@ -60,6 +60,11 @@
 		BB4798C727665DCA00736C59 /* EpisodeDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798C127665DCA00736C59 /* EpisodeDetailProtocols.swift */; };
 		BB4798C827665DCA00736C59 /* EpisodeDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798C227665DCA00736C59 /* EpisodeDetailInteractor.swift */; };
 		BB4798C927665DCA00736C59 /* EpisodeDetailContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798C327665DCA00736C59 /* EpisodeDetailContainer.swift */; };
+		BB4798CC27667DFA00736C59 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798CB27667DFA00736C59 /* BaseView.swift */; };
+		BB4798CF27667ED200736C59 /* LocationHeaderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798CE27667ED200736C59 /* LocationHeaderDetailView.swift */; };
+		BB4798D1276687EE00736C59 /* BaseUICollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798D0276687EE00736C59 /* BaseUICollectionReusableView.swift */; };
+		BB4798D42766AA9000736C59 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798D32766AA9000736C59 /* BaseViewController.swift */; };
+		BB4798D627670C7100736C59 /* LocationInfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798D527670C7100736C59 /* LocationInfoDetailView.swift */; };
 		BB591DA8275CBD2700F0A0B2 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */; };
 		BB591DAA275CCC0600F0A0B2 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */; };
 		BB6B6196275BA49B00658921 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6195275BA49B00658921 /* APIConstants.swift */; };
@@ -144,7 +149,7 @@
 		BB4743762763C2D10030FA9D /* BaseUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITableViewCell.swift; sourceTree = "<group>"; };
 		BB4743782763C8900030FA9D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		BB47437B2763CD680030FA9D /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
-		BB47437D2763D2820030FA9D /* UITableView+Empry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Empry.swift"; sourceTree = "<group>"; };
+		BB47437D2763D2820030FA9D /* UITableView+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Empty.swift"; sourceTree = "<group>"; };
 		BB4743802763E58A0030FA9D /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		BB4798AD2766004700736C59 /* CharacterDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsHeaderView.swift; sourceTree = "<group>"; };
 		BB4798B127665CB500736C59 /* LocationDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailPresenter.swift; sourceTree = "<group>"; };
@@ -159,6 +164,11 @@
 		BB4798C127665DCA00736C59 /* EpisodeDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailProtocols.swift; sourceTree = "<group>"; };
 		BB4798C227665DCA00736C59 /* EpisodeDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailInteractor.swift; sourceTree = "<group>"; };
 		BB4798C327665DCA00736C59 /* EpisodeDetailContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailContainer.swift; sourceTree = "<group>"; };
+		BB4798CB27667DFA00736C59 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		BB4798CE27667ED200736C59 /* LocationHeaderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderDetailView.swift; sourceTree = "<group>"; };
+		BB4798D0276687EE00736C59 /* BaseUICollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUICollectionReusableView.swift; sourceTree = "<group>"; };
+		BB4798D32766AA9000736C59 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		BB4798D527670C7100736C59 /* LocationInfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoDetailView.swift; sourceTree = "<group>"; };
 		BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		BB6B6195275BA49B00658921 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -318,17 +328,19 @@
 			path = Episode;
 			sourceTree = "<group>";
 		};
-		BB4743722763C02F0030FA9D /* Viper */ = {
+		BB4743722763C02F0030FA9D /* VIPER */ = {
 			isa = PBXGroup;
 			children = (
+				BB4798D22766AA7800736C59 /* ViewController */,
 				BB47434D276372940030FA9D /* Router */,
 			);
-			path = Viper;
+			path = VIPER;
 			sourceTree = "<group>";
 		};
 		BB4743732763C0490030FA9D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BB4798CA27667DE900736C59 /* View */,
 				BB132F3D27623C990014C944 /* Picker */,
 				BB47434E2763729D0030FA9D /* FlowLayout */,
 				BB82867B275F888C003100E4 /* Gradient */,
@@ -364,6 +376,7 @@
 		BB4798AF27665BFC00736C59 /* Location Detail */ = {
 			isa = PBXGroup;
 			children = (
+				BB4798CD27667EC100736C59 /* View */,
 				BB4798BD27665D8C00736C59 /* Cell */,
 				BB4798B127665CB500736C59 /* LocationDetailPresenter.swift */,
 				BB4798B227665CB500736C59 /* LocationDetailRouter.swift */,
@@ -393,6 +406,31 @@
 			children = (
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB4798CA27667DE900736C59 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB4798CB27667DFA00736C59 /* BaseView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BB4798CD27667EC100736C59 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB4798CE27667ED200736C59 /* LocationHeaderDetailView.swift */,
+				BB4798D527670C7100736C59 /* LocationInfoDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BB4798D22766AA7800736C59 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BB4798D32766AA9000736C59 /* BaseViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		BB6B6193275BA43F00658921 /* Network */ = {
@@ -539,8 +577,8 @@
 			isa = PBXGroup;
 			children = (
 				BB9E2B7C2757BAB400CC6A98 /* Colors.swift */,
-				BB9E2B7E2757BAEC00CC6A98 /* Localize.swift */,
 				BB9E2B802757BB3100CC6A98 /* GlobalConstants.swift */,
+				BB9E2B7E2757BAEC00CC6A98 /* Localize.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -563,7 +601,7 @@
 				BB9E2B9C2757BF0B00CC6A98 /* UIImageView+Extension.swift */,
 				BB132F2027612AF90014C944 /* UICollectionView+Empty.swift */,
 				BB132F39276211410014C944 /* UITextField+Extension.swift */,
-				BB47437D2763D2820030FA9D /* UITableView+Empry.swift */,
+				BB47437D2763D2820030FA9D /* UITableView+Empty.swift */,
 				BB77E0132765137A00E3A8A9 /* UILabel+Extension.swift */,
 			);
 			path = UIKit;
@@ -624,7 +662,7 @@
 			children = (
 				BB132F2227613BE10014C944 /* Transition */,
 				BB4743732763C0490030FA9D /* UI */,
-				BB4743722763C02F0030FA9D /* Viper */,
+				BB4743722763C02F0030FA9D /* VIPER */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -635,6 +673,7 @@
 				BB9E2BA92757DDA400CC6A98 /* BaseUICollectionViewCell.swift */,
 				BB4743762763C2D10030FA9D /* BaseUITableViewCell.swift */,
 				BB77E0182765197700E3A8A9 /* BaseUITableViewHeaderFooterView.swift */,
+				BB4798D0276687EE00736C59 /* BaseUICollectionReusableView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -735,9 +774,10 @@
 				BB9E2BA02757BF7500CC6A98 /* Cacher.swift in Sources */,
 				BB47437C2763CD680030FA9D /* LocationViewModel.swift in Sources */,
 				BB77E0142765137A00E3A8A9 /* UILabel+Extension.swift in Sources */,
-				BB47437E2763D2820030FA9D /* UITableView+Empry.swift in Sources */,
+				BB47437E2763D2820030FA9D /* UITableView+Empty.swift in Sources */,
 				BB3866F92762A92900E3155E /* CharacterDetailRouter.swift in Sources */,
 				BB132F2D2761F88A0014C944 /* DimmPresentationController.swift in Sources */,
+				BB4798D1276687EE00736C59 /* BaseUICollectionReusableView.swift in Sources */,
 				BB82867F275FDDEF003100E4 /* CustomFlowLayout.swift in Sources */,
 				BB3866F82762A92900E3155E /* CharacterDetailPresenter.swift in Sources */,
 				BB9E2B7D2757BAB400CC6A98 /* Colors.swift in Sources */,
@@ -745,6 +785,8 @@
 				BB6B61A8275BB1E500658921 /* AppDependency.swift in Sources */,
 				BB4743812763E58A0030FA9D /* EpisodeViewModel.swift in Sources */,
 				BB77E0192765197700E3A8A9 /* BaseUITableViewHeaderFooterView.swift in Sources */,
+				BB4798D42766AA9000736C59 /* BaseViewController.swift in Sources */,
+				BB4798CC27667DFA00736C59 /* BaseView.swift in Sources */,
 				BB4743642763BCBB0030FA9D /* LocationContainer.swift in Sources */,
 				BB132F3C276224120014C944 /* ToolbarPickerView.swift in Sources */,
 				BB47435F2763BCBB0030FA9D /* LocationPresenter.swift in Sources */,
@@ -797,11 +839,13 @@
 				BB82867D275F889A003100E4 /* GradientView.swift in Sources */,
 				BB4798BB27665CB600736C59 /* LocationDetailInteractor.swift in Sources */,
 				BB4798B827665CB600736C59 /* LocationDetailRouter.swift in Sources */,
+				BB4798D627670C7100736C59 /* LocationInfoDetailView.swift in Sources */,
 				BB4743562763B7A90030FA9D /* Episode.swift in Sources */,
 				BB6B619C275BA63700658921 /* Character.swift in Sources */,
 				BB47436D2763BCE60030FA9D /* EpisodeViewController.swift in Sources */,
 				BB6B619A275BA5E900658921 /* Response.swift in Sources */,
 				BB4743632763BCBB0030FA9D /* LocationInteractor.swift in Sources */,
+				BB4798CF27667ED200736C59 /* LocationHeaderDetailView.swift in Sources */,
 				BB4798AE2766004700736C59 /* CharacterDetailsHeaderView.swift in Sources */,
 				BB6B6198275BA57100658921 /* Info.swift in Sources */,
 				BB4743622763BCBB0030FA9D /* LocationProtocols.swift in Sources */,

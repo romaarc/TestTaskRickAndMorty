@@ -50,6 +50,10 @@ extension LocationPresenter: LocationViewOutput {
         view?.startActivityIndicator()
         interactor.loadNext()
     }
+    
+    func onCellTap(with viewModel: LocationViewModel) {
+        router.showDetail(with: viewModel)
+    }
 }
 
 extension LocationPresenter: LocationInteractorOutput {

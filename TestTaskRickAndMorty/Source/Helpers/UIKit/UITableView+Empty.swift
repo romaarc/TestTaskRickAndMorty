@@ -1,5 +1,5 @@
 //
-//  UITableView+Empry.swift
+//  UITableView+Empty.swift
 //  TestTaskRickAndMorty
 //
 //  Created by Roman Gorshkov on 10.12.2021.
