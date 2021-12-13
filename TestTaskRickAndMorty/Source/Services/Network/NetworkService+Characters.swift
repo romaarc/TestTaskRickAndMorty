@@ -30,4 +30,8 @@ extension NetworkService: NetworkServiceProtocol {
     func requestCharacter(with url: String, completion: @escaping (Result<Character, Error>) -> Void) {
         self.baseRequest(url: url, completion: completion)
     }
+    
+    func requestLocation(with url: String, completion: @escaping (Result<Location, Error>) -> Void) {
+        self.baseRequest(url: url, completion: completion)
+    }
 }

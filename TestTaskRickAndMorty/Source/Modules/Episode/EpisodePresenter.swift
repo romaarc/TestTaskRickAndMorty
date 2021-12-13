@@ -72,7 +72,7 @@ extension EpisodePresenter: EpisodeInteractorOutput {
             dictEpisodes[index] = episodesSeason.filter({ $0.contains(season) }).count
         }
         self.count = count
-        let viewModels: [EpisodeViewModel] = makeViewModels(self.episodes)
+        let viewModels: [EpisodeViewModel] = EpisodePresenter.makeViewModels(self.episodes)
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }
@@ -88,8 +88,8 @@ extension EpisodePresenter: EpisodeInteractorOutput {
     }
 }
 
-private extension EpisodePresenter {
-    func makeViewModels(_ episodes: [Episode]) -> [EpisodeViewModel] {
+extension EpisodePresenter {
+    static func makeViewModels(_ episodes: [Episode]) -> [EpisodeViewModel] {
         return episodes.map { epi in
             EpisodeViewModel(id: epi.id,
                               name: epi.name,

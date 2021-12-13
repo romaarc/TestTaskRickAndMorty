@@ -12,7 +12,7 @@ final class CharacterDetailViewController: UIViewController {
 	private let output: CharacterDetailViewOutput
     private let characterViewModel: CharacterViewModel
     private var episodeViewModels: [EpisodeViewModel] = []
-    private let locationViewModel: LocationViewModel?
+    private var locationViewModel: LocationViewModel?
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
     private lazy var tableView = UITableView(frame: .zero, style: .grouped)
@@ -41,7 +41,8 @@ final class CharacterDetailViewController: UIViewController {
 		super.viewDidLoad()
         setupNavBar()
         setupTableView()
-        output.viewDidLoad(with: characterViewModel.episodes)
+        output.viewDidLoad(with: characterViewModel.episodes,
+                           and: characterViewModel.location.url)
 	}
     
     private func setupNavBar() {
@@ -52,8 +53,9 @@ final class CharacterDetailViewController: UIViewController {
 }
 
 extension CharacterDetailViewController: CharacterDetailViewInput {
-    func set(viewModels: [EpisodeViewModel]) {
+    func set(viewModels: [EpisodeViewModel], and location: LocationViewModel?) {
         self.episodeViewModels = viewModels
+        self.locationViewModel = location
         DispatchQueue.main.async {
             self.tableView.restore()
             self.tableView.reloadData()
@@ -181,8 +183,11 @@ extension CharacterDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
-        //output.showLocation()
+        if indexPath.section == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            guard let location = locationViewModel else { return }
+            output.showLocation(with: location)
+        }
         //output.showEpisode()
     }
     

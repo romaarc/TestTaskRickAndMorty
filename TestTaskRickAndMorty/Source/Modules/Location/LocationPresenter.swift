@@ -85,8 +85,8 @@ extension LocationPresenter: LocationInteractorOutput {
     
 }
 
-private extension LocationPresenter {
-    func makeViewModels(_ locations: [Location]) -> [LocationViewModel] {
+extension LocationPresenter {
+    private func makeViewModels(_ locations: [Location]) -> [LocationViewModel] {
         return locations.map { location in
             LocationViewModel(id: location.id,
                               name: location.name,
@@ -95,5 +95,13 @@ private extension LocationPresenter {
                               residents: location.residents,
                               created: location.created)
         }
+    }
+    static func makeViewModel(_ location: Location) -> LocationViewModel {
+        LocationViewModel(id: location.id,
+                          name: location.name,
+                          type: location.type,
+                          dimension: location.dimension,
+                          residents: location.residents,
+                          created: location.created)
     }
 }

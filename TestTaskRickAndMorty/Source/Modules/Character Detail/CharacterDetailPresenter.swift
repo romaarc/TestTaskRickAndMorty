@@ -24,19 +24,27 @@ final class CharacterDetailPresenter {
 extension CharacterDetailPresenter: CharacterDetailModuleInput {}
 
 extension CharacterDetailPresenter: CharacterDetailViewOutput {
-    func viewDidLoad(with episodes: [String]) {
+    func viewDidLoad(with episodes: [String], and location: String) {
         view?.startActivityIndicator()
-        interactor.reload(with: episodes)
+        interactor.reload(with: episodes, and: location)
+    }
+    
+    func showLocation(with location: LocationViewModel) {
+        router.showLocation(with: location)
     }
 }
 
 extension CharacterDetailPresenter: CharacterDetailInteractorOutput {
-    func didLoad(with episodes: [Episode]) {
-        let viewModels: [EpisodeViewModel] = makeViewModels(episodes)
+    func didLoad(with episodes: [Episode], and location: Location?) {
+        let viewModels: [EpisodeViewModel] = EpisodePresenter.makeViewModels(episodes)
+        var locationViewModel: LocationViewModel? = nil
+        if let location = location {
+            locationViewModel = LocationPresenter.makeViewModel(location)
+        }
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }
-        view?.set(viewModels: viewModels)
+        view?.set(viewModels: viewModels, and: locationViewModel)
     }
     
     func didError(with error: Error) {
@@ -45,16 +53,5 @@ extension CharacterDetailPresenter: CharacterDetailInteractorOutput {
             self.view?.stopActivityIndicator()
         }
         view?.didError()
-    }
-}
-private extension CharacterDetailPresenter {
-    func makeViewModels(_ episodes: [Episode]) -> [EpisodeViewModel] {
-        return episodes.map { epi in
-            EpisodeViewModel(id: epi.id,
-                              name: epi.name,
-                              airDate: epi.airDate,
-                              episode: epi.episode,
-                              created: epi.created)
-        }
     }
 }

@@ -15,23 +15,26 @@ protocol CharacterDetailModuleInput {
 protocol CharacterDetailModuleOutput: AnyObject {}
 
 protocol CharacterDetailViewInput: AnyObject {
-    func set(viewModels: [EpisodeViewModel])
+    func set(viewModels: [EpisodeViewModel], and location: LocationViewModel?)
     func didError()
     func stopActivityIndicator()
     func startActivityIndicator()
 }
 
 protocol CharacterDetailViewOutput: AnyObject {
-    func viewDidLoad(with episodes: [String])
+    func showLocation(with location: LocationViewModel)
+    func viewDidLoad(with episodes: [String], and location: String)
 }
 
 protocol CharacterDetailInteractorInput: AnyObject {
-    func reload(with episodes: [String])
+    func reload(with episodes: [String], and location: String)
 }
 
 protocol CharacterDetailInteractorOutput: AnyObject {
-    func didLoad(with episodes: [Episode])
+    func didLoad(with episodes: [Episode], and location: Location?)
     func didError(with error: Error)
 }
 
-protocol CharacterDetailRouterInput: AnyObject {}
+protocol CharacterDetailRouterInput: AnyObject {
+    func showLocation(with location: LocationViewModel)
+}

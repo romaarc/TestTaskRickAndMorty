@@ -88,9 +88,7 @@ extension CharacterDetailViewCell {
             label.text = "Location"
             subLabel.text = viewModel.location.name
             arrowImageView.isHidden = false
-            if !isUserInteractionEnabled {
-                isUserInteractionEnabled = true
-            }
+            isUserInteractionEnabled = true
         default:
             break
         }

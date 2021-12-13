@@ -23,6 +23,15 @@ final class CharacterDetailContainer {
 		presenter.moduleOutput = context.moduleOutput
 
 		interactor.output = presenter
+        
+        router.viewControllerProvider = { [weak viewController] in
+            viewController
+        }
+        router.navigationControllerProvider = { [weak viewController] in
+            viewController?.navigationController
+        }
+        
+        router.moduleDependencies = context.moduleDependencies
 
         return CharacterDetailContainer(view: viewController, input: presenter, router: router)
 	}
