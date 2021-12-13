@@ -42,6 +42,7 @@ class LocationCell: BaseUICollectionViewCell {
         [typeLabel, nameLabel].forEach { contentView.addSubview($0) }
         setupUI()
         cornerRadius = LocationConstants.Layout.cornerRadius
+        shadowRadius = LocationConstants.Layout.shadowRadius
     }
 }
     //MARK: - UI

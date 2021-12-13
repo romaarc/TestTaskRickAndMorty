@@ -35,7 +35,6 @@ final class EpisodeContainer {
 }
 
 struct EpisodeContext {
-    typealias ModuleDependencies = HasNetworkService
     let moduleDependencies: ModuleDependencies
 	weak var moduleOutput: EpisodeModuleOutput?
 }

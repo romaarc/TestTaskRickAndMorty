@@ -49,34 +49,33 @@ class LocationInfoDetailView: BaseView {
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.16
         
-        label.attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.08, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.attributedText = NSMutableAttributedString(string: "", attributes: [.kern: -0.08, .paragraphStyle: paragraphStyle])
         label.textAlignment = .center
         return label
     }()
     
     
     override func setupView() {
+        backgroundColor = Colors.grayDetail
         [upLabel, nameLabel, downLabel].forEach { addSubview($0) }
     }
 
     override func setupLayout() {
         NSLayoutConstraint.activate([
-            upLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            upLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20),
-            upLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
+            upLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            upLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
+            upLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
             
             nameLabel.topAnchor.constraint(equalTo: upLabel.bottomAnchor),
-            nameLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20),
-            nameLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
             
             downLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-            downLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20),
-            downLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
-            downLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            downLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
+            downLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
         ])
     }
 }
-
 //MARK: - UI
 extension LocationInfoDetailView {
     //MARK: - Update with ViewModel

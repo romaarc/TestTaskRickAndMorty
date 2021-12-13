@@ -100,61 +100,62 @@ private extension LocationDetailViewController {
         NSLayoutConstraint.activate([
             locationInfoDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             locationInfoDetailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            locationInfoDetailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
+            locationInfoDetailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            locationInfoDetailView.heightAnchor.constraint(equalToConstant: 139)
         ])
         locationInfoDetailView.update(with: locationViewModel)
     }
 }
 
 //MARK: - UICollectionViewDataSource
-extension LocationDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //viewModels.count
-        10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueCell(cellType: UICollectionViewCell.self, for: indexPath)
-        cell.backgroundColor = .gray
-        cell.layer.cornerRadius = 8
-        cell.layer.masksToBounds = true
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = Colors.borderLightGray.cgColor
-        //let viewModel = viewModels[indexPath.row]
-        //cell.update(with: viewModel)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueSectionHeaderCell(cellType: LocationHeaderDetailView.self, for: indexPath)
-        header.update(some: LocationDetailConstants.Strings.headerInfo)
-        return header
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 298, height: 25)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        LocationDetailConstants.Layout.spacingBottom
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        LocationDetailConstants.Layout.minimumInteritemSpacingForSectionAt
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: LocationDetailConstants.Layout.spacingTop, left: LocationDetailConstants.Layout.spacingLeft, bottom: LocationDetailConstants.Layout.spacingBottom, right: LocationDetailConstants.Layout.spacingRight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = itemWidth(for: view.bounds.width, spacing: 10)
-        return CGSize(width: width, height: 219)
-    }
-    
-    func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
-        let totalSpacing: CGFloat = (LocationDetailConstants.Layout.itemsInRow * LocationDetailConstants.Layout.spacingLeft + (LocationDetailConstants.Layout.itemsInRow - 1) * LocationDetailConstants.Layout.spacingRight) + LocationDetailConstants.Layout.minimumInteritemSpacingForSectionAt - LocationDetailConstants.Layout.spacing
-        let finalWidth = (width - totalSpacing) / LocationDetailConstants.Layout.itemsInRow
-        return floor(finalWidth)
-    }
-}
+//extension LocationDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        //viewModels.count
+//        10
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueCell(cellType: UICollectionViewCell.self, for: indexPath)
+//        cell.backgroundColor = .gray
+//        cell.layer.cornerRadius = 8
+//        cell.layer.masksToBounds = true
+//        cell.layer.borderWidth = 1
+//        cell.layer.borderColor = Colors.borderLightGray.cgColor
+//        //let viewModel = viewModels[indexPath.row]
+//        //cell.update(with: viewModel)
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        let header = collectionView.dequeueSectionHeaderCell(cellType: LocationHeaderDetailView.self, for: indexPath)
+//        header.update(some: LocationDetailConstants.Strings.headerInfo)
+//        return header
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: 298, height: 25)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        LocationDetailConstants.Layout.spacingBottom
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        LocationDetailConstants.Layout.minimumInteritemSpacingForSectionAt
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: LocationDetailConstants.Layout.spacingTop, left: LocationDetailConstants.Layout.spacingLeft, bottom: LocationDetailConstants.Layout.spacingBottom, right: LocationDetailConstants.Layout.spacingRight)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = itemWidth(for: view.bounds.width, spacing: 10)
+//        return CGSize(width: width, height: 219)
+//    }
+//
+//    func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
+//        let totalSpacing: CGFloat = (LocationDetailConstants.Layout.itemsInRow * LocationDetailConstants.Layout.spacingLeft + (LocationDetailConstants.Layout.itemsInRow - 1) * LocationDetailConstants.Layout.spacingRight) + LocationDetailConstants.Layout.minimumInteritemSpacingForSectionAt - LocationDetailConstants.Layout.spacing
+//        let finalWidth = (width - totalSpacing) / LocationDetailConstants.Layout.itemsInRow
+//        return floor(finalWidth)
+//    }
+//}

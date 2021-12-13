@@ -20,8 +20,8 @@ extension UIImageView {
         // Limit disk cache size to 200 MB.
         cache.diskStorage.config.sizeLimit = 200 * 1024 * 1024
         
-        // Memory image expires after 20 sec.
-        cache.memoryStorage.config.expiration = .seconds(20)
+        // Memory image expires after 60 sec.
+        cache.memoryStorage.config.expiration = .seconds(60)
     }
 }
 

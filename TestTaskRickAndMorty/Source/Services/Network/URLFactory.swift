@@ -8,13 +8,11 @@
 import Foundation
 
 enum URLFactory {
-    private static let apiKey = APIConstants.rickMortyURL
-    
     private static var baseURL: URL {
         return baseURLComponents.url!
     }
     private static let baseURLComponents: URLComponents = {
-        let url = URL(string: APIConstants.rickMortyURL)!
+        let url = URL(string: API.main)!
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         urlComponents.queryItems = []
         return urlComponents
@@ -29,7 +27,7 @@ enum URLFactory {
             URLQueryItem(name: "gender", value: params.gender ?? "")
         ]
         urlComponents.queryItems?.append(contentsOf: paramsQueryItem)
-        return urlComponents.url!.appendingPathComponent(APIType.getCharacters).absoluteString
+        return urlComponents.url!.appendingPathComponent(API.TypeOf.characters).absoluteString
     }
     
     static func getLocation(params: LocationURLParameters) -> String {
@@ -39,7 +37,7 @@ enum URLFactory {
             URLQueryItem(name: "name", value:  params.name ?? "")
         ]
         urlComponents.queryItems?.append(contentsOf: paramsQueryItem)
-        return urlComponents.url!.appendingPathComponent(APIType.getLocations).absoluteString
+        return urlComponents.url!.appendingPathComponent(API.TypeOf.locations).absoluteString
     }
     
     static func getEpisode(params: EpisodeURLParameters) -> String {
@@ -49,6 +47,6 @@ enum URLFactory {
             URLQueryItem(name: "name", value:  params.name ?? "")
         ]
         urlComponents.queryItems?.append(contentsOf: paramsQueryItem)
-        return urlComponents.url!.appendingPathComponent(APIType.getEpisodes).absoluteString
+        return urlComponents.url!.appendingPathComponent(API.TypeOf.episodes).absoluteString
     }
 }
