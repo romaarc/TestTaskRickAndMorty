@@ -12,4 +12,5 @@ protocol NetworkServiceProtocol {
     func requestLocations(with params: LocationURLParameters, and completion: @escaping (Result<Response<Location>, Error>) -> Void)
     func requestEpisodes(with params: EpisodeURLParameters, and completion: @escaping (Result<Response<Episode>, Error>) -> Void)
     func requestEpisode(with url: String, completion: @escaping (Result<Episode, Error>) -> Void)
+    func requestCharacter(with url: String, completion: @escaping (Result<Character, Error>) -> Void)
 }

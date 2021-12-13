@@ -114,8 +114,8 @@ private extension CharacterDetailViewController {
         contentView.addSubview(characterDetailsHeaderView)
         NSLayoutConstraint.activate([
             characterDetailsHeaderView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            characterDetailsHeaderView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            characterDetailsHeaderView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+            characterDetailsHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            characterDetailsHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
         characterDetailsHeaderView.update(viewModel: characterViewModel)
     }
@@ -210,6 +210,16 @@ extension CharacterDetailViewController: UITableViewDelegate {
             return 74.0
         default:
             return 0.0
+        }
+    }
+    
+    ///Animate hide headerView maybe will be in future
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            UIView.animate(withDuration: 1 / 3, delay: 0, options: .curveEaseIn) {
+                self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -254).isActive = true
+                self.view.layoutIfNeeded()
+            }
         }
     }
 }

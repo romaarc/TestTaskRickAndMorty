@@ -95,7 +95,7 @@ extension CharacterPresenter: CharacterInteractorOutput {
             self.characters.append(contentsOf: characters)
         }
         self.count = count
-        let viewModels: [CharacterViewModel] = makeViewModels(self.characters)
+        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(self.characters)
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }
@@ -111,8 +111,8 @@ extension CharacterPresenter: CharacterInteractorOutput {
     }
 }
 
-private extension CharacterPresenter {
-    func makeViewModels(_ characters: [Character]) -> [CharacterViewModel] {
+extension CharacterPresenter {
+    static func makeViewModels(_ characters: [Character]) -> [CharacterViewModel] {
         return characters.map { character in
             CharacterViewModel(id: character.id,
                                name: character.name,

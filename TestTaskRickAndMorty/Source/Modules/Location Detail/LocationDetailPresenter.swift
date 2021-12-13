@@ -11,6 +11,7 @@ import Foundation
 final class LocationDetailPresenter {
 	weak var view: LocationDetailViewInput?
     weak var moduleOutput: LocationDetailModuleOutput?
+    private var residents: [Character] = []
     
 	private let router: LocationDetailRouterInput
 	private let interactor: LocationDetailInteractorInput
@@ -25,7 +26,27 @@ extension LocationDetailPresenter: LocationDetailModuleInput {
 }
 
 extension LocationDetailPresenter: LocationDetailViewOutput {
+    func viewDidLoad(with residents: [String]) {
+        view?.startActivityIndicator()
+        interactor.reload(with: residents)
+    }
+    
 }
 
 extension LocationDetailPresenter: LocationDetailInteractorOutput {
+    func didLoad(with residents: [Character]) {
+        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(residents)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
+        view?.set(viewModels: viewModels)
+    }
+    
+    func didError(with error: Error) {
+        print(error)
+        DispatchQueue.main.async {
+            self.view?.stopActivityIndicator()
+        }
+        view?.didError()
+    }
 }

@@ -14,7 +14,6 @@ final class CharacterDetailPresenter {
     
 	private let router: CharacterDetailRouterInput
 	private let interactor: CharacterDetailInteractorInput
-    private var episodes: [Episode] = []
     
     init(router: CharacterDetailRouterInput, interactor: CharacterDetailInteractorInput) {
         self.router = router
@@ -33,8 +32,7 @@ extension CharacterDetailPresenter: CharacterDetailViewOutput {
 
 extension CharacterDetailPresenter: CharacterDetailInteractorOutput {
     func didLoad(with episodes: [Episode]) {
-        self.episodes = episodes
-        let viewModels: [EpisodeViewModel] = makeViewModels(self.episodes)
+        let viewModels: [EpisodeViewModel] = makeViewModels(episodes)
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }

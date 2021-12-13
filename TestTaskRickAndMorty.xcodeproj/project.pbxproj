@@ -65,6 +65,7 @@
 		BB4798D1276687EE00736C59 /* BaseUICollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798D0276687EE00736C59 /* BaseUICollectionReusableView.swift */; };
 		BB4798D42766AA9000736C59 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798D32766AA9000736C59 /* BaseViewController.swift */; };
 		BB4798D627670C7100736C59 /* LocationInfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798D527670C7100736C59 /* LocationInfoDetailView.swift */; };
+		BB4798D82767945900736C59 /* LocationDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4798D72767945900736C59 /* LocationDetailCell.swift */; };
 		BB591DA8275CBD2700F0A0B2 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */; };
 		BB591DAA275CCC0600F0A0B2 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */; };
 		BB6B6196275BA49B00658921 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6195275BA49B00658921 /* API.swift */; };
@@ -169,6 +170,7 @@
 		BB4798D0276687EE00736C59 /* BaseUICollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUICollectionReusableView.swift; sourceTree = "<group>"; };
 		BB4798D32766AA9000736C59 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		BB4798D527670C7100736C59 /* LocationInfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoDetailView.swift; sourceTree = "<group>"; };
+		BB4798D72767945900736C59 /* LocationDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailCell.swift; sourceTree = "<group>"; };
 		BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		BB6B6195275BA49B00658921 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 		BB4798BD27665D8C00736C59 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				BB4798D72767945900736C59 /* LocationDetailCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 				BB9E2B962757BD7D00CC6A98 /* CharacterProtocols.swift in Sources */,
 				BB132F252761F78C0014C944 /* PanelTransition.swift in Sources */,
 				BB9E2BA02757BF7500CC6A98 /* Cacher.swift in Sources */,
+				BB4798D82767945900736C59 /* LocationDetailCell.swift in Sources */,
 				BB47437C2763CD680030FA9D /* LocationViewModel.swift in Sources */,
 				BB77E0142765137A00E3A8A9 /* UILabel+Extension.swift in Sources */,
 				BB47437E2763D2820030FA9D /* UITableView+Empty.swift in Sources */,

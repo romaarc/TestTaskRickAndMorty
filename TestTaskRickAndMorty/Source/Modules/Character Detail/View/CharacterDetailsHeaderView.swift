@@ -90,27 +90,27 @@ class CharacterDetailsHeaderView: UIView {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            backgroundImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
-            backgroundImageView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 19.0),
-            avatarImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: -70.0),
+            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 19.0),
+            avatarImageView.leadingAnchor.constraint(equalTo: centerXAnchor, constant: -70.0),
             avatarImageView.heightAnchor.constraint(equalToConstant: 140.0),
             avatarImageView.widthAnchor.constraint(equalToConstant: 140.0),
             
             statusLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 15.0),
-            statusLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20),
-            statusLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
+            statusLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
             nameLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor),
-            nameLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20),
-            nameLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
             speciesLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-            speciesLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20),
-            speciesLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
-            speciesLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            speciesLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            speciesLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            speciesLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         ])
     }
     

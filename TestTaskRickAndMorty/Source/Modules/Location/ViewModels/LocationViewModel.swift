@@ -12,5 +12,6 @@ struct LocationViewModel {
     let name: String
     let type: String
     let dimension: String
+    let residents: [String]
     let created: Date
 }

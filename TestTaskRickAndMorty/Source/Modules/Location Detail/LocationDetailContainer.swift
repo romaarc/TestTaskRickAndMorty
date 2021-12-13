@@ -15,7 +15,7 @@ final class LocationDetailContainer {
 
 	static func assemble(with context: LocationDetailContext, withModel viewModel: LocationViewModel) -> LocationDetailContainer {
         let router = LocationDetailRouter()
-        let interactor = LocationDetailInteractor()
+        let interactor = LocationDetailInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService)
         let presenter = LocationDetailPresenter(router: router, interactor: interactor)
         let viewController = LocationDetailViewController(output: presenter, viewModel: viewModel)
 

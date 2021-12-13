@@ -30,8 +30,8 @@ class EpisodeHeaderSectionView: BaseUITableViewHeaderFooterView {
 extension EpisodeHeaderSectionView {
     private func setupUI() {
         NSLayoutConstraint.activate([
-            label.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16.0),
-            label.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -9.5)
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9.5)
         ])
     }
     //MARK: - Update

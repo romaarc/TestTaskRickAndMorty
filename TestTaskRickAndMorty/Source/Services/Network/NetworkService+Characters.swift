@@ -22,7 +22,12 @@ extension NetworkService: NetworkServiceProtocol {
         let url = URLFactory.getEpisode(params: params)
         self.baseRequest(url: url, completion: completion)
     }
+    
     func requestEpisode(with url: String, completion: @escaping (Result<Episode, Error>) -> Void) {
+        self.baseRequest(url: url, completion: completion)
+    }
+    
+    func requestCharacter(with url: String, completion: @escaping (Result<Character, Error>) -> Void) {
         self.baseRequest(url: url, completion: completion)
     }
 }
