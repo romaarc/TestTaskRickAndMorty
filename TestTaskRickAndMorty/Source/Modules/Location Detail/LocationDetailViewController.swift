@@ -20,7 +20,7 @@ final class LocationDetailViewController: BaseViewController {
     init(output: LocationDetailViewOutput, viewModel: LocationViewModel) {
         self.output = output
         self.locationViewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {

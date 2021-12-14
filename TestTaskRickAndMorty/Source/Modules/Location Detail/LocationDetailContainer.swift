@@ -10,7 +10,7 @@ import UIKit
 
 final class LocationDetailContainer {
     let input: LocationDetailModuleInput
-	let viewController: BaseViewController
+	let viewController: UIViewController
 	private(set) weak var router: LocationDetailRouterInput!
 
 	static func assemble(with context: LocationDetailContext, withModel viewModel: LocationViewModel) -> LocationDetailContainer {
@@ -27,7 +27,7 @@ final class LocationDetailContainer {
         return LocationDetailContainer(view: viewController, input: presenter, router: router)
 	}
 
-    private init(view: BaseViewController, input: LocationDetailModuleInput, router: LocationDetailRouterInput) {
+    private init(view: UIViewController, input: LocationDetailModuleInput, router: LocationDetailRouterInput) {
 		self.viewController = view
         self.input = input
 		self.router = router

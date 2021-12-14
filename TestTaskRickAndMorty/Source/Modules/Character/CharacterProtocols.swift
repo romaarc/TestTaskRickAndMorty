@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum LoadingDataType {
-    case nextPage
-    case reload
-}
-
 protocol CharacterModuleInput {
 	var moduleOutput: CharacterModuleOutput? { get }
 }
@@ -20,11 +15,8 @@ protocol CharacterModuleInput {
 protocol CharacterModuleOutput: AnyObject {
 }
 
-protocol CharacterViewInput: AnyObject {
+protocol CharacterViewInput: ViewInput {
     func set(viewModels: [CharacterViewModel], isSearch: Bool)
-    func didError()
-    func stopActivityIndicator()
-    func startActivityIndicator()
 }
 
 protocol CharacterViewOutput: AnyObject {
@@ -37,16 +29,13 @@ protocol CharacterViewOutput: AnyObject {
     func onCellTap(with viewModel: CharacterViewModel)
 }
 
-protocol CharacterInteractorInput: AnyObject {
-    func reload()
-    func loadNext()
+protocol CharacterInteractorInput: InteractorInput {
     func reload(withParams params: CharacterURLParameters)
     func reloadFilter(withParams params: CharacterURLParameters)
 }
 
-protocol CharacterInteractorOutput: AnyObject {
+protocol CharacterInteractorOutput: InteractorOutput {
     func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isSearch: Bool)
-    func didError(with error: Error)
 }
 
 protocol CharacterRouterInput: AnyObject {

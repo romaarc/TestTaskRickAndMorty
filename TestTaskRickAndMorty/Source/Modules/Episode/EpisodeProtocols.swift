@@ -14,11 +14,8 @@ protocol EpisodeModuleInput {
 
 protocol EpisodeModuleOutput: AnyObject {}
 
-protocol EpisodeViewInput: AnyObject {
+protocol EpisodeViewInput: ViewInput {
     func set(viewModels: [EpisodeViewModel], seasons: [Int: Int])
-    func didError()
-    func stopActivityIndicator()
-    func startActivityIndicator()
 }
 
 protocol EpisodeViewOutput: AnyObject {
@@ -26,14 +23,10 @@ protocol EpisodeViewOutput: AnyObject {
     func willDisplay(at index: Int, on section: Int)
 }
 
-protocol EpisodeInteractorInput: AnyObject {
-    func reload()
-    func loadNext()
-}
+protocol EpisodeInteractorInput: InteractorInput {}
 
-protocol EpisodeInteractorOutput: AnyObject {
+protocol EpisodeInteractorOutput: InteractorOutput {
     func didLoad(with episodes: [Episode], loadType: LoadingDataType, count: Int)
-    func didError(with error: Error)
 }
 
 protocol EpisodeRouterInput: AnyObject {}

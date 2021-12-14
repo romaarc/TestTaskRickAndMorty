@@ -8,13 +8,12 @@
 
 import UIKit
 
-final class EpisodeDetailViewController: UIViewController {
+final class EpisodeDetailViewController: BaseViewController {
 	private let output: EpisodeDetailViewOutput
 
     init(output: EpisodeDetailViewOutput) {
         self.output = output
-        
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,5 +25,4 @@ final class EpisodeDetailViewController: UIViewController {
 	}
 }
 
-extension EpisodeDetailViewController: EpisodeDetailViewInput {
-}
+extension EpisodeDetailViewController: EpisodeDetailViewInput {}

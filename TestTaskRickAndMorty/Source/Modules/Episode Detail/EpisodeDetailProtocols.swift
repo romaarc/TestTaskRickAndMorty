@@ -12,10 +12,10 @@ protocol EpisodeDetailModuleInput {
 	var moduleOutput: EpisodeDetailModuleOutput? { get }
 }
 
-protocol EpisodeDetailModuleOutput: AnyObject {
-}
+protocol EpisodeDetailModuleOutput: AnyObject {}
 
-protocol EpisodeDetailViewInput: AnyObject {
+protocol EpisodeDetailViewInput: ViewInput {
+//    func set(viewModels: [EpisodeViewModel])
 }
 
 protocol EpisodeDetailViewOutput: AnyObject {
@@ -24,8 +24,7 @@ protocol EpisodeDetailViewOutput: AnyObject {
 protocol EpisodeDetailInteractorInput: AnyObject {
 }
 
-protocol EpisodeDetailInteractorOutput: AnyObject {
+protocol EpisodeDetailInteractorOutput: InteractorOutput {
 }
 
-protocol EpisodeDetailRouterInput: AnyObject {
-}
+protocol EpisodeDetailRouterInput: AnyObject {}

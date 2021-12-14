@@ -8,76 +8,48 @@
 
 import UIKit
 
-final class CharacterViewController: UIViewController {
+final class CharacterViewController: BaseViewController {
     private let output: CharacterViewOutput
     private let searchController = UISearchController(searchResultsController: nil)
-    private let collectionView: UICollectionView
     private var viewModels: [CharacterViewModel] = []
     private var status: String?
     private var gender: String?
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .medium)
-        activity.hidesWhenStopped = true
-        activity.color = .black
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        return activity
-    }()
-
     init(output: CharacterViewOutput) {
         self.output = output
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        let view = UIView()
-        collectionView.addSubview(activityIndicator)
-        view.addSubview(collectionView)
-        setupCollectionView()
-        self.view = view
-    }
-    
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        setupUI()
+        super.setupUI()
         output.viewDidLoad()
         setupSearchController()
 	}
-    
-    private func setupUI() {
-        view.backgroundColor = .white
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        
+    override func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .white
+        collectionView.register(CharacterCell.self)
+        view.addSubview(collectionView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.frame
     }
-    
-}
-//MARK: - Extensions CollectionsView
-private extension CharacterViewController {
-    func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = .white
-        collectionView.register(CharacterCell.self)
-    }
 }
 //MARK: - UICollectionViewDataSource
 extension CharacterViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModels.count
+        viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,7 +59,6 @@ extension CharacterViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
 //MARK: - UICollectionViewDelegateFlowLayout
 extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     
@@ -112,18 +83,17 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: CharacterConstants.Layout.spacingTop, left: CharacterConstants.Layout.spacingLeft, bottom: CharacterConstants.Layout.spacingBottom, right: CharacterConstants.Layout.spacingRight)
+        UIEdgeInsets(top: CharacterConstants.Layout.spacingTop, left: CharacterConstants.Layout.spacingLeft, bottom: CharacterConstants.Layout.spacingBottom, right: CharacterConstants.Layout.spacingRight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CharacterConstants.Layout.spacingBottom
+        CharacterConstants.Layout.spacingBottom
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return CharacterConstants.Layout.minimumInteritemSpacingForSectionAt
+        CharacterConstants.Layout.minimumInteritemSpacingForSectionAt
     }
 }
-
 //MARK: - CharacterViewInput from Presenter
 extension CharacterViewController: CharacterViewInput {
     func didError() {
@@ -154,7 +124,6 @@ extension CharacterViewController: CharacterViewInput {
         }
     }
 }
-
 //MARK: - Filter VC
 private extension CharacterViewController {
     @objc func filterButtonClicked() {
@@ -217,15 +186,5 @@ extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating 
             viewModels.removeAll()
             output.searchBarCancelButtonClicked()
         }
-    }
-}
-//MARK: - activityIndicator
-extension CharacterViewController {
-    func stopActivityIndicator() {
-        activityIndicator.stopAnimating()
-    }
-
-    func startActivityIndicator() {
-        activityIndicator.startAnimating()
     }
 }

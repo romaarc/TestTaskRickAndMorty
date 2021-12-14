@@ -12,14 +12,10 @@ protocol LocationDetailModuleInput {
 	var moduleOutput: LocationDetailModuleOutput? { get }
 }
 
-protocol LocationDetailModuleOutput: AnyObject {
-}
+protocol LocationDetailModuleOutput: AnyObject {}
 
-protocol LocationDetailViewInput: AnyObject {
+protocol LocationDetailViewInput: ViewInput {
     func set(viewModels: [CharacterViewModel])
-    func didError()
-    func stopActivityIndicator()
-    func startActivityIndicator()
 }
 
 protocol LocationDetailViewOutput: AnyObject {
@@ -30,10 +26,8 @@ protocol LocationDetailInteractorInput: AnyObject {
     func reload(with residents: [String])
 }
 
-protocol LocationDetailInteractorOutput: AnyObject {
+protocol LocationDetailInteractorOutput: InteractorOutput {
     func didLoad(with residents: [Character])
-    func didError(with error: Error)
 }
 
-protocol LocationDetailRouterInput: AnyObject {
-}
+protocol LocationDetailRouterInput: AnyObject {}

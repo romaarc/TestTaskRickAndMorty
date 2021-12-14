@@ -14,11 +14,8 @@ protocol LocationModuleInput {
 
 protocol LocationModuleOutput: AnyObject {}
 
-protocol LocationViewInput: AnyObject {
+protocol LocationViewInput: ViewInput {
     func set(viewModels: [LocationViewModel])
-    func stopActivityIndicator()
-    func startActivityIndicator()
-    func didError()
 }
 
 protocol LocationViewOutput: AnyObject {
@@ -27,14 +24,10 @@ protocol LocationViewOutput: AnyObject {
     func onCellTap(with viewModel: LocationViewModel)
 }
 
-protocol LocationInteractorInput: AnyObject {
-    func reload()
-    func loadNext()
-}
+protocol LocationInteractorInput: InteractorInput {}
 
-protocol LocationInteractorOutput: AnyObject {
+protocol LocationInteractorOutput: InteractorOutput {
     func didLoad(with locations: [Location], loadType: LoadingDataType, count: Int)
-    func didError(with error: Error)
 }
 
 protocol LocationRouterInput: AnyObject {

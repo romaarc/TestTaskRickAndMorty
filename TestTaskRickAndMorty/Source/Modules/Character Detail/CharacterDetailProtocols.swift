@@ -14,11 +14,8 @@ protocol CharacterDetailModuleInput {
 
 protocol CharacterDetailModuleOutput: AnyObject {}
 
-protocol CharacterDetailViewInput: AnyObject {
+protocol CharacterDetailViewInput: ViewInput {
     func set(viewModels: [EpisodeViewModel], and location: LocationViewModel?)
-    func didError()
-    func stopActivityIndicator()
-    func startActivityIndicator()
 }
 
 protocol CharacterDetailViewOutput: AnyObject {
@@ -30,9 +27,8 @@ protocol CharacterDetailInteractorInput: AnyObject {
     func reload(with episodes: [String], and location: String)
 }
 
-protocol CharacterDetailInteractorOutput: AnyObject {
+protocol CharacterDetailInteractorOutput: InteractorOutput {
     func didLoad(with episodes: [Episode], and location: Location?)
-    func didError(with error: Error)
 }
 
 protocol CharacterDetailRouterInput: AnyObject {
