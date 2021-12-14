@@ -133,7 +133,7 @@ private extension AppCoordinator {
                                                             .font : Font.sber(ofSize: Font.Size.thirdyFour, weight: .bold),
                                                             .paragraphStyle: paragraphStyle,
                                                             .kern: 0.41]
-        UINavigationBar.appearance().tintColor = .gray
+        UINavigationBar.appearance().tintColor = Colors.purple
         controller.navigationBar.standardAppearance = navigationBarAppearance
         controller.navigationBar.compactAppearance = navigationBarAppearance
         controller.navigationBar.scrollEdgeAppearance = navigationBarAppearance

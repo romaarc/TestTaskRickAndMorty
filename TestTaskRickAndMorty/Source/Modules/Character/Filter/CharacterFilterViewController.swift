@@ -15,238 +15,155 @@ protocol CharacterFilterDelegate: AnyObject {
 class CharacterFilterViewController: UIViewController {
     
     weak var delegate: CharacterFilterDelegate?
-    
-    private let statusTextField: PickerTextField = {
-        let field = PickerTextField()
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.textAlignment = .center
-        field.placeholder = "Укажите статус"
-        field.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
-        field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.black.cgColor
-        field.layer.cornerRadius = 5
-        field.textColor = .black
-        return field
+    private let statusCharacters = ["Alive", "Dead", "Unknown"]
+    private let genderCharacters = ["Female", "Male", "Genderless", "Unknown"]
+    private lazy var tableView = UITableView(frame: .zero, style: .grouped)
+  
+    private let navBarView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    private let genderTextField: PickerTextField = {
-        let field = PickerTextField()
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.textAlignment = .center
-        field.placeholder = "Укажите пол"
-        field.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
-        field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.black.cgColor
-        field.layer.cornerRadius = 5
-        field.textColor = .black
-        return field
+    private let rowView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.grayDetail
+        view.layer.cornerRadius = 4
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    private let statusPickerView: ToolbarPickerView = {
-        let picker = ToolbarPickerView()
-        picker.tag = 1
-        return picker
+    private let filterLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Font.sber(ofSize: Font.Size.seventeen, weight: .bold)
+        label.text = "Filter"
+        return label
     }()
     
-    private let genderPickerView: ToolbarPickerView = {
-        let picker = ToolbarPickerView()
-        picker.tag = 2
-        return picker
+    private let applyButton: UIButton = {
+        if #available(iOS 15.0, *) {
+            var configuration = UIButton.Configuration.filled()
+            configuration.title = "APPLY"
+            configuration.attributedTitle?.kern = -0.08
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineHeightMultiple = 1.16
+            configuration.attributedTitle?.paragraphStyle = paragraphStyle
+            configuration.attributedTitle?.font = Font.sber(ofSize: Font.Size.thirteen, weight: .bold)
+            configuration.baseForegroundColor = .white
+            configuration.baseBackgroundColor = Colors.purple
+            configuration.cornerStyle = .capsule
+            configuration.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 12, bottom: 5, trailing: 12)
+            let button = UIButton(configuration: configuration, primaryAction: nil)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        } else {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.layer.cornerRadius = 14
+            button.layer.masksToBounds = true
+            button.frame.size = CGSize(width: 66, height: 28)
+            
+            let title = NSMutableAttributedString()
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineHeightMultiple = 1.16
+            paragraphStyle.alignment = .center
+            let part = NSAttributedString(string: "APPLY         ",
+                                          attributes: [.foregroundColor: UIColor.white,
+                                                       .font: Font.sber(ofSize: Font.Size.thirteen, weight: .bold),
+                                                       .paragraphStyle: paragraphStyle,
+                                                       .kern: -0.08])
+            title.append(part)
+            button.titleEdgeInsets = UIEdgeInsets(top: 3, left: 12, bottom: 5, right: 12)
+            button.setAttributedTitle(title, for: .normal)
+            button.backgroundColor = Colors.purple
+            return button
+        }
     }()
     
-    private let filterButton: UIButton = {
-        let btn = UIButton(type: .custom)
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.layer.cornerRadius = 10
-        btn.backgroundColor = Colors.lightWhite
-        btn.layer.borderWidth = 1
-        btn.layer.borderColor = UIColor.black.cgColor
-        btn.setTitle("Фильтр", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
-        return btn
+    private let clearButton: UIButton = {
+        if #available(iOS 15.0, *) {
+            var configuration = UIButton.Configuration.plain()
+            configuration.title = "Clear"
+            configuration.attributedTitle?.kern = -0.41
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineHeightMultiple = 1.08
+            configuration.attributedTitle?.paragraphStyle = paragraphStyle
+            configuration.attributedTitle?.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
+            configuration.baseForegroundColor = Colors.purple
+            configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+            let button = UIButton(configuration: configuration, primaryAction: nil)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        } else {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.frame.size = CGSize(width: 44, height: 22)
+            let title = NSMutableAttributedString()
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineHeightMultiple = 1.08
+            paragraphStyle.alignment = .center
+            let part = NSAttributedString(string: "Clear",
+                                          attributes: [.foregroundColor: Colors.purple,
+                                                       .font: Font.sber(ofSize: Font.Size.seventeen, weight: .regular),
+                                                       .paragraphStyle: paragraphStyle,
+                                                       .kern: -0.41])
+            title.append(part)
+            button.setAttributedTitle(title, for: .normal)
+            return button
+        }
     }()
     
-    private let clearFilterButton: UIButton = {
-        let btn = UIButton(type: .custom)
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.layer.cornerRadius = 10
-        btn.backgroundColor = Colors.lightWhite
-        btn.layer.borderWidth = 1
-        btn.layer.borderColor = UIColor.black.cgColor
-        btn.setTitle("Очистить", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
-        return btn
-    }()
-    
-    private let statusCharacters = ["alive", "dead", "unknown"]
-    private let genderCharacters = ["female", "male", "genderless", "unknown"]
+    private func setupNavBar() {
+        
+        view.layer.cornerRadius = 10
+        
+        [rowView, navBarView].forEach { view.addSubview($0) }
+        [clearButton, filterLabel, applyButton].forEach { navBarView.addSubview($0) }
+        
+        NSLayoutConstraint.activate([
+            rowView.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+            rowView.widthAnchor.constraint(equalTo: filterLabel.widthAnchor),
+            rowView.heightAnchor.constraint(equalToConstant: 5),
+            rowView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            navBarView.topAnchor.constraint(equalTo: rowView.bottomAnchor, constant: 0),
+            navBarView.heightAnchor.constraint(equalToConstant: 44),
+            navBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            clearButton.leadingAnchor.constraint(equalTo: navBarView.leadingAnchor, constant: 16),
+            clearButton.topAnchor.constraint(equalTo: navBarView.topAnchor, constant: 11),
+            clearButton.bottomAnchor.constraint(equalTo: navBarView.bottomAnchor, constant: -13),
+            clearButton.widthAnchor.constraint(equalToConstant: 41),
+            
+            filterLabel.centerXAnchor.constraint(equalTo: navBarView.centerXAnchor),
+            filterLabel.centerYAnchor.constraint(equalTo: navBarView.centerYAnchor),
+            
+            applyButton.trailingAnchor.constraint(equalTo: navBarView.trailingAnchor, constant: -15),
+            applyButton.topAnchor.constraint(equalTo: navBarView.topAnchor, constant: 8)
+        ])
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupButtons()
+        view.backgroundColor = .white
+        setupNavBar()
     }
     
     init(currentStatus: String, currentGender: String) {
         super.init(nibName: nil, bundle: nil)
-        if currentStatus != "" {
-            self.statusTextField.text = currentStatus
-        }
-        if currentGender != "" {
-            self.genderTextField.text = currentGender
-        }
+//        if currentStatus != "" {
+//            self.statusTextField.text = currentStatus
+//        }
+//        if currentGender != "" {
+//            self.genderTextField.text = currentGender
+//        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-//MARK: - CharacterFilterViewController
-private extension CharacterFilterViewController {
-    func setupView() {
-        view.backgroundColor = Colors.lightWhite
-        view.layer.cornerRadius = 24
-        
-        statusTextField.inputView = statusPickerView
-        statusTextField.inputAccessoryView = statusPickerView.toolbar
-        genderTextField.inputView = genderPickerView
-        genderTextField.inputAccessoryView = genderPickerView.toolbar
-        
-        [statusTextField, genderTextField, filterButton, clearFilterButton].forEach { view.addSubview($0) }
-        
-        NSLayoutConstraint.activate([
-            statusTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.size.height * 0.03),
-            statusTextField.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.80),
-            statusTextField.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.04),
-            statusTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            genderTextField.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: view.frame.size.height * 0.025),
-            genderTextField.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.80),
-            genderTextField.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.04),
-            genderTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            filterButton.topAnchor.constraint(equalTo: genderTextField.bottomAnchor, constant:  view.frame.size.height * 0.03),
-            filterButton.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.80),
-            filterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            filterButton.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.04),
-            
-            clearFilterButton.topAnchor.constraint(equalTo: filterButton.bottomAnchor, constant:  view.frame.size.height * 0.01),
-            clearFilterButton.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.80),
-            clearFilterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            clearFilterButton.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.04)
-        ])
-        
-        [statusPickerView, genderPickerView].forEach {
-            $0.delegate = self
-            $0.dataSource = self
-            $0.toolbarDelegate = self
-        }
-    }
-    
-func setupButtons() {
-        filterButton.addTarget(self, action: #selector(buttonFilterClicked), for: .touchUpInside)
-        clearFilterButton.addTarget(self, action: #selector(buttonCleaFilterClicked), for: .touchUpInside)
-    }
-    
-    @objc private func buttonFilterClicked() {
-        let status = statusTextField.text ?? ""
-        let gender = genderTextField.text ?? ""
-        delegate?.didFilterTapped(status: status, gender: gender)
-        dismiss(animated: true)
-    }
-    @objc private func buttonCleaFilterClicked() {
-        delegate?.didClearTapped()
-        dismiss(animated: true)
-    }
-}
-// MARK: - UIPickerViewDataSource
-extension CharacterFilterViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch pickerView.tag {
-        case 1:
-            return statusCharacters.count
-        case 2:
-            return genderCharacters.count
-        default:
-            return 1
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch pickerView.tag {
-        case 1:
-            return statusCharacters[row]
-        case 2:
-            return genderCharacters[row]
-        default:
-            return "Не найдено"
-        }
-    }
-}
-// MARK: - UIPickerViewDelegate
-extension CharacterFilterViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch pickerView.tag {
-        case 1:
-            statusTextField.text = statusCharacters[row]
-        case 2:
-            genderTextField.text = genderCharacters[row]
-        default:
-            return
-        }
-    }
-}
-// MARK: - ToolbarPickerViewDelegate
-extension CharacterFilterViewController: ToolbarPickerViewDelegate {
-    func didTapDone(_ pickerView: UIPickerView) {
-        switch pickerView.tag {
-        case 1:
-            let row = pickerView.selectedRow(inComponent: 0)
-            pickerView.selectRow(row, inComponent: 0, animated: false)
-            statusTextField.text = statusCharacters[row]
-            statusTextField.resignFirstResponder()
-        case 2:
-            let row = pickerView.selectedRow(inComponent: 0)
-            pickerView.selectRow(row, inComponent: 0, animated: false)
-            genderTextField.text = genderCharacters[row]
-            genderTextField.resignFirstResponder()
-        default:
-            return
-        }
-        
-    }
-    
-    func didTapCancel(_ pickerView: UIPickerView) {
-        switch pickerView.tag {
-        case 1:
-            statusTextField.text = nil
-            statusTextField.resignFirstResponder()
-        case 2:
-            genderTextField.text = nil
-            genderTextField.resignFirstResponder()
-        default:
-            return
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let label = (view as? UILabel) ?? UILabel()
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = Font.sber(ofSize: Font.Size.twenty, weight: .regular)
-        switch pickerView.tag {
-        case 1:
-            label.text = statusCharacters[row]
-        case 2:
-            label.text = genderCharacters[row]
-        default:
-            return UIView()
-        }
-        return label
     }
 }
