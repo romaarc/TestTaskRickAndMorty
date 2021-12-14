@@ -15,16 +15,19 @@ protocol EpisodeDetailModuleInput {
 protocol EpisodeDetailModuleOutput: AnyObject {}
 
 protocol EpisodeDetailViewInput: ViewInput {
-//    func set(viewModels: [EpisodeViewModel])
+    func set(viewModels: [CharacterViewModel])
 }
 
 protocol EpisodeDetailViewOutput: AnyObject {
+    func viewDidLoad(with characters: [String])
 }
 
 protocol EpisodeDetailInteractorInput: AnyObject {
+    func reload(with characters: [String])
 }
 
 protocol EpisodeDetailInteractorOutput: InteractorOutput {
+    func didLoad(with characters: [Character])
 }
 
 protocol EpisodeDetailRouterInput: AnyObject {}

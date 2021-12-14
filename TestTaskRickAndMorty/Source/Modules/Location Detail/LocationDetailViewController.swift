@@ -14,13 +14,13 @@ final class LocationDetailViewController: BaseViewController {
     private var charactersViewModels: [CharacterViewModel] = []
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
-    private lazy var locationInfoDetailView = LocationInfoDetailView()
+    private lazy var infoDetailView = LocationInfoDetailView()
     private var startLayout: NSLayoutConstraint!
 
     init(output: LocationDetailViewOutput, viewModel: LocationViewModel) {
         self.output = output
         self.locationViewModel = viewModel
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,7 +55,7 @@ final class LocationDetailViewController: BaseViewController {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: locationInfoDetailView.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: infoDetailView.bottomAnchor, constant: 20),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
@@ -93,7 +93,7 @@ extension LocationDetailViewController: LocationDetailViewInput {
 }
 
 private extension LocationDetailViewController {
-    private func setupScrollView() {
+    func setupScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = false
         view.addSubview(scrollView)
@@ -125,16 +125,16 @@ private extension LocationDetailViewController {
         contentView.backgroundColor = .white
     }
     
-    private func setupHeaderView() {
-        contentView.addSubview(locationInfoDetailView)
-        locationInfoDetailView.translatesAutoresizingMaskIntoConstraints = false
+    func setupHeaderView() {
+        contentView.addSubview(infoDetailView)
+        infoDetailView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            locationInfoDetailView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            locationInfoDetailView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            locationInfoDetailView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            locationInfoDetailView.heightAnchor.constraint(equalToConstant: 139)
+            infoDetailView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            infoDetailView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            infoDetailView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            infoDetailView.heightAnchor.constraint(equalToConstant: 139)
         ])
-        locationInfoDetailView.update(with: locationViewModel)
+        infoDetailView.update(with: locationViewModel)
     }
 }
 //MARK: - UICollectionViewDataSource

@@ -32,6 +32,10 @@ extension CharacterDetailPresenter: CharacterDetailViewOutput {
     func showLocation(with location: LocationViewModel) {
         router.showLocation(with: location)
     }
+    
+    func showEpisode(with episode: EpisodeViewModel) {
+        router.showEpisode(with: episode)
+    }
 }
 
 extension CharacterDetailPresenter: CharacterDetailInteractorOutput {

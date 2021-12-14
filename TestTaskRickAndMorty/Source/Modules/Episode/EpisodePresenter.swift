@@ -53,6 +53,10 @@ extension EpisodePresenter: EpisodeViewOutput {
         isNextPageLoading = true
         interactor.loadNext()
     }
+    
+    func onRowTap(with viewModel: EpisodeViewModel) {
+        router.showDetail(with: viewModel)
+    }
 }
 
 extension EpisodePresenter: EpisodeInteractorOutput {
@@ -94,7 +98,8 @@ extension EpisodePresenter {
             EpisodeViewModel(id: epi.id,
                               name: epi.name,
                               airDate: epi.airDate,
-                              episode: epi.episode,
+                             episode: epi.episode,
+                             characters: epi.characters,
                               created: epi.created)
         }
     }

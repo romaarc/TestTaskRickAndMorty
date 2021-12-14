@@ -22,15 +22,13 @@ final class LocationDetailPresenter {
     }
 }
 
-extension LocationDetailPresenter: LocationDetailModuleInput {
-}
+extension LocationDetailPresenter: LocationDetailModuleInput {}
 
 extension LocationDetailPresenter: LocationDetailViewOutput {
     func viewDidLoad(with residents: [String]) {
         view?.startActivityIndicator()
         interactor.reload(with: residents)
     }
-    
 }
 
 extension LocationDetailPresenter: LocationDetailInteractorOutput {

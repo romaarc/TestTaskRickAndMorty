@@ -36,7 +36,7 @@ extension EpisodeHeaderSectionView {
     }
     //MARK: - Update
     func update(with viewModel: [Int], section: Int) {
-        label.text = "Сезон \(String(viewModel[section] + 1))"
+        label.text = "\(EpisodeConstants.String.seasonTitle) \(String(viewModel[section] + 1))"
     }
     
     func update(someText text: String) {

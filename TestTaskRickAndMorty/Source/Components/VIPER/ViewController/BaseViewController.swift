@@ -18,10 +18,6 @@ class BaseViewController: UIViewController {
         return activity
     }()
     
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
-    }
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let layout = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
@@ -34,11 +30,11 @@ class BaseViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         self.setupUI()
     }
 
     func setupUI() {
+        view.backgroundColor = .white
         setupCollectionView()
     }
     

@@ -8,8 +8,6 @@
 
 import UIKit
 
-final class LocationDetailRouter {
-}
+final class LocationDetailRouter {}
 
-extension LocationDetailRouter: LocationDetailRouterInput {
-}
+extension LocationDetailRouter: LocationDetailRouterInput {}

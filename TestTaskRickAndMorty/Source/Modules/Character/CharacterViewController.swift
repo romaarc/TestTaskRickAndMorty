@@ -17,7 +17,7 @@ final class CharacterViewController: BaseViewController {
     
     init(output: CharacterViewOutput) {
         self.output = output
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,7 +37,13 @@ final class CharacterViewController: BaseViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .white
         collectionView.register(CharacterCell.self)
+        collectionView.addSubview(activityIndicator)
         view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,7 +53,6 @@ final class CharacterViewController: BaseViewController {
 }
 //MARK: - UICollectionViewDataSource
 extension CharacterViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModels.count
     }
@@ -61,7 +66,6 @@ extension CharacterViewController: UICollectionViewDataSource {
 }
 //MARK: - UICollectionViewDelegateFlowLayout
 extension CharacterViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = itemWidth(for: view.bounds.width, spacing: CharacterConstants.Layout.spacing)
         return CGSize(width: width, height: width + CharacterConstants.Layout.heightCardDescription)
@@ -139,12 +143,12 @@ extension CharacterViewController: CharacterFilterDelegate {
             self.gender = gender
         }
     }
+    
     func didClearTapped() {
         self.status = ""
         self.gender = ""
         output.didFilterTapped(withStatus: status ?? "", withGender: gender ?? "")
     }
-    
 }
 // MARK: - Search bar methods
 extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating {

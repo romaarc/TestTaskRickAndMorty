@@ -121,8 +121,10 @@ extension EpisodeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let episodeDetailsController = EpisodeDetailsController(episode: self.episodes[indexPath.row])
-//        navigationController?.pushViewController(episodeDetailsController, animated: true)
+        let seasonsKeys = Array(seasons.keys).sorted()
+        let seasonEpisodes = viewModels.filter({ $0.episode.contains("S0" + String(seasonsKeys[indexPath.section] + 1)) })
+        let viewModel = seasonEpisodes[indexPath.row]
+        output.onRowTap(with: viewModel)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

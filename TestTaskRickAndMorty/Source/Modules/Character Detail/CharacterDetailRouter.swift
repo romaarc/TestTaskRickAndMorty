@@ -17,6 +17,14 @@ extension CharacterDetailRouter: CharacterDetailRouterInput {
         let container = LocationDetailContainer.assemble(with: context, withModel: location)
         navigationController?.pushViewController(container.viewController, animated: true)
     }
+    
+    func showEpisode(with viewModel: EpisodeViewModel) {
+        guard let moduleDependencies = moduleDependencies else { return }
+        let context = EpisodeDetailContext(moduleDependencies: moduleDependencies, moduleOutput: self)
+        let container = EpisodeDetailContainer.assemble(with: context, withModel: viewModel)
+        navigationController?.pushViewController(container.viewController, animated: true)
+    }
 }
 
 extension CharacterDetailRouter: LocationDetailModuleOutput {}
+extension CharacterDetailRouter: EpisodeDetailModuleOutput {}

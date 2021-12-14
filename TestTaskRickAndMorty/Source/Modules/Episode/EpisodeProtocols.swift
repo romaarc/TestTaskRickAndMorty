@@ -21,6 +21,7 @@ protocol EpisodeViewInput: ViewInput {
 protocol EpisodeViewOutput: AnyObject {
     func viewDidLoad()
     func willDisplay(at index: Int, on section: Int)
+    func onRowTap(with viewModel: EpisodeViewModel)
 }
 
 protocol EpisodeInteractorInput: InteractorInput {}
@@ -29,4 +30,6 @@ protocol EpisodeInteractorOutput: InteractorOutput {
     func didLoad(with episodes: [Episode], loadType: LoadingDataType, count: Int)
 }
 
-protocol EpisodeRouterInput: AnyObject {}
+protocol EpisodeRouterInput: AnyObject {
+    func showDetail(with viewModel: EpisodeViewModel)
+}

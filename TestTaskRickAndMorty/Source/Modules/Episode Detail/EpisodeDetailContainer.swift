@@ -13,11 +13,11 @@ final class EpisodeDetailContainer {
 	let viewController: UIViewController
 	private(set) weak var router: EpisodeDetailRouterInput!
 
-	static func assemble(with context: EpisodeDetailContext) -> EpisodeDetailContainer {
+	static func assemble(with context: EpisodeDetailContext, withModel viewModel: EpisodeViewModel) -> EpisodeDetailContainer {
         let router = EpisodeDetailRouter()
-        let interactor = EpisodeDetailInteractor()
+        let interactor = EpisodeDetailInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService)
         let presenter = EpisodeDetailPresenter(router: router, interactor: interactor)
-		let viewController = EpisodeDetailViewController(output: presenter)
+        let viewController = EpisodeDetailViewController(output: presenter, viewModel: viewModel)
 
 		presenter.view = viewController
 		presenter.moduleOutput = context.moduleOutput
@@ -35,5 +35,6 @@ final class EpisodeDetailContainer {
 }
 
 struct EpisodeDetailContext {
+    let moduleDependencies: ModuleDependencies
 	weak var moduleOutput: EpisodeDetailModuleOutput?
 }

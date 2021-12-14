@@ -187,10 +187,12 @@ extension CharacterDetailViewController: UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
             guard let location = locationViewModel else { return }
             output.showLocation(with: location)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let viewModel = episodeViewModels[indexPath.row]
+            output.showEpisode(with: viewModel)
         }
-        //output.showEpisode()
     }
-    
 }
 //MARK: - UITableViewDelegate
 extension CharacterDetailViewController: UITableViewDelegate {

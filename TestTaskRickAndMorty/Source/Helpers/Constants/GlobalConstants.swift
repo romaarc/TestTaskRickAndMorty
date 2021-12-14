@@ -30,13 +30,16 @@ struct CharacterConstants {
     struct Layout {
         static let heightCardDescription: CGFloat = 79
         static let itemsInRow: CGFloat = 2
+        
         static let spacing: CGFloat = 9
         static let spacingLeft: CGFloat = 9
         static let spacingTop: CGFloat = 9
         static let spacingBottom: CGFloat = 20
         static let spacingRight: CGFloat = 23
         static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        
         static let cornerRadius: CGFloat = 8
+        
         static let shadowRadius: CGFloat = 6
         static let shadowOpacity: Float = 0.4
         static let shadowOffsetWidth: CGFloat = 0
@@ -52,13 +55,16 @@ struct LocationConstants {
     struct Layout {
         static let heightCardDescription: CGFloat = 80
         static let itemsInRow: CGFloat = 2
+        
         static let spacing: CGFloat = 16
         static let spacingLeft: CGFloat = 16
         static let spacingTop: CGFloat = 19
         static let spacingBottom: CGFloat = 20
         static let spacingRight: CGFloat = 16
         static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        
         static let cornerRadius: CGFloat = 8
+        
         static let shadowRadius: CGFloat = 6
         static let shadowOpacity: Float = 0.4
         static let shadowOffsetWidth: CGFloat = 0
@@ -74,13 +80,16 @@ struct LocationDetailConstants {
     struct Layout {
         static let heightCardDescription: CGFloat = 79
         static let itemsInRow: CGFloat = 2
+        
         static let spacing: CGFloat = 16
         static let spacingLeft: CGFloat = 16
         static let spacingTop: CGFloat = 10
         static let spacingBottom: CGFloat = 20
         static let spacingRight: CGFloat = 16
         static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        
         static let cornerRadius: CGFloat = 8
+        
         static let shadowRadius: CGFloat = 6
         static let shadowOpacity: Float = 0.4
         static let shadowOffsetWidth: CGFloat = 0
@@ -96,13 +105,16 @@ struct EpisodeConstants {
     struct Layout {
         static let heightCardDescription: CGFloat = 80
         static let itemsInRow: CGFloat = 2
+        
         static let spacing: CGFloat = 16
         static let spacingLeft: CGFloat = 16
         static let spacingTop: CGFloat = 19
         static let spacingBottom: CGFloat = 20
         static let spacingRight: CGFloat = 16
         static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        
         static let cornerRadius: CGFloat = 8
+        
         static let shadowRadius: CGFloat = 6
         static let shadowOpacity: Float = 0.4
         static let shadowOffsetWidth: CGFloat = 0
@@ -110,21 +122,25 @@ struct EpisodeConstants {
     }
     
     struct String {
-        static var seasonTitle = "Сезоны"
+        static var seasonTitle = "Сезон"
     }
 }
 
 struct EpisodeDetailConstants {
     struct Layout {
-        static let heightCardDescription: CGFloat = 80
+        static let heightCardDescription: CGFloat = 79
+        
         static let itemsInRow: CGFloat = 2
+        
         static let spacing: CGFloat = 16
         static let spacingLeft: CGFloat = 16
-        static let spacingTop: CGFloat = 19
+        static let spacingTop: CGFloat = 10
         static let spacingBottom: CGFloat = 20
         static let spacingRight: CGFloat = 16
         static let minimumInteritemSpacingForSectionAt: CGFloat = 17
+        
         static let cornerRadius: CGFloat = 8
+    
         static let shadowRadius: CGFloat = 6
         static let shadowOpacity: Float = 0.4
         static let shadowOffsetWidth: CGFloat = 0
@@ -132,6 +148,6 @@ struct EpisodeDetailConstants {
     }
     
     struct String {
-        static var seasonTitle = "Сезоны"
+        static var headerInfo = "Персонажи"
     }
 }

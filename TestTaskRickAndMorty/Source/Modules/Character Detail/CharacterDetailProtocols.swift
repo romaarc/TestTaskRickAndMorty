@@ -19,8 +19,9 @@ protocol CharacterDetailViewInput: ViewInput {
 }
 
 protocol CharacterDetailViewOutput: AnyObject {
-    func showLocation(with location: LocationViewModel)
     func viewDidLoad(with episodes: [String], and location: String)
+    func showLocation(with location: LocationViewModel)
+    func showEpisode(with episode: EpisodeViewModel)
 }
 
 protocol CharacterDetailInteractorInput: AnyObject {
@@ -33,4 +34,5 @@ protocol CharacterDetailInteractorOutput: InteractorOutput {
 
 protocol CharacterDetailRouterInput: AnyObject {
     func showLocation(with location: LocationViewModel)
+    func showEpisode(with episode: EpisodeViewModel)
 }

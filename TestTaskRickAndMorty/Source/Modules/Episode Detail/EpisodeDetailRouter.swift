@@ -8,8 +8,6 @@
 
 import UIKit
 
-final class EpisodeDetailRouter {
-}
+final class EpisodeDetailRouter {}
 
-extension EpisodeDetailRouter: EpisodeDetailRouterInput {
-}
+extension EpisodeDetailRouter: EpisodeDetailRouterInput {}

@@ -84,4 +84,10 @@ extension LocationInfoDetailView {
         nameLabel.text = viewModel.name
         downLabel.text = viewModel.dimension.uppercased()
     }
+    
+    func update(with viewModel: EpisodeViewModel) {
+        upLabel.text = viewModel.airDate
+        nameLabel.text = viewModel.name
+        downLabel.text = viewModel.episode
+    }
 }
