@@ -1,23 +1,23 @@
 //
-//  EpisodeHeaderSectionView.swift
+//  FilterHeader.swift
 //  TestTaskRickAndMorty
 //
-//  Created by Roman Gorshkov on 11.12.2021.
+//  Created by Roman Gorshkov on 15.12.2021.
 //
 
 import UIKit
 
-class EpisodeHeaderSectionView: BaseUITableViewHeaderFooterView {
+class FilterHeader: BaseUITableViewHeaderFooterView {
     
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Colors.grayTabBar
-        label.font = Font.sber(ofSize: Font.Size.twenty, weight: .bold)
+        label.font = Font.sber(ofSize: Font.Size.fithteen, weight: .regular)
         
         var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.05
-        label.attributedText = NSMutableAttributedString(string: "", attributes: [.kern: 0.38, .paragraphStyle: paragraphStyle])
+        paragraphStyle.lineHeightMultiple = 1.01
+        label.attributedText = NSMutableAttributedString(string: "", attributes: [.kern: -0.24, .paragraphStyle: paragraphStyle])
         return label
     }()
     
@@ -27,7 +27,7 @@ class EpisodeHeaderSectionView: BaseUITableViewHeaderFooterView {
     }
 }
     //MARK: - UI
-extension EpisodeHeaderSectionView {
+extension FilterHeader {
     private func setupUI() {
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
@@ -35,10 +35,6 @@ extension EpisodeHeaderSectionView {
         ])
     }
     //MARK: - Update
-    func update(with viewModel: [Int], section: Int) {
-        label.text = "\(EpisodeConstants.String.seasonTitle) \(String(viewModel[section] + 1))"
-    }
-    
     func update(someText text: String) {
         label.text = text
     }

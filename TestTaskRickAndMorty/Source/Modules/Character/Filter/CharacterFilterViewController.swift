@@ -8,15 +8,15 @@
 import UIKit
 
 protocol CharacterFilterDelegate: AnyObject {
-    func didFilterTapped(status: String, gender: String)
+    func didFilterTapped(with filter: Filter)
     func didClearTapped()
 }
 
 class CharacterFilterViewController: UIViewController {
     
     weak var delegate: CharacterFilterDelegate?
-    private let statusCharacters = ["Alive", "Dead", "Unknown"]
-    private let genderCharacters = ["Female", "Male", "Genderless", "Unknown"]
+    var filter = Filter(statusIndexPath: nil,
+                        genderIndexPath: nil)
     private lazy var tableView = UITableView(frame: .zero, style: .grouped)
   
     private let navBarView: UIView = {
@@ -145,25 +145,148 @@ class CharacterFilterViewController: UIViewController {
             applyButton.trailingAnchor.constraint(equalTo: navBarView.trailingAnchor, constant: -15),
             applyButton.topAnchor.constraint(equalTo: navBarView.topAnchor, constant: 8)
         ])
+        
+        applyButton.addTarget(self, action: #selector(apply), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clear), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavBar()
+        setupTableView()
     }
     
-    init(currentStatus: String, currentGender: String) {
+    init(filter: Filter) {
         super.init(nibName: nil, bundle: nil)
-//        if currentStatus != "" {
-//            self.statusTextField.text = currentStatus
-//        }
-//        if currentGender != "" {
-//            self.genderTextField.text = currentGender
-//        }
+        self.filter = filter
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = .white
+        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 56, bottom: 0, right: 0)
+        tableView.contentInsetAdjustmentBehavior = .never
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        tableView.sectionFooterHeight = 0
+        tableView.register(FilterCell.self)
+        tableView.register(FilterHeader.self)
+
+        view.addSubview(tableView)
+
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: navBarView.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    @objc private func apply() {
+        delegate?.didFilterTapped(with: filter)
+        dismiss(animated: true)
+    }
+    
+    @objc private func clear() {
+        delegate?.didClearTapped()
+        dismiss(animated: true)
+    }
+}
+//MARK: - UITableViewDelegate
+extension CharacterFilterViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.layoutIfNeeded()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            let cell = tableView.dequeueHeaderFooterViewCell(cellType: FilterHeader.self)
+            cell.update(someText: "Status")
+            return cell
+        case 1:
+            let cell = tableView.dequeueHeaderFooterViewCell(cellType: FilterHeader.self)
+            cell.update(someText: "Gender")
+            return cell
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 46.0
+        case 1:
+            return 56.0
+        default:
+            return 0.0
+        }
+    }
+}
+//MARK: - UITableViewDataSource
+extension CharacterFilterViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return filter.statusCharacters.count
+        case 1:
+            return filter.genderCharacters.count
+        default:
+            break
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueCell(cellType: FilterCell.self, for: indexPath)
+        switch indexPath.section {
+        case 0:
+            cell.update(some: filter.statusCharacters[indexPath.row])
+            cell.selectionStyle = .none
+            cell.isSelected(filter.statusIndexPath == indexPath)
+            return cell
+        case 1:
+            cell.update(some: filter.genderCharacters[indexPath.row])
+            cell.selectionStyle = .none
+            cell.isSelected(filter.genderIndexPath == indexPath)
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            filter.statusIndexPath = indexPath
+        case 1:
+            filter.genderIndexPath = indexPath
+        default:
+            break
+        }
+        tableView.reloadData()
     }
 }

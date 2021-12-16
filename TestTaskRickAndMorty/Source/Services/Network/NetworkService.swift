@@ -11,25 +11,17 @@ enum NetworkErrors: Error {
     case wrongURL
     case dataIsEmpty
     case decodeIsFail
-    case noConnection
 }
 
 final class NetworkService {
     
-    private let reachability: ReachabilityProtocol
     private let customDecoder: CustomDecoder
     
-    init(reachability: ReachabilityProtocol, customDecoder: CustomDecoder) {
-        self.reachability = reachability
+    init(customDecoder: CustomDecoder) {
         self.customDecoder = customDecoder
     }
     
     func baseRequest<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
-        
-        if !reachability.isReachable {
-            completion(.failure(NetworkErrors.noConnection))
-            return
-        }
         
         guard let url = URL(string: url) else {
             completion(.failure(NetworkErrors.wrongURL))

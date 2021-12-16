@@ -12,8 +12,7 @@ final class CharacterViewController: BaseViewController {
     private let output: CharacterViewOutput
     private let searchController = UISearchController(searchResultsController: nil)
     private var viewModels: [CharacterViewModel] = []
-    private var status: String?
-    private var gender: String?
+    private var filter = Filter(statusIndexPath: nil, genderIndexPath: nil)
     
     init(output: CharacterViewOutput) {
         self.output = output
@@ -131,30 +130,31 @@ extension CharacterViewController: CharacterViewInput {
 //MARK: - Filter VC
 private extension CharacterViewController {
     @objc func filterButtonClicked() {
-        output.onFilterButtonTap(withStatus: status ?? "", withGender: gender ?? "")
+        output.onFilterButtonTap(with: filter)
     }
 }
 // MARK: - Filter Delegate
 extension CharacterViewController: CharacterFilterDelegate {
-    func didFilterTapped(status: String, gender: String) {
-        if !status.isEmpty || !gender.isEmpty {
-            output.didFilterTapped(withStatus: status, withGender: gender)
-            self.status = status
-            self.gender = gender
+    func didFilterTapped(with filter: Filter) {
+        if filter.statusIndexPath != nil || filter.genderIndexPath != nil {
+            output.didFilterTapped(with: filter)
+            self.filter = filter
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.statusSymbol?.withTintColor(Colors.purple).withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)), style:  .plain, target: self, action: #selector(filterButtonClicked))
         }
     }
     
     func didClearTapped() {
-        self.status = ""
-        self.gender = ""
-        output.didFilterTapped(withStatus: status ?? "", withGender: gender ?? "")
+        filter.statusIndexPath = nil
+        filter.genderIndexPath = nil
+        output.didFilterTapped(with: filter)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style:  .plain, target: self, action: #selector(filterButtonClicked))
     }
 }
 // MARK: - Search bar methods
 extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating {
     private func setupSearchController() {
         navigationItem.searchController = searchController
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style: .plain, target: self, action: #selector(filterButtonClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style:  .plain, target: self, action: #selector(filterButtonClicked))
         
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
@@ -173,19 +173,14 @@ extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating 
         guard let text = searchController.searchBar.text else { return }
         if !text.isEmpty {
             viewModels.removeAll()
-            output.searchBarTextDidEndEditing(with: text, withStatus: status ?? "", withGender: gender ?? "")
+            output.searchBarTextDidEndEditing(with: text, and: filter)
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if let status = status, let gender = gender {
-            if status.isEmpty, gender.isEmpty {
-                viewModels.removeAll()
-                output.searchBarCancelButtonClicked()
-            } else {
-                viewModels.removeAll()
-                output.searchBarTextDidEndEditing(with: "", withStatus: status, withGender: gender)
-            }
+        if let _ = filter.statusIndexPath, let _ = filter.genderIndexPath {
+            viewModels.removeAll()
+            output.searchBarTextDidEndEditing(with: "", and: filter)
         } else {
             viewModels.removeAll()
             output.searchBarCancelButtonClicked()

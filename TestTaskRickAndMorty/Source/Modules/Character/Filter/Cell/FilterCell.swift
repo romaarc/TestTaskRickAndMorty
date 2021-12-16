@@ -53,8 +53,9 @@ extension FilterCell {
             radioImageView.widthAnchor.constraint(equalToConstant: 28.0),
             
             label.topAnchor.constraint(equalTo: topAnchor, constant: 10.5),
-            label.leadingAnchor.constraint(equalTo: radioImageView.trailingAnchor, constant: 13),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10.5)
+            label.leadingAnchor.constraint(equalTo: radioImageView.trailingAnchor, constant: 16),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10.5),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     //MARK: - Update with text

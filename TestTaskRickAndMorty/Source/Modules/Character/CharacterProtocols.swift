@@ -21,11 +21,11 @@ protocol CharacterViewInput: ViewInput {
 
 protocol CharacterViewOutput: AnyObject {
     func viewDidLoad()
-    func searchBarTextDidEndEditing(with searchText: String, withStatus status: String, withGender gender: String)
+    func searchBarTextDidEndEditing(with searchText: String, and filter: Filter)
     func searchBarCancelButtonClicked()
     func willDisplay(at index: Int)
-    func onFilterButtonTap(withStatus status: String, withGender gender: String)
-    func didFilterTapped(withStatus status: String, withGender gender: String)
+    func onFilterButtonTap(with filter: Filter)
+    func didFilterTapped(with filter: Filter)
     func onCellTap(with viewModel: CharacterViewModel)
 }
 
@@ -40,5 +40,5 @@ protocol CharacterInteractorOutput: InteractorOutput {
 
 protocol CharacterRouterInput: AnyObject {
     func showDetail(with viewModel: CharacterViewModel)
-    func showFilter(withStatus status: String, withGender gender: String)
+    func showFilter(with filter: Filter)
 }

@@ -19,8 +19,8 @@ extension CharacterRouter: CharacterRouterInput {
         navigationController?.pushViewController(container.viewController, animated: true)
     }
     
-    func showFilter(withStatus status: String, withGender gender: String) {
-        let filterVC = CharacterFilterViewController(currentStatus: status, currentGender: gender)
+    func showFilter(with filter: Filter) {
+        let filterVC = CharacterFilterViewController(filter: filter)
         filterVC.delegate = self.viewController as? CharacterFilterDelegate
         filterVC.transitioningDelegate = transition
         filterVC.modalPresentationStyle = .custom

@@ -45,11 +45,19 @@ extension CharacterPresenter: CharacterViewOutput {
         interactor.loadNext()
     }
     
-    func searchBarTextDidEndEditing(with searchText: String, withStatus status: String, withGender gender: String) {
+    func searchBarTextDidEndEditing(with searchText: String, and filter: Filter) {
         view?.startActivityIndicator()
         characters.removeAll()
         isReloading = true
         isNextPageLoading = false
+        var status = ""
+        var gender = ""
+        if let indexPath = filter.statusIndexPath {
+            status = filter.statusCharacters[indexPath.row]
+        }
+        if let indexPath = filter.genderIndexPath {
+            gender = filter.genderCharacters[indexPath.row]
+        }
         interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage),
                                                              name: searchText,
                                                              status: status,
@@ -64,15 +72,23 @@ extension CharacterPresenter: CharacterViewOutput {
         interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage)))
     }
     
-    func onFilterButtonTap(withStatus status: String, withGender gender: String) {
-        router.showFilter(withStatus: status, withGender: gender)
+    func onFilterButtonTap(with filter: Filter) {
+        router.showFilter(with: filter)
     }
     
-    func didFilterTapped(withStatus status: String, withGender gender: String) {
+    func didFilterTapped(with filter: Filter) {
         view?.startActivityIndicator()
         characters.removeAll()
         isReloading = true
         isNextPageLoading = false
+        var status = ""
+        var gender = ""
+        if let indexPath = filter.statusIndexPath {
+            status = filter.statusCharacters[indexPath.row]
+        }
+        if let indexPath = filter.genderIndexPath {
+            gender = filter.genderCharacters[indexPath.row]
+        }
         interactor.reloadFilter(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage),
                                                              status: status,
                                                              gender: gender))
