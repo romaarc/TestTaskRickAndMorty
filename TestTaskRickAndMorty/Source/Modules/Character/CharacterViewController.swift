@@ -13,6 +13,7 @@ final class CharacterViewController: BaseViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private var viewModels: [CharacterViewModel] = []
     private var filter = Filter(statusIndexPath: nil, genderIndexPath: nil)
+    private var isOffline: Bool = false
     
     init(output: CharacterViewOutput) {
         self.output = output
@@ -59,7 +60,7 @@ extension CharacterViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCell(cellType: CharacterCell.self, for: indexPath)
         let viewModel = viewModels[indexPath.row]
-        cell.update(with: viewModel)
+        cell.update(with: viewModel, isOffline: self.isOffline)
         return cell
     }
 }
@@ -117,10 +118,13 @@ extension CharacterViewController: CharacterViewInput {
         }
     }
     
-    func set(viewModels: [CharacterViewModel], isSearch: Bool) {
+    func set(viewModels: [CharacterViewModel], isOffline: Bool) {
         self.viewModels = viewModels
+        self.isOffline = isOffline
         DispatchQueue.main.async {
-            if !self.viewModels.isEmpty {
+            if self.viewModels.isEmpty {
+                self.collectionView.setEmptyMessage(message: "Не найдено персонажей, подключитесь к сети, чтобы загрузить данные")
+            } else {
                 self.collectionView.restore()
                 self.collectionView.reloadData()
             }

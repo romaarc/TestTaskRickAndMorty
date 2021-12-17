@@ -19,9 +19,10 @@ struct Character: Decodable {
     let episode: [String]
     let imageURL: String
     let created: Date
+    let url: String
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, status, species, type, gender, origin, location, episode, created
+        case id, name, status, species, type, gender, origin, location, episode, created, url
         case imageURL = "image"
     }
 }

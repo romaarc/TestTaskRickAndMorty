@@ -48,8 +48,12 @@ extension EpisodeViewController: EpisodeViewInput {
         self.viewModels = viewModels
         self.seasons = seasons
         DispatchQueue.main.async {
-            self.tableView.restore()
-            self.tableView.reloadData()
+            if self.viewModels.isEmpty {
+                self.tableView.setEmptyMessage(message: "Не найдено эпизодов, подключитесь к сети, чтобы загрузить данные")
+            } else {
+                self.tableView.restore()
+                self.tableView.reloadData()
+            }
         }
     }
     

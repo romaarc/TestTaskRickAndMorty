@@ -16,7 +16,7 @@ final class CharacterContainer {
     static func assemble(with context: CharacterContext) -> CharacterContainer {
         let router = CharacterRouter()
         let interactor = CharacterInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService,
-                                             reachabilityService: context.moduleDependencies.reachabilityService)
+                                             reachabilityService: context.moduleDependencies.reachabilityService, persistentProvider: context.moduleDependencies.persistentProvider)
         let presenter = CharacterPresenter(router: router, interactor: interactor)
         let viewController = CharacterViewController(output: presenter)
         

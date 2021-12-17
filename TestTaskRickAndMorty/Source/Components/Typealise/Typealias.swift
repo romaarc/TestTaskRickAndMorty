@@ -7,7 +7,7 @@
 
 import Foundation
 //MARK: - For Dependencies
-typealias ModuleDependencies = HasNetworkService
+typealias ModuleDependencies = HasDependencies
 //MARK: - For VIPER
 typealias ViewInput = AnyObject & Errorable & Indicator
 typealias InteractorInput = AnyObject & Reloadable

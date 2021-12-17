@@ -99,9 +99,9 @@ extension CharacterCell {
         ])
     }
     //MARK: - Update with ViewModel
-    func update(with viewModel: CharacterViewModel) {
+    func update(with viewModel: CharacterViewModel, isOffline: Bool) {
         detailViewNameLabel.text = viewModel.name
-        characterImageView.setImage(with: URL(string: viewModel.imageURL))
+        characterImageView.setImage(with: URL(string: viewModel.imageURL), isOffline: isOffline)
         detailViewStatusImageView.tintColor = viewModel.status == "Alive" ? .green : (viewModel.status == "Dead" ? .red : .gray)
         detailViewStatusLabel.text = "\(viewModel.status) - \(viewModel.species)"
     }

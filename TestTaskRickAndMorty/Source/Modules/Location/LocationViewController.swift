@@ -81,8 +81,12 @@ extension LocationViewController: LocationViewInput {
     func set(viewModels: [LocationViewModel]) {
         self.viewModels = viewModels
         DispatchQueue.main.async {
-            self.collectionView.restore()
-            self.collectionView.reloadData()
+            if self.viewModels.isEmpty {
+                self.collectionView.setEmptyMessage(message: "Не найдено локаций, подключитесь к сети, чтобы загрузить данные")
+            } else {
+                self.collectionView.restore()
+                self.collectionView.reloadData()
+            }
         }
     }
 }

@@ -11,17 +11,23 @@ import Foundation
 final class CharacterDetailInteractor {
 	weak var output: CharacterDetailInteractorOutput?
     private let rickAndMortyNetworkService: NetworkServiceProtocol
+    private var reachabilityService: ReachabilityProtocol
+    private var persistentProvider: PersistentProviderProtocol
     private var episodes: [Episode] = []
     private var location: Location? = nil
     
-    init(rickAndMortyNetworkService: NetworkServiceProtocol) {
+    init(rickAndMortyNetworkService: NetworkServiceProtocol,
+         reachabilityService: ReachabilityProtocol,
+         persistentProvider: PersistentProviderProtocol) {
         self.rickAndMortyNetworkService = rickAndMortyNetworkService
+        self.reachabilityService = reachabilityService
+        self.persistentProvider = persistentProvider
     }
 }
 
 extension CharacterDetailInteractor: CharacterDetailInteractorInput {
     func reload(with episodes: [String], and location: String) {
-        load(with: episodes, and: location)
+        reachabilityService.isConnectedToNetwork() ? load(with: episodes, and: location) : loadOffline(with: episodes, and: location)
     }
 }
 
@@ -65,6 +71,34 @@ private extension CharacterDetailInteractor {
                     }
                 }
             }
+        }
+    }
+    func loadOffline(with episodes: [String], and location: String) {
+        let resultsEpisodes = persistentProvider.fetchEpisodeModels(by: episodes)
+        self.episodes = resultsEpisodes.map { epi in
+            Episode(id: Int(epi.id),
+                    name: epi.name,
+                    airDate: epi.airDate,
+                    episode: epi.episode,
+                    characters: epi.characters ?? [String](),
+                    created: epi.created,
+                    url: epi.url)
+        }
+        
+        let resultsLocation = persistentProvider.fetchLocationModel(by: location)
+        if resultsLocation.isEmpty {
+            output?.didLoad(with: self.episodes, and: self.location)
+        } else {
+            self.location = resultsLocation.first.map { location in
+                Location(id: Int(location.id),
+                         name: location.name,
+                         type: location.type,
+                         dimension: location.dimension,
+                         residents: location.residents ?? [String](),
+                         created: location.created,
+                         url: location.url)
+            }
+            output?.didLoad(with: self.episodes, and: self.location)
         }
     }
 }

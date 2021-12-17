@@ -16,7 +16,7 @@ protocol CharacterModuleOutput: AnyObject {
 }
 
 protocol CharacterViewInput: ViewInput {
-    func set(viewModels: [CharacterViewModel], isSearch: Bool)
+    func set(viewModels: [CharacterViewModel], isOffline: Bool)
 }
 
 protocol CharacterViewOutput: AnyObject {
@@ -31,11 +31,10 @@ protocol CharacterViewOutput: AnyObject {
 
 protocol CharacterInteractorInput: InteractorInput {
     func reload(withParams params: CharacterURLParameters)
-    func reloadFilter(withParams params: CharacterURLParameters)
 }
 
 protocol CharacterInteractorOutput: InteractorOutput {
-    func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isSearch: Bool)
+    func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isOffline: Bool)
 }
 
 protocol CharacterRouterInput: AnyObject {

@@ -15,7 +15,8 @@ final class EpisodeDetailContainer {
 
 	static func assemble(with context: EpisodeDetailContext, withModel viewModel: EpisodeViewModel) -> EpisodeDetailContainer {
         let router = EpisodeDetailRouter()
-        let interactor = EpisodeDetailInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService)
+        let interactor = EpisodeDetailInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService,
+                                                 reachabilityService: context.moduleDependencies.reachabilityService, persistentProvider: context.moduleDependencies.persistentProvider)
         let presenter = EpisodeDetailPresenter(router: router, interactor: interactor)
         let viewController = EpisodeDetailViewController(output: presenter, viewModel: viewModel)
 

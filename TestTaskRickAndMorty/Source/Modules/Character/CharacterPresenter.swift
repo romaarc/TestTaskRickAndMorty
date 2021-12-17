@@ -89,7 +89,7 @@ extension CharacterPresenter: CharacterViewOutput {
         if let indexPath = filter.genderIndexPath {
             gender = filter.genderCharacters[indexPath.row]
         }
-        interactor.reloadFilter(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage),
+        interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage),
                                                              status: status,
                                                              gender: gender))
     }
@@ -100,7 +100,7 @@ extension CharacterPresenter: CharacterViewOutput {
 }
 
 extension CharacterPresenter: CharacterInteractorOutput {
-    func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isSearch: Bool) {
+    func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isOffline: Bool) {
         switch loadType {
         case .reload:
             isReloading = false
@@ -115,7 +115,7 @@ extension CharacterPresenter: CharacterInteractorOutput {
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }
-        view?.set(viewModels: viewModels, isSearch: isSearch)
+        view?.set(viewModels: viewModels, isOffline: isOffline)
     }
     
     func didError(with error: Error) {

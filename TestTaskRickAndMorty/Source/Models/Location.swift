@@ -14,9 +14,10 @@ struct Location: Decodable {
     let dimension: String
     let residents: [String]
     let created: Date
+    let url: String
     
     enum CodingKeys: String, CodingKey {
-        case id, name, type, dimension, residents, created
+        case id, name, type, dimension, residents, created, url
     }
 }
 //MARK: - LocationURLParameters

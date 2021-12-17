@@ -10,14 +10,19 @@ import Kingfisher
 
 extension UIImageView {
     
-    func setImage(with url: URL?) {
+    func setImage(with url: URL?, isOffline: Bool) {
+        let placeholder = UIImage(named: "default")
         self.kf.indicatorType = .activity
-        self.kf.setImage(with: url)
+        if isOffline {
+            self.kf.setImage(with: url, placeholder: placeholder, options: [.onlyFromCache])
+        } else {
+            self.kf.setImage(with: url, placeholder: placeholder)
+        }
     }
     
     func setImageOffline(with url: URL?) {
         self.kf.indicatorType = .activity
-        self.kf.setImage(with: url, options: [.fromMemoryCacheOrRefresh])
+        self.kf.setImage(with: url, placeholder: UIImage(named: "default"), options: [.onlyFromCache])
     }
 }
 

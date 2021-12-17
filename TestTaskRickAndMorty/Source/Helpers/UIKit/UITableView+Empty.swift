@@ -10,7 +10,7 @@ import UIKit
 
 extension UITableView {
     func setEmptyMessage(message: String) {
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
         messageLabel.text = message
         messageLabel.textColor = .gray
         messageLabel.numberOfLines = 0
@@ -20,7 +20,6 @@ extension UITableView {
         self.separatorStyle = .none
         
         self.backgroundView = messageLabel
-        
     }
     
     func restore() {

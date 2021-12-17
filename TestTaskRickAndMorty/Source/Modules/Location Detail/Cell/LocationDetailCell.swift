@@ -89,7 +89,7 @@ extension LocationDetailCell {
     //MARK: - Update with ViewModel
     func update(with viewModel: CharacterViewModel) {
         detailViewNameLabel.text = viewModel.name
-        characterImageView.setImage(with: URL(string: viewModel.imageURL))
+        characterImageView.setImage(with: URL(string: viewModel.imageURL), isOffline: false)
         detailViewStatusLabel.text = "\(viewModel.status) - \(viewModel.species)"
     }
 }

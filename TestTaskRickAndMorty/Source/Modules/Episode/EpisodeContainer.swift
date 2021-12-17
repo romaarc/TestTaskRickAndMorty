@@ -10,19 +10,20 @@ import UIKit
 
 final class EpisodeContainer {
     let input: EpisodeModuleInput
-	let viewController: UIViewController
-	private(set) weak var router: EpisodeRouterInput!
-
-	static func assemble(with context: EpisodeContext) -> EpisodeContainer {
+    let viewController: UIViewController
+    private(set) weak var router: EpisodeRouterInput!
+    
+    static func assemble(with context: EpisodeContext) -> EpisodeContainer {
         let router = EpisodeRouter()
-        let interactor = EpisodeInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService)
+        let interactor = EpisodeInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService,
+                                           reachabilityService: context.moduleDependencies.reachabilityService, persistentProvider: context.moduleDependencies.persistentProvider)
         let presenter = EpisodePresenter(router: router, interactor: interactor)
-		let viewController = EpisodeViewController(output: presenter)
-
-		presenter.view = viewController
-		presenter.moduleOutput = context.moduleOutput
-
-		interactor.output = presenter
+        let viewController = EpisodeViewController(output: presenter)
+        
+        presenter.view = viewController
+        presenter.moduleOutput = context.moduleOutput
+        
+        interactor.output = presenter
         
         router.viewControllerProvider = { [weak viewController] in
             viewController
@@ -32,18 +33,18 @@ final class EpisodeContainer {
         }
         
         router.moduleDependencies = context.moduleDependencies
-
+        
         return EpisodeContainer(view: viewController, input: presenter, router: router)
-	}
-
+    }
+    
     private init(view: UIViewController, input: EpisodeModuleInput, router: EpisodeRouterInput) {
-		self.viewController = view
+        self.viewController = view
         self.input = input
-		self.router = router
-	}
+        self.router = router
+    }
 }
 
 struct EpisodeContext {
     let moduleDependencies: ModuleDependencies
-	weak var moduleOutput: EpisodeModuleOutput?
+    weak var moduleOutput: EpisodeModuleOutput?
 }

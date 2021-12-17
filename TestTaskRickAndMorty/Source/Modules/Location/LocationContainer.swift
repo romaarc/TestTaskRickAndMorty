@@ -15,7 +15,8 @@ final class LocationContainer {
 
 	static func assemble(with context: LocationContext) -> LocationContainer {
         let router = LocationRouter()
-        let interactor = LocationInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService)
+        let interactor = LocationInteractor(rickAndMortyNetworkService: context.moduleDependencies.rickAndMortyNetworkService,
+                                            reachabilityService: context.moduleDependencies.reachabilityService, persistentProvider: context.moduleDependencies.persistentProvider)
         let presenter = LocationPresenter(router: router, interactor: interactor)
 		let viewController = LocationViewController(output: presenter)
 
