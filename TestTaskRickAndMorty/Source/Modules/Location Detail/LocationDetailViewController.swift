@@ -190,6 +190,7 @@ extension LocationDetailViewController: UICollectionViewDataSource, UICollection
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
             UIView.animate(withDuration: 1 / 3, delay: 0, options: .curveEaseIn) {
                 self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -139).isActive = true
+                self.collectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -79).isActive = true
                 self.view.layoutIfNeeded()
             }
         }

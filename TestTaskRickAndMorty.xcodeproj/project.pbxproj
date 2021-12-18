@@ -85,6 +85,7 @@
 		BB50A401276C0CE900BFEAFF /* EpisodeCDModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A3FF276C0CE900BFEAFF /* EpisodeCDModel+CoreDataClass.swift */; };
 		BB50A402276C0CE900BFEAFF /* EpisodeCDModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A400276C0CE900BFEAFF /* EpisodeCDModel+CoreDataProperties.swift */; };
 		BB50A434276CF3D000BFEAFF /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A433276CF3D000BFEAFF /* BaseInteractor.swift */; };
+		BB50A436276D326D00BFEAFF /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50A435276D326D00BFEAFF /* UIDevice+Extension.swift */; };
 		BB577E6D27691E8700EBC726 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB577E6C27691E8700EBC726 /* FilterCell.swift */; };
 		BB577E6F2769FF3100EBC726 /* FilterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB577E6E2769FF3100EBC726 /* FilterHeader.swift */; };
 		BB577E71276A232500EBC726 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB577E70276A232500EBC726 /* Filter.swift */; };
@@ -212,6 +213,7 @@
 		BB50A3FF276C0CE900BFEAFF /* EpisodeCDModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeCDModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BB50A400276C0CE900BFEAFF /* EpisodeCDModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeCDModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BB50A433276CF3D000BFEAFF /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
+		BB50A435276D326D00BFEAFF /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		BB577E6C27691E8700EBC726 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		BB577E6E2769FF3100EBC726 /* FilterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeader.swift; sourceTree = "<group>"; };
 		BB577E70276A232500EBC726 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 				BB132F39276211410014C944 /* UITextField+Extension.swift */,
 				BB47437D2763D2820030FA9D /* UITableView+Empty.swift */,
 				BB77E0132765137A00E3A8A9 /* UILabel+Extension.swift */,
+				BB50A435276D326D00BFEAFF /* UIDevice+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -971,6 +974,7 @@
 				BB4798BA27665CB600736C59 /* LocationDetailProtocols.swift in Sources */,
 				BB47436B2763BCE60030FA9D /* EpisodePresenter.swift in Sources */,
 				BB4798DD2768AA5A00736C59 /* Errorable.swift in Sources */,
+				BB50A436276D326D00BFEAFF /* UIDevice+Extension.swift in Sources */,
 				BB3866FD2762A92900E3155E /* CharacterDetailContainer.swift in Sources */,
 				BB77E01B27651BF700E3A8A9 /* EpisodeCell.swift in Sources */,
 				BB132F292761F82A0014C944 /* TransitionDirection.swift in Sources */,
@@ -1089,6 +1093,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_SWIFT_FLAGS[sdk=iphonesimulator*]" = "-D IOS_SIMULATOR";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

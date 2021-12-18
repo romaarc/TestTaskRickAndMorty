@@ -27,7 +27,7 @@ final class NetworkService {
     
     func baseRequest<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
         
-        guard reachability.isReachable || reachability.isConnectedToNetwork() else {
+        guard reachability.isConnectedToNetwork() else {
             completion(.failure(NetworkErrors.noConnection))
             return
         }

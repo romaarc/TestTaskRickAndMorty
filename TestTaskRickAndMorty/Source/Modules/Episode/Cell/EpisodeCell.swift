@@ -40,7 +40,7 @@ class EpisodeCell: BaseUITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Colors.grayTabBar
-        label.font = Font.sber(ofSize: Font.Size.eleven, weight: .regular)
+        label.font = Font.sber(ofSize: Font.Size.eleven, weight: .bold)
         
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 0.99

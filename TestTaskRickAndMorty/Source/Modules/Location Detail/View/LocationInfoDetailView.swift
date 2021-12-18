@@ -29,6 +29,8 @@ class LocationInfoDetailView: BaseView {
         label.textColor = .gray
         label.textColor = .black
         label.font = Font.sber(ofSize: Font.Size.twentyEight, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
 
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.02
@@ -65,14 +67,17 @@ class LocationInfoDetailView: BaseView {
             upLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             upLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
             upLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
+            upLabel.heightAnchor.constraint(equalToConstant: 13),
             
             nameLabel.topAnchor.constraint(equalTo: upLabel.bottomAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
+            nameLabel.heightAnchor.constraint(equalToConstant: 34),
             
             downLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
             downLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
             downLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
+            downLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
 }

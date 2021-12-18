@@ -88,6 +88,8 @@ private extension EpisodeInteractor {
                 page += 1
             }
             params.page = String(page)
+        } else {
+            output?.didError(with: NetworkErrors.dataIsEmpty)
         }
     }
 }

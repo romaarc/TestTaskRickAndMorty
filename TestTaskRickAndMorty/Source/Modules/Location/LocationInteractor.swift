@@ -89,6 +89,8 @@ private extension LocationInteractor {
                 page += 1
             }
             params.page = String(page)
+        } else {
+            output?.didError(with: NetworkErrors.dataIsEmpty)
         }
     }
 }

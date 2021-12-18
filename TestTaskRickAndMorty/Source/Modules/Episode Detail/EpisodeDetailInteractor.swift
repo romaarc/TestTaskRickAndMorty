@@ -32,23 +32,29 @@ extension EpisodeDetailInteractor: EpisodeDetailInteractorInput {
 
 private extension EpisodeDetailInteractor {
     func load(with characters: [String]) {
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        let group = DispatchGroup()
+        
         if characters.isEmpty {
             output?.didError(with: NetworkErrors.dataIsEmpty)
         } else {
-            for (index, character) in characters.enumerated() {
+            for character in characters {
+                group.enter()
                 rickAndMortyNetworkService.requestCharacter(with: character) { [weak self] result in
+                    defer { group.leave() }
                     guard let self = self else { return }
                     switch result {
                     case.success(let response):
                         self.characters.append(response)
-                        if index == characters.count - 1 {
-                            self.output?.didLoad(with: self.characters)
-                        }
                     case .failure(let error):
                         self.output?.didError(with: error)
                     }
                 }
             }
+        }
+        group.notify(queue: queue) { [weak self] in
+            guard let self = self else { return }
+            self.output?.didLoad(with: self.characters)
         }
     }
     

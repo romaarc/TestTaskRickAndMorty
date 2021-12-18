@@ -183,13 +183,16 @@ extension CharacterDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let generator = UISelectionFeedbackGenerator()
         if indexPath.section == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             guard let location = locationViewModel else { return }
+            generator.selectionChanged()
             output.showLocation(with: location)
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
             let viewModel = episodeViewModels[indexPath.row]
+            generator.selectionChanged()
             output.showEpisode(with: viewModel)
         }
     }
@@ -225,6 +228,7 @@ extension CharacterDetailViewController: UITableViewDelegate {
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
             UIView.animate(withDuration: 1 / 3, delay: 0, options: .curveEaseIn) {
                 self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -254).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -79).isActive = true
                 self.view.layoutIfNeeded()
             }
         }

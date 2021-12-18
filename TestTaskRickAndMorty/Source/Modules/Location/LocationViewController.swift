@@ -129,7 +129,9 @@ extension LocationViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let generator = UISelectionFeedbackGenerator()
         let viewModel = viewModels[indexPath.row]
+        generator.selectionChanged()
         output.onCellTap(with: viewModel)
     }
     

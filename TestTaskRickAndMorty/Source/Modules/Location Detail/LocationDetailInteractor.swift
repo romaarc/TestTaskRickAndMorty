@@ -32,23 +32,29 @@ extension LocationDetailInteractor: LocationDetailInteractorInput {
 
 private extension LocationDetailInteractor {
     func load(with residents: [String]) {
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        let group = DispatchGroup()
+        
         if residents.isEmpty {
             self.output?.didError(with: NetworkErrors.dataIsEmpty)
         } else {
-            for (index, resident) in residents.enumerated() {
+            for resident in residents {
+                group.enter()
                 rickAndMortyNetworkService.requestCharacter(with: resident) { [weak self] result in
+                    defer { group.leave() }
                     guard let self = self else { return }
                     switch result {
                     case.success(let response):
                         self.residents.append(response)
-                        if index == residents.count - 1 {
-                            self.output?.didLoad(with: self.residents)
-                        }
                     case .failure(let error):
                         self.output?.didError(with: error)
                     }
                 }
             }
+        }
+        group.notify(queue: queue) { [weak self] in
+            guard let self = self else { return }
+            self.output?.didLoad(with: self.residents)
         }
     }
     
