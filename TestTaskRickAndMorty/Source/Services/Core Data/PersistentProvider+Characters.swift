@@ -17,7 +17,7 @@ extension PersistentProvider: PersistentProviderProtocol {
                 models.forEach {
                     ///updating
                     if let characters = try? self.fetchRequest(for: $0).execute().first {
-                        characters.update(with: $0, and: page)
+                        characters.update(with: $0, and: page, isUpdatingPage: false)
                     ///adding
                     } else {
                         let characterCD = CharacterCDModel(context: backgroundViewContext)
@@ -36,6 +36,8 @@ extension PersistentProvider: PersistentProviderProtocol {
     func fetchCharactersModels() -> [CharacterCDModel] {
         let request = CharacterCDModel.fetchRequest()
         request.returnsObjectsAsFaults = false
+        let sort = NSSortDescriptor(key: "id", ascending: true)
+        request.sortDescriptors = [sort]
         let table = try? mainViewContext.fetch(request)
         guard let table = table else { return [CharacterCDModel]() }
         return table
@@ -58,6 +60,42 @@ extension PersistentProvider: PersistentProviderProtocol {
         request.sortDescriptors = [sort]
         request.returnsObjectsAsFaults = false
         request.predicate = NSPredicate(format: "url IN %@", urls)
+        let table = try? mainViewContext.fetch(request)
+        guard let table = table else { return [CharacterCDModel]() }
+        return table
+    }
+    
+    func fetchCharactersModels(with params: CharacterURLParameters) -> [CharacterCDModel] {
+        let request  = CharacterCDModel.fetchRequest()
+        let sort = NSSortDescriptor(key: "id", ascending: true)
+        request.sortDescriptors = [sort]
+        request.returnsObjectsAsFaults = false
+        var arrayParams: [CharacterURLParameters] = []
+        arrayParams.append(params)
+        var predicates: [NSPredicate] = []
+        for param in arrayParams {
+            if let name = param.name {
+                if !name.isEmpty {
+                    predicates.append(NSPredicate(format: "name CONTAINS %@", name))
+                }
+            }
+            if let gender = param.gender {
+                if !gender.isEmpty {
+                    predicates.append(NSPredicate(format: "gender CONTAINS %@", gender.capitalized))
+                }
+            }
+            if let status = param.status {
+                if !status.isEmpty {
+                    predicates.append(NSPredicate(format: "status CONTAINS %@", status.capitalized))
+                }
+            }
+        }
+        if predicates.count == 1 {
+            request.predicate = predicates[0]
+        } else {
+            let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            request.predicate = predicate
+        }
         let table = try? mainViewContext.fetch(request)
         guard let table = table else { return [CharacterCDModel]() }
         return table
@@ -202,16 +240,18 @@ private extension PersistentProvider {
 }
 
 fileprivate extension CharacterCDModel {
-    func update(with character: Character, and characterPage: Int) {
+    func update(with character: Character, and characterPage: Int, isUpdatingPage: Bool) {
         var originDict: [String: String] = [:]
         var locationDict: [String: String] = [:]
-       
-        page = Int16(characterPage)
+        
+        if isUpdatingPage {
+            page = Int16(characterPage)
+        }
         name = character.name
-        status = character.status
+        status = character.status.lowercased().capitalized
         species = character.species
         type = character.type
-        gender = character.gender
+        gender = character.gender.lowercased().capitalized
         
         originDict[character.origin.name] = character.origin.url
         origin = originDict
@@ -227,7 +267,7 @@ fileprivate extension CharacterCDModel {
 
     func configNew(with character: Character, and characterPage: Int) {
         id = Int64(character.id)
-        update(with: character, and: characterPage)
+        update(with: character, and: characterPage, isUpdatingPage: true)
     }
 }
 

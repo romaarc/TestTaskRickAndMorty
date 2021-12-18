@@ -48,7 +48,7 @@ private extension EpisodeDetailInteractor {
                         case.success(let response):
                             self.characters.append(response)
                         case .failure(let error):
-                            self.output?.didError(with: error)
+                            print(error)
                         }
                     }
                 }

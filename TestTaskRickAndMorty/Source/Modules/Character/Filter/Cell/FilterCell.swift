@@ -60,6 +60,6 @@ extension FilterCell {
     }
     //MARK: - Update with text
     func update(some text: String) {
-        label.text = text
+        label.text = text.capitalized
     }
 }

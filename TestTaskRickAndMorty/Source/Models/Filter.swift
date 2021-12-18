@@ -8,8 +8,8 @@
 import Foundation
 
 struct Filter {
-    let statusCharacters = ["Alive", "Dead", "Unknown"]
-    let genderCharacters = ["Female", "Male", "Genderless", "Unknown"]
+    let statusCharacters = ["alive", "dead", "unknown"]
+    let genderCharacters = ["female", "male", "genderless", "unknown"]
     var statusIndexPath: IndexPath?
     var genderIndexPath: IndexPath?
 }

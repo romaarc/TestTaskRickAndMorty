@@ -49,7 +49,7 @@ extension EpisodeViewController: EpisodeViewInput {
         self.seasons = seasons
         DispatchQueue.main.async {
             if self.viewModels.isEmpty {
-                self.tableView.setEmptyMessage(message: "Не найдено эпизодов, подключитесь к сети, чтобы загрузить данные")
+                self.tableView.setEmptyMessage(message: "Не найдено эпизодов или подключитесь к сети, чтобы загрузить данные")
             } else {
                 self.tableView.restore()
                 self.tableView.reloadData()
@@ -69,7 +69,7 @@ extension EpisodeViewController: EpisodeViewInput {
                     }
                     self.tableView.deleteRows(at: indexPaths, with: .automatic)
                 } completion: {_ in
-                    self.tableView.setEmptyMessage(message: "Не найдено эпизодов")
+                    self.tableView.setEmptyMessage(message: "Не найдено эпизодов или подключитесь к сети, чтобы загрузить данные")
                 }
             }
         }

@@ -14,6 +14,7 @@ protocol PersistentProviderProtocol {
              and completion: @escaping (Result<PersistentState, Error>) -> Void)
     func fetchCharactersModels() -> [CharacterCDModel]
     func fetchCharactersModels(with page: Int) -> [CharacterCDModel]
+    func fetchCharactersModels(with params: CharacterURLParameters) -> [CharacterCDModel]
     func fetchCharactersModels(by urls: [String]) -> [CharacterCDModel]
     
     //MARK: - Info

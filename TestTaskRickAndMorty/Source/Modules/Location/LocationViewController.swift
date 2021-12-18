@@ -72,7 +72,7 @@ extension LocationViewController: LocationViewInput {
                     }
                     self.collectionView.deleteItems(at: indexPaths)
                 } completion: {_ in
-                    self.collectionView.setEmptyMessage(message: "Не найдено локаций")
+                    self.collectionView.setEmptyMessage(message: "Не найдено локаций или подключитесь к сети, чтобы загрузить данные")
                 }
             }
         }
@@ -82,7 +82,7 @@ extension LocationViewController: LocationViewInput {
         self.viewModels = viewModels
         DispatchQueue.main.async {
             if self.viewModels.isEmpty {
-                self.collectionView.setEmptyMessage(message: "Не найдено локаций, подключитесь к сети, чтобы загрузить данные")
+                self.collectionView.setEmptyMessage(message: "Не найдено локаций или подключитесь к сети, чтобы загрузить данные")
             } else {
                 self.collectionView.restore()
                 self.collectionView.reloadData()

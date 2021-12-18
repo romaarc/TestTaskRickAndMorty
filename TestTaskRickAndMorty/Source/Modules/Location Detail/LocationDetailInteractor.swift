@@ -48,7 +48,7 @@ private extension LocationDetailInteractor {
                         case.success(let response):
                             self.residents.append(response)
                         case .failure(let error):
-                            self.output?.didError(with: error)
+                            print(error)
                         }
                     }
                 }

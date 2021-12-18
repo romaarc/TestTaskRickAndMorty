@@ -17,7 +17,6 @@ final class EpisodePresenter {
     
     private var isNextPageLoading = false
     private var isReloading = false
-    private var hasNextPage = true
     private var episodes: [Episode] = []
     private var dictEpisodes: [Int: Int] = [:]
     private var count: Int = 0
@@ -67,7 +66,6 @@ extension EpisodePresenter: EpisodeInteractorOutput {
             self.episodes = episodes
         case .nextPage:
             isNextPageLoading = false
-            hasNextPage = episodes.count > 0
             self.episodes.append(contentsOf: episodes)
         }
         let episodesSeason = self.episodes.map({ String($0.episode.dropLast(3)) })

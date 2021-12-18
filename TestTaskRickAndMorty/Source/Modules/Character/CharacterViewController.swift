@@ -114,7 +114,7 @@ extension CharacterViewController: CharacterViewInput {
                     }
                     self.collectionView.deleteItems(at: indexPaths)
                 } completion: {_ in
-                    self.collectionView.setEmptyMessage(message: "Не найдено персонажей")
+                    self.collectionView.setEmptyMessage(message: "Не найдено персонажей или подключитесь к сети, чтобы загрузить данные")
                 }
             }
         }
@@ -125,7 +125,7 @@ extension CharacterViewController: CharacterViewInput {
         self.isOffline = isOffline
         DispatchQueue.main.async {
             if self.viewModels.isEmpty {
-                self.collectionView.setEmptyMessage(message: "Не найдено персонажей, подключитесь к сети, чтобы загрузить данные")
+                self.collectionView.setEmptyMessage(message: "Не найдено персонажей или подключитесь к сети, чтобы загрузить данные")
             } else {
                 self.collectionView.restore()
                 self.collectionView.reloadData()

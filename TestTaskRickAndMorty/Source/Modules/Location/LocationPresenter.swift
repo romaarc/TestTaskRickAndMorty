@@ -17,7 +17,6 @@ final class LocationPresenter {
     
     private var isNextPageLoading = false
     private var isReloading = false
-    private var hasNextPage = true
     private var locations: [Location] = []
     private var count: Int = 0
     
@@ -64,7 +63,6 @@ extension LocationPresenter: LocationInteractorOutput {
             self.locations = locations
         case .nextPage:
             isNextPageLoading = false
-            hasNextPage = locations.count > 0
             self.locations.append(contentsOf: locations)
         }
         self.count = count

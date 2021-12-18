@@ -17,7 +17,6 @@ final class CharacterPresenter {
     
     private var isNextPageLoading = false
     private var isReloading = false
-    private var hasNextPage = true
     private var characters: [Character] = []
     private var count: Int = 0
     
@@ -107,7 +106,6 @@ extension CharacterPresenter: CharacterInteractorOutput {
             self.characters = characters
         case .nextPage:
             isNextPageLoading = false
-            hasNextPage = characters.count > 0
             self.characters.append(contentsOf: characters)
         }
         self.count = count
@@ -133,7 +131,7 @@ extension CharacterPresenter {
             CharacterViewModel(id: character.id,
                                name: character.name,
                                gender: character.gender,
-                               status: character.status,
+                               status: character.status.capitalized,
                                imageURL: character.imageURL,
                                species: character.species,
                                type: character.type,
