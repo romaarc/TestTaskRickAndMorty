@@ -47,7 +47,7 @@ extension CharacterInteractor: CharacterInteractorInput {
 
 private extension CharacterInteractor {
     func load() {
-        rickAndMortyNetworkService.requestCharacters(with: params) { [weak self] result  in
+        rickAndMortyNetworkService.fetchCharacters(with: params) { [weak self] result  in
             guard let self = self else { return }
             switch result {
             case.success(let response):

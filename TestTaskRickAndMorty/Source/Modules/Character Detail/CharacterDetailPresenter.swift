@@ -9,11 +9,11 @@
 import Foundation
 
 final class CharacterDetailPresenter {
-	weak var view: CharacterDetailViewInput?
+    weak var view: CharacterDetailViewInput?
     weak var moduleOutput: CharacterDetailModuleOutput?
     
-	private let router: CharacterDetailRouterInput
-	private let interactor: CharacterDetailInteractorInput
+    private let router: CharacterDetailRouterInput
+    private let interactor: CharacterDetailInteractorInput
     
     init(router: CharacterDetailRouterInput, interactor: CharacterDetailInteractorInput) {
         self.router = router
@@ -26,7 +26,7 @@ extension CharacterDetailPresenter: CharacterDetailModuleInput {}
 extension CharacterDetailPresenter: CharacterDetailViewOutput {
     func viewDidLoad(with episodes: [String], and location: String) {
         view?.startActivityIndicator()
-        interactor.reload(with: episodes, and: location)
+        interactor.reload(by: episodes, and: location)
     }
     
     func showLocation(with location: LocationViewModel) {
@@ -39,8 +39,8 @@ extension CharacterDetailPresenter: CharacterDetailViewOutput {
 }
 
 extension CharacterDetailPresenter: CharacterDetailInteractorOutput {
-    func didLoad(with episodes: [Episode], and location: Location?) {
-        let viewModels: [EpisodeViewModel] = EpisodePresenter.makeViewModels(episodes)
+    func didLoad(by episodes: [Episode], and location: Location?) {
+        let viewModels: [EpisodeViewModel] = EpisodePresenter.makeViewModels(episodes.sorted {$0.id < $1.id})
         var locationViewModel: LocationViewModel? = nil
         if let location = location {
             locationViewModel = LocationPresenter.makeViewModel(location)

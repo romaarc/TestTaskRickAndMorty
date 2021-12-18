@@ -25,7 +25,7 @@ final class LocationDetailInteractor {
 }
 
 extension LocationDetailInteractor: LocationDetailInteractorInput {
-    func reload(with residents: [String]) {
+    func reload(by residents: [String]) {
         reachabilityService.isConnectedToNetwork() ? load(with: residents) : loadOffline(with: residents)
     }
 }
@@ -40,21 +40,22 @@ private extension LocationDetailInteractor {
         } else {
             for resident in residents {
                 group.enter()
-                rickAndMortyNetworkService.requestCharacter(with: resident) { [weak self] result in
-                    defer { group.leave() }
-                    guard let self = self else { return }
-                    switch result {
-                    case.success(let response):
-                        self.residents.append(response)
-                    case .failure(let error):
-                        self.output?.didError(with: error)
+                queue.async { [self] in
+                    rickAndMortyNetworkService.fetchCharacter(with: resident) { [weak self] result in
+                        defer { group.leave() }
+                        guard let self = self else { return }
+                        switch result {
+                        case.success(let response):
+                            self.residents.append(response)
+                        case .failure(let error):
+                            self.output?.didError(with: error)
+                        }
                     }
                 }
             }
         }
-        group.notify(queue: queue) { [weak self] in
-            guard let self = self else { return }
-            self.output?.didLoad(with: self.residents)
+        group.notify(queue: queue) { [self] in
+            output?.didLoad(with: self.residents)
         }
     }
     

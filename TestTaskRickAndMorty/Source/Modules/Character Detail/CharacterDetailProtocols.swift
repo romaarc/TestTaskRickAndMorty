@@ -25,11 +25,11 @@ protocol CharacterDetailViewOutput: AnyObject {
 }
 
 protocol CharacterDetailInteractorInput: AnyObject {
-    func reload(with episodes: [String], and location: String)
+    func reload(by episodes: [String], and location: String)
 }
 
 protocol CharacterDetailInteractorOutput: InteractorOutput {
-    func didLoad(with episodes: [Episode], and location: Location?)
+    func didLoad(by episodes: [Episode], and location: Location?)
 }
 
 protocol CharacterDetailRouterInput: AnyObject {

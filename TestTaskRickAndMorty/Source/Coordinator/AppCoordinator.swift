@@ -106,10 +106,14 @@ private extension AppCoordinator {
         controller.tabBar.unselectedItemTintColor = Colors.grayTabBar
         controller.selectedIndex = 0
         
-        UITabBar.appearance().barTintColor = UIColor.black
-        UITabBar.appearance().tintColor = .black
-        UITabBarItem.appearance().setTitleTextAttributes([.font: Font.sber(ofSize: Font.Size.ten, weight: .bold)], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([.font: Font.sber(ofSize: Font.Size.ten, weight: .bold)], for: .selected)
+        UITabBar.appearance().tintColor = Colors.purple
+        
+        let tabBarItemAppearance = UITabBarItemAppearance()
+        tabBarItemAppearance.normal.titleTextAttributes = [.font: Font.sber(ofSize: Font.Size.ten, weight: .bold)]
+        tabBarItemAppearance.selected.titleTextAttributes = [.font: Font.sber(ofSize: Font.Size.ten, weight: .bold)]
+        
+        tabBarAppearance.stackedLayoutAppearance = tabBarItemAppearance
+        
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x: controller.tabBar.frame.width, y: 0))

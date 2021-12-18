@@ -63,7 +63,7 @@ final class LocationDetailViewController: BaseViewController {
         ])
     }
 }
-
+//MARK: - LocationDetailViewInput from Presenter
 extension LocationDetailViewController: LocationDetailViewInput {
     func set(viewModels: [CharacterViewModel]) {
         self.charactersViewModels = viewModels
@@ -91,7 +91,7 @@ extension LocationDetailViewController: LocationDetailViewInput {
         }
     }
 }
-
+//MARK: - LocationDetailViewController
 private extension LocationDetailViewController {
     func setupScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false

@@ -40,7 +40,7 @@ extension EpisodeInteractor: EpisodeInteractorInput {
 
 private extension EpisodeInteractor {
     func load() {
-        rickAndMortyNetworkService.requestEpisodes(with: params) { [weak self] result  in
+        rickAndMortyNetworkService.fetchEpisodes(with: params) { [weak self] result  in
             guard let self = self else { return }
             switch result {
             case.success(let response):

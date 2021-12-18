@@ -28,13 +28,13 @@ extension EpisodeDetailPresenter: EpisodeDetailModuleInput {
 extension EpisodeDetailPresenter: EpisodeDetailViewOutput {
     func viewDidLoad(with characters: [String]) {
         view?.startActivityIndicator()
-        interactor.reload(with: characters)
+        interactor.reload(by: characters)
     }
 }
 
 extension EpisodeDetailPresenter: EpisodeDetailInteractorOutput {
     func didLoad(with characters: [Character]) {
-        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(characters)
+        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(characters.sorted {$0.id < $1.id})
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }

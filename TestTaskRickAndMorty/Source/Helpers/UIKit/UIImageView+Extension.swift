@@ -25,4 +25,3 @@ extension UIImageView {
         self.kf.setImage(with: url, placeholder: UIImage(named: "default"), options: [.onlyFromCache])
     }
 }
-

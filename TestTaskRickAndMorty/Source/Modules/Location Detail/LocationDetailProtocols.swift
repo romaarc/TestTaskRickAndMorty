@@ -23,7 +23,7 @@ protocol LocationDetailViewOutput: AnyObject {
 }
 
 protocol LocationDetailInteractorInput: AnyObject {
-    func reload(with residents: [String])
+    func reload(by residents: [String])
 }
 
 protocol LocationDetailInteractorOutput: InteractorOutput {

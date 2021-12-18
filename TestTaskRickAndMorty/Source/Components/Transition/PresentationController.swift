@@ -15,7 +15,7 @@ class PresentationController: UIPresentationController {
     
     override var frameOfPresentedViewInContainerView: CGRect {
         let bounds = containerView!.bounds
-        let halfHeight = bounds.height * 0.6
+        let halfHeight = bounds.height * 0.7
         return CGRect(x: 0,
                       y: bounds.maxY - halfHeight,
                       width: bounds.width,

@@ -8,11 +8,11 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func requestCharacters(with params: CharacterURLParameters, and completion: @escaping (Result<Response<Character>, Error>) -> Void)
-    func requestLocations(with params: LocationURLParameters, and completion: @escaping (Result<Response<Location>, Error>) -> Void)
-    func requestEpisodes(with params: EpisodeURLParameters, and completion: @escaping (Result<Response<Episode>, Error>) -> Void)
+    func fetchCharacters(with params: CharacterURLParameters, and completion: @escaping (Result<Response<Character>, Error>) -> Void)
+    func fetchLocations(with params: LocationURLParameters, and completion: @escaping (Result<Response<Location>, Error>) -> Void)
+    func fetchEpisodes(with params: EpisodeURLParameters, and completion: @escaping (Result<Response<Episode>, Error>) -> Void)
     
-    func requestEpisode(with url: String, completion: @escaping (Result<Episode, Error>) -> Void)
-    func requestCharacter(with url: String, completion: @escaping (Result<Character, Error>) -> Void)
-    func requestLocation(with url: String, completion: @escaping (Result<Location, Error>) -> Void)
+    func fetchEpisode(with url: String, completion: @escaping (Result<Episode, Error>) -> Void)
+    func fetchCharacter(with url: String, completion: @escaping (Result<Character, Error>) -> Void)
+    func fetchLocation(with url: String, completion: @escaping (Result<Location, Error>) -> Void)
 }

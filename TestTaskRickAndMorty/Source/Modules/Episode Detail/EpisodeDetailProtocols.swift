@@ -23,7 +23,7 @@ protocol EpisodeDetailViewOutput: AnyObject {
 }
 
 protocol EpisodeDetailInteractorInput: AnyObject {
-    func reload(with characters: [String])
+    func reload(by characters: [String])
 }
 
 protocol EpisodeDetailInteractorOutput: InteractorOutput {

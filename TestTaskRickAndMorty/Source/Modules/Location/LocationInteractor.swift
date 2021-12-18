@@ -40,7 +40,7 @@ extension LocationInteractor: LocationInteractorInput {
 
 private extension LocationInteractor {
     func load() {
-        rickAndMortyNetworkService.requestLocations(with: params) { [weak self] result  in
+        rickAndMortyNetworkService.fetchLocations(with: params) { [weak self] result  in
             guard let self = self else { return }
             switch result {
             case.success(let response):

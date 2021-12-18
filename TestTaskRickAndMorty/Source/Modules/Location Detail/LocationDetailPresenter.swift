@@ -27,13 +27,13 @@ extension LocationDetailPresenter: LocationDetailModuleInput {}
 extension LocationDetailPresenter: LocationDetailViewOutput {
     func viewDidLoad(with residents: [String]) {
         view?.startActivityIndicator()
-        interactor.reload(with: residents)
+        interactor.reload(by: residents)
     }
 }
 
 extension LocationDetailPresenter: LocationDetailInteractorOutput {
     func didLoad(with residents: [Character]) {
-        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(residents)
+        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(residents.sorted {$0.id < $1.id})
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }

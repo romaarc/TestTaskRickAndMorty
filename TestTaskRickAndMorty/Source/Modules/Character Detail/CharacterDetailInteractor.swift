@@ -9,7 +9,7 @@
 import Foundation
 
 final class CharacterDetailInteractor {
-	weak var output: CharacterDetailInteractorOutput?
+    weak var output: CharacterDetailInteractorOutput?
     private let rickAndMortyNetworkService: NetworkServiceProtocol
     private var reachabilityService: ReachabilityProtocol
     private var persistentProvider: PersistentProviderProtocol
@@ -26,7 +26,7 @@ final class CharacterDetailInteractor {
 }
 
 extension CharacterDetailInteractor: CharacterDetailInteractorInput {
-    func reload(with episodes: [String], and location: String) {
+    func reload(by episodes: [String], and location: String) {
         reachabilityService.isConnectedToNetwork() ? load(with: episodes, and: location) : loadOffline(with: episodes, and: location)
     }
 }
@@ -41,29 +41,30 @@ private extension CharacterDetailInteractor {
         } else {
             for episode in episodes {
                 group.enter()
-                rickAndMortyNetworkService.requestEpisode(with: episode) { [weak self] result in
-                    defer { group.leave() }
-                    guard let self = self else { return }
-                    switch result {
-                    case.success(let response):
-                        self.episodes.append(response)
-                    case .failure(let error):
-                        self.output?.didError(with: error)
+                queue.async { [self] in
+                    rickAndMortyNetworkService.fetchEpisode(with: episode) { [weak self] result in
+                        defer { group.leave() }
+                        guard let self = self else { return }
+                        switch result {
+                        case.success(let response):
+                            self.episodes.append(response)
+                        case .failure(let error):
+                            self.output?.didError(with: error)
+                        }
                     }
                 }
             }
-            group.notify(queue: queue) { [weak self] in
-                guard let self = self else { return }
+            group.notify(queue: queue) { [self] in
                 if location.isEmpty {
-                    self.output?.didLoad(with: self.episodes, and: self.location)
+                    output?.didLoad(by: self.episodes, and: self.location)
                 } else {
-                    self.rickAndMortyNetworkService.requestLocation(with: location) { [weak self] result in
+                    rickAndMortyNetworkService.fetchLocation(with: location) { [weak self] result in
                         guard let self = self else { return }
                         switch result {
                         case .success(let response):
                             self.location = response
                             if let location = self.location {
-                                self.output?.didLoad(with: self.episodes, and: location)
+                                self.output?.didLoad(by: self.episodes, and: location)
                             }
                         case .failure(let error):
                             self.output?.didError(with: error)
@@ -87,7 +88,7 @@ private extension CharacterDetailInteractor {
         
         let resultsLocation = persistentProvider.fetchLocationModel(by: location)
         if resultsLocation.isEmpty {
-            output?.didLoad(with: self.episodes, and: self.location)
+            output?.didLoad(by: self.episodes, and: self.location)
         } else {
             self.location = resultsLocation.first.map { location in
                 Location(id: Int(location.id),
@@ -98,7 +99,7 @@ private extension CharacterDetailInteractor {
                          created: location.created,
                          url: location.url)
             }
-            output?.didLoad(with: self.episodes, and: self.location)
+            output?.didLoad(by: self.episodes, and: self.location)
         }
     }
 }

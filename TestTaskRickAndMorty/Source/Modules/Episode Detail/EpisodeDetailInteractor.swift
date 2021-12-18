@@ -25,7 +25,7 @@ final class EpisodeDetailInteractor {
 }
 
 extension EpisodeDetailInteractor: EpisodeDetailInteractorInput {
-    func reload(with characters: [String]) {
+    func reload(by characters: [String]) {
         reachabilityService.isConnectedToNetwork() ? load(with: characters) : loadOffline(with: characters)
     }
 }
@@ -40,21 +40,22 @@ private extension EpisodeDetailInteractor {
         } else {
             for character in characters {
                 group.enter()
-                rickAndMortyNetworkService.requestCharacter(with: character) { [weak self] result in
-                    defer { group.leave() }
-                    guard let self = self else { return }
-                    switch result {
-                    case.success(let response):
-                        self.characters.append(response)
-                    case .failure(let error):
-                        self.output?.didError(with: error)
+                queue.async { [self] in
+                    rickAndMortyNetworkService.fetchCharacter(with: character) { [weak self] result in
+                        defer { group.leave() }
+                        guard let self = self else { return }
+                        switch result {
+                        case.success(let response):
+                            self.characters.append(response)
+                        case .failure(let error):
+                            self.output?.didError(with: error)
+                        }
                     }
                 }
             }
         }
-        group.notify(queue: queue) { [weak self] in
-            guard let self = self else { return }
-            self.output?.didLoad(with: self.characters)
+        group.notify(queue: queue) { [self] in
+            output?.didLoad(with: self.characters)
         }
     }
     

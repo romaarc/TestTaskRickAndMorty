@@ -9,11 +9,11 @@
 import Foundation
 
 final class EpisodePresenter {
-	weak var view: EpisodeViewInput?
+    weak var view: EpisodeViewInput?
     weak var moduleOutput: EpisodeModuleOutput?
     
-	private let router: EpisodeRouterInput
-	private let interactor: EpisodeInteractorInput
+    private let router: EpisodeRouterInput
+    private let interactor: EpisodeInteractorInput
     
     private var isNextPageLoading = false
     private var isReloading = false
@@ -96,11 +96,11 @@ extension EpisodePresenter {
     static func makeViewModels(_ episodes: [Episode]) -> [EpisodeViewModel] {
         return episodes.map { epi in
             EpisodeViewModel(id: epi.id,
-                              name: epi.name,
-                              airDate: epi.airDate,
+                             name: epi.name,
+                             airDate: epi.airDate,
                              episode: epi.episode,
                              characters: epi.characters,
-                              created: epi.created)
+                             created: epi.created)
         }
     }
 }
