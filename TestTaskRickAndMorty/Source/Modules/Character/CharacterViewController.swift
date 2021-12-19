@@ -114,7 +114,7 @@ extension CharacterViewController: CharacterViewInput {
                     }
                     self.collectionView.deleteItems(at: indexPaths)
                 } completion: {_ in
-                    self.collectionView.setEmptyMessage(message: "Не найдено персонажей или подключитесь к сети, чтобы загрузить данные")
+                    self.collectionView.setEmptyMessage(message: CharacterConstants.Strings.emptyMessageDidError)
                 }
             }
         }
@@ -125,7 +125,7 @@ extension CharacterViewController: CharacterViewInput {
         self.isOffline = isOffline
         DispatchQueue.main.async {
             if self.viewModels.isEmpty {
-                self.collectionView.setEmptyMessage(message: "Не найдено персонажей или подключитесь к сети, чтобы загрузить данные")
+                self.collectionView.setEmptyMessage(message: CharacterConstants.Strings.emptyMessage)
             } else {
                 self.collectionView.restore()
                 self.collectionView.reloadData()
@@ -166,7 +166,7 @@ extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating 
         
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Найти персонажа"
+        searchController.searchBar.placeholder = CharacterConstants.Strings.searchBarPlaceholder
         searchController.searchBar.searchTextField.font = Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
         searchController.obscuresBackgroundDuringPresentation = false
         
@@ -174,7 +174,7 @@ extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating 
             .font: Font.sber(ofSize: Font.Size.seventeen, weight: .regular)
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Отменить"
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = CharacterConstants.Strings.UISearchBarTitle
     }
     
     func updateSearchResults(for searchController: UISearchController) {

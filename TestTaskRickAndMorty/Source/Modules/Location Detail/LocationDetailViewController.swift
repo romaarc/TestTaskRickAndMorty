@@ -68,8 +68,12 @@ extension LocationDetailViewController: LocationDetailViewInput {
     func set(viewModels: [CharacterViewModel]) {
         self.charactersViewModels = viewModels
         DispatchQueue.main.async {
-            self.collectionView.restore()
-            self.collectionView.reloadData()
+            if self.charactersViewModels.isEmpty {
+                self.collectionView.setEmptyMessage(message: LocationDetailConstants.Strings.emptyMessage)
+            } else {
+                self.collectionView.restore()
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -85,7 +89,7 @@ extension LocationDetailViewController: LocationDetailViewInput {
                     }
                     self.collectionView.deleteItems(at: indexPaths)
                 } completion: {_ in
-                    self.collectionView.setEmptyMessage(message: "Не найдено резидентов")
+                    self.collectionView.setEmptyMessage(message: LocationDetailConstants.Strings.emptyMessage)
                 }
             }
         }

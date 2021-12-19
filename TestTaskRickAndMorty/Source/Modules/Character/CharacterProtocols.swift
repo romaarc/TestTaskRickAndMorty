@@ -35,6 +35,7 @@ protocol CharacterInteractorInput: InteractorInput {
 
 protocol CharacterInteractorOutput: InteractorOutput {
     func didLoad(with characters: [Character], loadType: LoadingDataType, count: Int, isOffline: Bool)
+    func change(loadType: LoadingDataType, isOffline: Bool)
 }
 
 protocol CharacterRouterInput: AnyObject {

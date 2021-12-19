@@ -70,8 +70,12 @@ extension EpisodeDetailViewController: LocationDetailViewInput {
     func set(viewModels: [CharacterViewModel]) {
         self.charactersViewModels = viewModels
         DispatchQueue.main.async {
-            self.collectionView.restore()
-            self.collectionView.reloadData()
+            if self.charactersViewModels.isEmpty {
+                self.collectionView.setEmptyMessage(message: EpisodeDetailConstants.Strings.emptyMessage)
+            } else {
+                self.collectionView.restore()
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -87,7 +91,7 @@ extension EpisodeDetailViewController: LocationDetailViewInput {
                     }
                     self.collectionView.deleteItems(at: indexPaths)
                 } completion: {_ in
-                    self.collectionView.setEmptyMessage(message: "Не найдено персонажей")
+                    self.collectionView.setEmptyMessage(message: EpisodeDetailConstants.Strings.emptyMessage)
                 }
             }
         }
@@ -155,7 +159,7 @@ extension EpisodeDetailViewController: UICollectionViewDataSource, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueSectionHeaderCell(cellType: LocationHeaderDetailView.self, for: indexPath)
-        header.update(some: EpisodeDetailConstants.String.headerInfo)
+        header.update(some: EpisodeDetailConstants.Strings.headerInfo)
         return header
     }
     

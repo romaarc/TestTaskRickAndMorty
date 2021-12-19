@@ -109,7 +109,7 @@ extension CharacterPresenter: CharacterInteractorOutput {
             self.characters.append(contentsOf: characters)
         }
         self.count = count
-        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(self.characters)
+        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(self.characters.sorted {$0.id < $1.id} )
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }
@@ -122,6 +122,15 @@ extension CharacterPresenter: CharacterInteractorOutput {
             self.view?.stopActivityIndicator()
         }
         view?.didError()
+    }
+    
+    func change(loadType: LoadingDataType, isOffline: Bool) {
+        switch loadType {
+        case .nextPage:
+            isNextPageLoading = false
+        case .reload:
+            isReloading = false
+        }
     }
 }
 

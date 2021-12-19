@@ -40,7 +40,7 @@ private extension EpisodeDetailInteractor {
         } else {
             for character in characters {
                 group.enter()
-                queue.async { [self] in
+                queue.sync { [self] in
                     rickAndMortyNetworkService.fetchCharacter(with: character) { [weak self] result in
                         defer { group.leave() }
                         guard let self = self else { return }

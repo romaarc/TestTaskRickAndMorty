@@ -115,6 +115,7 @@ private extension CharacterInteractor {
             }
             params.page = String(page)
         } else {
+            output?.change(loadType: .nextPage, isOffline: true)
             output?.didError(with: NetworkErrors.dataIsEmpty)
         }
     }

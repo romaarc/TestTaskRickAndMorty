@@ -23,6 +23,7 @@ struct CharacterDetailConstants {
     struct Strings {
         static let headerInfo = "Информация"
         static let headerEpi = "Эпизоды"
+        static let emptyMessage = "Не найдено эпизодов или локаций"
     }
 }
 
@@ -49,6 +50,13 @@ struct CharacterConstants {
     struct Design {
         static var shadowColor = UIColor.black
     }
+    
+    struct Strings {
+        static let emptyMessageDidError = "Не найдено персонажей или подключитесь к сети, чтобы загрузить данные"
+        static let emptyMessage = "Не найдено персонажей"
+        static let searchBarPlaceholder = "Найти персонажа"
+        static let UISearchBarTitle = "Отменить"
+    }
 }
 
 struct LocationConstants {
@@ -74,6 +82,10 @@ struct LocationConstants {
     struct Design {
         static var shadowColor = UIColor.black
     }
+    
+    struct Strings {
+        static let emptyMessage = "Не найдено локаций или подключитесь к сети, чтобы загрузить данные"
+    }
 }
 
 struct LocationDetailConstants {
@@ -98,6 +110,7 @@ struct LocationDetailConstants {
     
     struct Strings {
         static var headerInfo = "Резиденты"
+        static let emptyMessage = "Не найдено резидентов"
     }
 }
 
@@ -121,8 +134,9 @@ struct EpisodeConstants {
         static let shadowOffsetHeight: CGFloat = 5
     }
     
-    struct String {
+    struct Strings {
         static var seasonTitle = "Сезон"
+        static let emptyMessage = "Не найдено эпизодов или подключитесь к сети, чтобы загрузить данные"
     }
 }
 
@@ -147,7 +161,8 @@ struct EpisodeDetailConstants {
         static let shadowOffsetHeight: CGFloat = 5
     }
     
-    struct String {
+    struct Strings {
         static var headerInfo = "Персонажи"
+        static let emptyMessage = "Не найдено персонажей"
     }
 }

@@ -74,7 +74,7 @@ extension CharacterDetailViewController: CharacterDetailViewInput {
                     }
                     self.tableView.deleteRows(at: indexPaths, with: .automatic)
                 } completion: {_ in
-                    self.tableView.setEmptyMessage(message: "Не найдено эпизодов или локаций")
+                    self.tableView.setEmptyMessage(message: CharacterDetailConstants.Strings.emptyMessage)
                 }
             }
         }

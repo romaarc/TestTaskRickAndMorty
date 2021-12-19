@@ -76,7 +76,7 @@ extension PersistentProvider: PersistentProviderProtocol {
         for param in arrayParams {
             if let name = param.name {
                 if !name.isEmpty {
-                    predicates.append(NSPredicate(format: "name CONTAINS %@", name))
+                    predicates.append(NSPredicate(format: "name CONTAINS %@", name)) //LIKE '*%1$@*'
                 }
             }
             if let gender = param.gender {

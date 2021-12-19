@@ -40,7 +40,7 @@ private extension LocationDetailInteractor {
         } else {
             for resident in residents {
                 group.enter()
-                queue.async { [self] in
+                queue.sync { [self] in
                     rickAndMortyNetworkService.fetchCharacter(with: resident) { [weak self] result in
                         defer { group.leave() }
                         guard let self = self else { return }
