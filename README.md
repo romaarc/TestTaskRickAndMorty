@@ -4,8 +4,10 @@
 <a href="https://app.staply.co/n/b1e72e43">Тестовое задание</a>
 ![2021-12-20 01 54 09](https://user-images.githubusercontent.com/28999468/146693895-444ff7c9-831f-42a7-a593-350ec9d137bf.jpg)
 # Экраны
+ 
+https://user-images.githubusercontent.com/28999468/146780356-0c648baa-5221-40d6-b1d2-fdb34020dc28.MP4
 
-
+https://user-images.githubusercontent.com/28999468/146780843-6af7b4d9-4981-4ab3-bae4-7158a9198b06.MP4
 ## Установка
 У вас должны быть установлены SPM <a href="https://github.com/onevcat/Kingfisher">Kingfisher</a>
 
