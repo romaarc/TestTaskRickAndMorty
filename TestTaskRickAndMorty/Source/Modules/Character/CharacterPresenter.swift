@@ -47,7 +47,7 @@ extension CharacterPresenter: CharacterViewOutput {
     func searchBarTextDidEndEditing(with searchText: String, and filter: Filter) {
         view?.startActivityIndicator()
         characters.removeAll()
-        isReloading = true
+        isReloading = false
         isNextPageLoading = false
         var status = ""
         var gender = ""
@@ -66,7 +66,7 @@ extension CharacterPresenter: CharacterViewOutput {
     func searchBarCancelButtonClicked() {
         view?.startActivityIndicator()
         characters.removeAll()
-        isReloading = true
+        isReloading = false
         isNextPageLoading = false
         interactor.reload(withParams: CharacterURLParameters(page: String(GlobalConstants.initialPage)))
     }
@@ -78,7 +78,7 @@ extension CharacterPresenter: CharacterViewOutput {
     func didFilterTapped(with filter: Filter) {
         view?.startActivityIndicator()
         characters.removeAll()
-        isReloading = true
+        isReloading = false
         isNextPageLoading = false
         var status = ""
         var gender = ""

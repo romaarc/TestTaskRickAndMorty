@@ -37,7 +37,7 @@ class NetworkTests: XCTestCase {
             }
         })
         //Then
-        wait(for: [expectation], timeout: 1.5)
+        wait(for: [expectation], timeout: 5.5)
     }
     
     func testNetworkRequestByCharactersError() {
@@ -153,7 +153,7 @@ class NetworkTests: XCTestCase {
             }
         })
         //Then
-        wait(for: [expectation], timeout: 1.5)
+        wait(for: [expectation], timeout: 5.5)
     }
     
     func testNetworkRequestByLocation() throws {
@@ -172,7 +172,7 @@ class NetworkTests: XCTestCase {
             }
         })
         //Then
-        wait(for: [expectation], timeout: 1.5)
+        wait(for: [expectation], timeout: 5.5)
     }
     
     func testNetworkRequestByEpisode() throws {
@@ -191,7 +191,7 @@ class NetworkTests: XCTestCase {
             }
         })
         //Then
-        wait(for: [expectation], timeout: 1.5)
+        wait(for: [expectation], timeout: 5.5)
     }
     
     func testNetworkRequestByCharacterError() throws {

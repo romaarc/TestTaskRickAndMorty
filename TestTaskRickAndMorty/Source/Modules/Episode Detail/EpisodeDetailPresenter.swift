@@ -34,7 +34,7 @@ extension EpisodeDetailPresenter: EpisodeDetailViewOutput {
 
 extension EpisodeDetailPresenter: EpisodeDetailInteractorOutput {
     func didLoad(with characters: [Character]) {
-        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(characters)
+        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(characters.sorted {$0.id < $1.id })
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }

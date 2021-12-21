@@ -64,7 +64,7 @@ class PersistentTest: XCTestCase {
         let params = CharacterURLParameters(page: "1", name: "Morty", status: "", gender: "")
         let expectation = XCTestExpectation(description: "Get all cd models from storage")
         //When
-        let cdModels = persistentProvider?.fetchCharactersModels(with: params)
+        let cdModels = persistentProvider?.fetchCharactersFilterModels(with: params, and: 1)
         guard let cdModels = cdModels else { return }
         print(cdModels)
         expectation.fulfill()

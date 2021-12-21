@@ -91,6 +91,8 @@
 		BB577E71276A232500EBC726 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB577E70276A232500EBC726 /* Filter.swift */; };
 		BB591DA8275CBD2700F0A0B2 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */; };
 		BB591DAA275CCC0600F0A0B2 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */; };
+		BB5EDACC2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDACA2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataClass.swift */; };
+		BB5EDACD2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5EDACB2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataProperties.swift */; };
 		BB6B6196275BA49B00658921 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6195275BA49B00658921 /* API.swift */; };
 		BB6B6198275BA57100658921 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6197275BA57100658921 /* Info.swift */; };
 		BB6B619A275BA5E900658921 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B6199275BA5E900658921 /* Response.swift */; };
@@ -232,6 +234,8 @@
 		BB577E70276A232500EBC726 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		BB591DA7275CBD2700F0A0B2 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		BB591DA9275CCC0600F0A0B2 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
+		BB5EDACA2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterFilterCDModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BB5EDACB2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterFilterCDModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BB6B6195275BA49B00658921 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BB6B6197275BA57100658921 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		BB6B6199275BA5E900658921 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -553,6 +557,8 @@
 				BB50A3F8276BDB9300BFEAFF /* LocationCDModel+CoreDataProperties.swift */,
 				BB50A3FF276C0CE900BFEAFF /* EpisodeCDModel+CoreDataClass.swift */,
 				BB50A400276C0CE900BFEAFF /* EpisodeCDModel+CoreDataProperties.swift */,
+				BB5EDACA2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataClass.swift */,
+				BB5EDACB2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -991,6 +997,7 @@
 				BB47437E2763D2820030FA9D /* UITableView+Empty.swift in Sources */,
 				BB3866F92762A92900E3155E /* CharacterDetailRouter.swift in Sources */,
 				BB132F2D2761F88A0014C944 /* DimmPresentationController.swift in Sources */,
+				BB5EDACD2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataProperties.swift in Sources */,
 				BB4798D1276687EE00736C59 /* BaseUICollectionReusableView.swift in Sources */,
 				BB82867F275FDDEF003100E4 /* CustomFlowLayout.swift in Sources */,
 				BB4798DB2768A6F200736C59 /* Indicator.swift in Sources */,
@@ -1093,6 +1100,7 @@
 				BB50A3F2276BC49E00BFEAFF /* InfoCDModel+CoreDataProperties.swift in Sources */,
 				BB50A402276C0CE900BFEAFF /* EpisodeCDModel+CoreDataProperties.swift in Sources */,
 				BB4798C427665DCA00736C59 /* EpisodeDetailPresenter.swift in Sources */,
+				BB5EDACC2770E0EB00429DE5 /* CharacterFilterCDModel+CoreDataClass.swift in Sources */,
 				BB577E71276A232500EBC726 /* Filter.swift in Sources */,
 				BB9E2B852757BB9500CC6A98 /* ReuseIdentifier.swift in Sources */,
 				BB9E2B942757BD7D00CC6A98 /* CharacterRouter.swift in Sources */,

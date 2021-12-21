@@ -14,7 +14,7 @@ protocol PersistentProviderProtocol {
              and completion: @escaping (Result<PersistentState, Error>) -> Void)
     func fetchCharactersModels() -> [CharacterCDModel]
     func fetchCharactersModels(with page: Int) -> [CharacterCDModel]
-    func fetchCharactersModels(with params: CharacterURLParameters) -> [CharacterCDModel]
+    //func fetchCharactersModels(with params: CharacterURLParameters) -> [CharacterCDModel]
     func fetchCharactersModels(by urls: [String]) -> [CharacterCDModel]
     
     //MARK: - Info
@@ -30,4 +30,11 @@ protocol PersistentProviderProtocol {
     func fetchEpisodeModels(with page: Int) -> [EpisodeCDModel]
     func fetchEpisodeModels(by urls: [String]) -> [EpisodeCDModel]
     func update(with page: Int, where models: [Episode], and action: PersistentState)
+    
+    //MARK: - Character Filter
+    func updateFilter(with page: Int, where models: [Character],
+                to action: PersistentState,
+             and completion: @escaping (Result<PersistentState, Error>) -> Void)
+    func fetchCharactersFilterModels(with params: CharacterURLParameters, and page: Int) -> [CharacterFilterCDModel]
+    func fetchCharactersFilterModels(with params: CharacterURLParameters) -> [CharacterFilterCDModel]
 }

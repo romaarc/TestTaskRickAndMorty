@@ -13,5 +13,6 @@ enum PersistentConstants {
     static let characterModel = "CharacterCDModel"
     static let locationModel = "LocationCDModel"
     static let episodeModel = "EpisodeCDModel"
+    static let characterFilterModel = "CharacterFilterCDModel"
 }
 

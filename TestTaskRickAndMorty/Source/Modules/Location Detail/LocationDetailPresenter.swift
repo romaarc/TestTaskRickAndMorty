@@ -33,7 +33,7 @@ extension LocationDetailPresenter: LocationDetailViewOutput {
 
 extension LocationDetailPresenter: LocationDetailInteractorOutput {
     func didLoad(with residents: [Character]) {
-        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(residents)
+        let viewModels: [CharacterViewModel] = CharacterPresenter.makeViewModels(residents.sorted {$0.id < $1.id })
         DispatchQueue.main.async {
             self.view?.stopActivityIndicator()
         }

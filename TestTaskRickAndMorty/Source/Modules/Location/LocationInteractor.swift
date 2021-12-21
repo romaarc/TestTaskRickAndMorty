@@ -46,16 +46,18 @@ private extension LocationInteractor {
             case.success(let response):
                 let maxPage = response.info.pages
                 let maxCount = response.info.count
+                var wasMax = false
                 self.output?.didLoad(with: response.results, loadType: self.page == GlobalConstants.initialPage ? .reload : .nextPage, count: maxCount)
                 if self.page == maxPage {
                     self.page = maxPage
+                    wasMax = true
                 } else {
                     self.page += 1
                 }
                 self.params.page = String(self.page)
                 
                 let workItem = DispatchWorkItem {
-                    self.persistentProvider.update(with: self.page > maxPage ? maxPage : self.page - 1, where: response.results, and: .add)
+                    self.persistentProvider.update(with: wasMax ? maxPage : self.page - 1, where: response.results, and: .add)
                     self.persistentProvider.update(with: maxPage, and: maxCount, where: .locations)
                 }
                 

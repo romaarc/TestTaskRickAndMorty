@@ -138,6 +138,18 @@ class FakeNetworkManager: NetworkServiceProtocol {
 }
 
 class FakePersistentProvider: PersistentProviderProtocol {
+    func updateFilter(with page: Int, where models: [Character], to action: PersistentState, and completion: @escaping (Result<PersistentState, Error>) -> Void) {
+        return
+    }
+    
+    func fetchCharactersFilterModels(with params: CharacterURLParameters, and page: Int) -> [CharacterFilterCDModel] {
+        return [CharacterFilterCDModel]()
+    }
+    
+    func fetchCharactersFilterModels(with params: CharacterURLParameters) -> [CharacterFilterCDModel] {
+        return [CharacterFilterCDModel]()
+    }
+    
     func update(with page: Int, where models: [Character], to action: PersistentState, and completion: @escaping (Result<PersistentState, Error>) -> Void) {
         return
     }
