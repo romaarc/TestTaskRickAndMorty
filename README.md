@@ -1,5 +1,4 @@
 # TestTaskRickAndMorty
-![180](https://user-images.githubusercontent.com/28999468/146693820-3619bd4a-69f1-4253-b4e2-39c73e7928f5.png)
 # Описание
 <a href="https://app.staply.co/n/b1e72e43">Тестовое задание</a>
 ![2021-12-20 01 54 09](https://user-images.githubusercontent.com/28999468/146693895-444ff7c9-831f-42a7-a593-350ec9d137bf.jpg)
