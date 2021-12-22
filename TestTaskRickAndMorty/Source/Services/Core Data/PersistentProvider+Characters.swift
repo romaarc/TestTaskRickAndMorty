@@ -194,18 +194,18 @@ extension PersistentProvider: PersistentProviderProtocol {
         return table
     }
     //MARK: - Character Filter table
-    func updateFilter(with page: Int, where models: [Character], to action: PersistentState, and completion: @escaping (Result<PersistentState, Error>) -> Void) {
+    func updateFilter(with page: Int, where models: [Character], and params: CharacterURLParameters, to action: PersistentState, and completion: @escaping (Result<PersistentState, Error>) -> Void) {
         switch action  {
         case .add:
             backgroundViewContext.performAndWait {
                 models.forEach {
                     ///updating
-                    if let characters = try? self.fetchRequestFilter(for: $0, and: page).execute().first {
-                        characters.update(with: $0, and: page, isUpdatingPage: false)
+                    if let character = try? self.fetchRequestFilter(for: $0, and: page, and: params).execute().first {
+                        character.update(with: $0, and: page, isUpdatingPage: false, and: params)
                         ///adding
                     } else {
                         let characterCD = CharacterFilterCDModel(context: backgroundViewContext)
-                        characterCD.configNew(with: $0, and: page)
+                        characterCD.configNew(with: $0, and: page, and: params)
                     }
                 }
                 saveContext()
@@ -223,27 +223,35 @@ extension PersistentProvider: PersistentProviderProtocol {
         request.sortDescriptors = [sort]
         request.returnsObjectsAsFaults = false
         request.fetchLimit = 20
+        request.returnsDistinctResults = true
         var arrayParams: [CharacterURLParameters] = []
         arrayParams.append(params)
         var predicates: [NSPredicate] = []
         predicates.append(NSPredicate(format: "page == %i", page))
+        var genderString: String = ""
+        var stasusString: String = ""
         for param in arrayParams {
             if let name = param.name {
                 if !name.isEmpty {
-                    predicates.append(NSPredicate(format: "name CONTAINS %@", name)) //LIKE '*%1$@*'
+                    predicates.append(NSPredicate(format: "name CONTAINS %@", name))
                 }
             }
             if let gender = param.gender {
                 if !gender.isEmpty {
-                    predicates.append(NSPredicate(format: "gender CONTAINS %@", gender.capitalized))
+                    genderString = gender.lowercased()
                 }
             }
             if let status = param.status {
                 if !status.isEmpty {
-                    predicates.append(NSPredicate(format: "status CONTAINS %@", status.capitalized))
+                    stasusString = status.lowercased()
                 }
             }
         }
+        
+        if !genderString.isEmpty || !stasusString.isEmpty {
+            predicates.append(NSPredicate(format: "attributeFilter == %@", stasusString + genderString))
+        }
+        
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.predicate = predicate
         let table = try? mainViewContext.fetch(request)
@@ -260,6 +268,9 @@ extension PersistentProvider: PersistentProviderProtocol {
         var arrayParams: [CharacterURLParameters] = []
         arrayParams.append(params)
         var predicates: [NSPredicate] = []
+        predicates.append(NSCompoundPredicate(notPredicateWithSubpredicate: NSPredicate(format: "page == %i", 0)))
+        var genderString: String = ""
+        var stasusString: String = ""
         for param in arrayParams {
             if let name = param.name {
                 if !name.isEmpty {
@@ -268,15 +279,20 @@ extension PersistentProvider: PersistentProviderProtocol {
             }
             if let gender = param.gender {
                 if !gender.isEmpty {
-                    predicates.append(NSPredicate(format: "gender CONTAINS %@", gender.capitalized))
+                    genderString = gender.lowercased()
                 }
             }
             if let status = param.status {
                 if !status.isEmpty {
-                    predicates.append(NSPredicate(format: "status CONTAINS %@", status.capitalized))
+                    stasusString = status.lowercased()
                 }
             }
         }
+        
+        if !genderString.isEmpty || !stasusString.isEmpty {
+            predicates.append(NSPredicate(format: "attributeFilter == %@", stasusString + genderString))
+        }
+        
         if predicates.count == 1 {
             request.predicate = predicates[0]
         } else {
@@ -297,15 +313,23 @@ private extension PersistentProvider {
         request.predicate = .init(format: "id == %i", character.id)
         return request
     }
-    func fetchRequestFilter(for character: Character, and page: Int) -> NSFetchRequest<CharacterFilterCDModel> {
+    func fetchRequestFilter(for character: Character, and page: Int, and params: CharacterURLParameters) -> NSFetchRequest<CharacterFilterCDModel> {
         let request = CharacterFilterCDModel.fetchRequest()
         var predicates: [NSPredicate] = []
         predicates.append(.init(format: "id == %i", character.id))
-        predicates.append(.init(format: "page == %i", page))
+        if page == 0 {
+            predicates.append(.init(format: "page == %i", page))
+        }
+        if params.name == nil, let paramsGender = params.gender, let paramsStatus = params.status {
+            if !paramsGender.isEmpty || !paramsStatus.isEmpty || ((params.name?.isEmpty) != nil) {
+                predicates.append(.init(format: "attributeFilter == %@", paramsStatus + paramsGender))
+            }
+        }
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         return request
     }
 }
+
 
 fileprivate extension CharacterCDModel {
     func update(with character: Character, and characterPage: Int, isUpdatingPage: Bool) {
@@ -340,13 +364,24 @@ fileprivate extension CharacterCDModel {
 }
 
 fileprivate extension CharacterFilterCDModel {
-    func update(with character: Character, and characterPage: Int, isUpdatingPage: Bool) {
+    func update(with character: Character, and characterPage: Int, isUpdatingPage: Bool, and params: CharacterURLParameters) {
         var originDict: [String: String] = [:]
         var locationDict: [String: String] = [:]
         
         if isUpdatingPage {
             page = Int16(characterPage)
         }
+        
+        if params.name == nil, let paramsGender = params.gender, let paramsStatus = params.status {
+            if !paramsGender.isEmpty || !paramsStatus.isEmpty || ((params.name?.isEmpty) != nil) {
+                attributeFilter = paramsStatus + paramsGender
+            } else {
+                attributeFilter = ""
+            }
+        } else {
+            attributeFilter = ""
+        }
+        
         name = character.name
         status = character.status.lowercased().capitalized
         species = character.species
@@ -365,9 +400,9 @@ fileprivate extension CharacterFilterCDModel {
         url = character.url
     }
     
-    func configNew(with character: Character, and characterPage: Int) {
+    func configNew(with character: Character, and characterPage: Int, and params: CharacterURLParameters) {
         id = Int64(character.id)
-        update(with: character, and: characterPage, isUpdatingPage: true)
+        update(with: character, and: characterPage, isUpdatingPage: true, and: params)
     }
 }
 

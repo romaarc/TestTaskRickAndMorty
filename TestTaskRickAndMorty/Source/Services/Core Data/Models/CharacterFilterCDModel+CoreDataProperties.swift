@@ -28,7 +28,7 @@ extension CharacterFilterCDModel {
     @NSManaged public var name: String
     @NSManaged public var page: Int16
     @NSManaged public var status: String
-
+    @NSManaged public var attributeFilter: String
 }
 
 extension CharacterFilterCDModel : Identifiable {}

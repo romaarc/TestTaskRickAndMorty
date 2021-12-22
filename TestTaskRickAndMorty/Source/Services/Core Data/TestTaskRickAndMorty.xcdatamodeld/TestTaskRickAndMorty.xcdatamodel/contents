@@ -16,6 +16,7 @@
         <attribute name="url" attributeType="String"/>
     </entity>
     <entity name="CharacterFilterCDModel" representedClassName="CharacterFilterCDModel" syncable="YES">
+        <attribute name="attributeFilter" attributeType="String"/>
         <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="episode" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;String&gt;"/>
         <attribute name="gender" attributeType="String"/>
@@ -60,9 +61,9 @@
     </entity>
     <elements>
         <element name="CharacterCDModel" positionX="-9063.303588867188" positionY="-2671.531311035156" width="241.6643676757812" height="224"/>
+        <element name="CharacterFilterCDModel" positionX="-9065.575500488281" positionY="-2432.451721191406" width="244.3501586914062" height="239"/>
         <element name="EpisodeCDModel" positionX="-8807.779418945312" positionY="-2344.41064453125" width="128" height="149"/>
         <element name="InfoCDModel" positionX="-8806.247314453125" positionY="-2670.474655151367" width="128" height="133"/>
         <element name="LocationCDModel" positionX="-8807.799194335938" positionY="-2498.468536376953" width="128" height="149"/>
-        <element name="CharacterFilterCDModel" positionX="-9065.575500488281" positionY="-2432.451721191406" width="244.3501586914062" height="238"/>
     </elements>
 </model>

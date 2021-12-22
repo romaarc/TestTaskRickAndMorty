@@ -69,7 +69,7 @@ extension EpisodeViewController: EpisodeViewInput {
                     }
                     self.tableView.deleteRows(at: indexPaths, with: .automatic)
                 } completion: {_ in
-                    self.tableView.setEmptyMessage(message: "Не найдено эпизодов или подключитесь к сети, чтобы загрузить данные")
+                    self.tableView.setEmptyMessage(message: EpisodeConstants.Strings.emptyMessage)
                 }
             }
         }

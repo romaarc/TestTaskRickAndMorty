@@ -40,7 +40,6 @@ extension CharacterPresenter: CharacterViewOutput {
             return
         }
         view?.startActivityIndicator()
-        isNextPageLoading = true
         interactor.loadNext()
     }
     
@@ -122,15 +121,6 @@ extension CharacterPresenter: CharacterInteractorOutput {
             self.view?.stopActivityIndicator()
         }
         view?.didError()
-    }
-    
-    func change(loadType: LoadingDataType, isOffline: Bool) {
-        switch loadType {
-        case .nextPage:
-            isNextPageLoading = false
-        case .reload:
-            isReloading = false
-        }
     }
 }
 

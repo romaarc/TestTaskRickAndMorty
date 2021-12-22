@@ -32,9 +32,7 @@ protocol PersistentProviderProtocol {
     func update(with page: Int, where models: [Episode], and action: PersistentState)
     
     //MARK: - Character Filter
-    func updateFilter(with page: Int, where models: [Character],
-                to action: PersistentState,
-             and completion: @escaping (Result<PersistentState, Error>) -> Void)
+    func updateFilter(with page: Int, where models: [Character], and params: CharacterURLParameters, to action: PersistentState, and completion: @escaping (Result<PersistentState, Error>) -> Void)
     func fetchCharactersFilterModels(with params: CharacterURLParameters, and page: Int) -> [CharacterFilterCDModel]
     func fetchCharactersFilterModels(with params: CharacterURLParameters) -> [CharacterFilterCDModel]
 }
