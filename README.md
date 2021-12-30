@@ -10,22 +10,20 @@ https://user-images.githubusercontent.com/28999468/146780843-6af7b4d9-4981-4ab3-
 ## Установка
 У вас должны быть установлены SPM <a href="https://github.com/onevcat/Kingfisher">Kingfisher</a>
 
-## Детали реализации
-### Deployment Target
-
+# Детали реализации
+## Deployment Target
 iOS 13
-### Архитектура приложения
-
+## Архитектура приложения
+**VIPER + Coordinator + Services (Core Data Stack + URLSession)**<br>
+## UI
 **UIKit without Storyboard and Xibs, only layout with code**<br>
 
-**VIPER + Coordinator + Services (Core Data Stack + URLSession)**<br>
-
-### Дизайн приложения
+# Дизайн приложения
 
 За пример использовался общедоступный макет из Figma
 <br><a href="https://www.figma.com/file/xOgqbbqNwGiIqI5Ni9GR0v/Rick-and-Morty---Test-Developer-iOS-(Community)?node-id=0%3A1">Сам макет</a>
 
 <img width="916" alt="Screenshot 2021-12-20 at 02 06 53" src="https://user-images.githubusercontent.com/28999468/146694230-cdf1531c-14f7-459b-a53a-0cbdd2f786d4.png">
 
-### Немного тестов
+# Немного тестов
 <img width="1084" alt="Screenshot 2021-12-20 at 02 12 38" src="https://user-images.githubusercontent.com/28999468/146694382-5dabd5d3-3f1b-4ab3-8c33-0f07ac1c9161.png">
