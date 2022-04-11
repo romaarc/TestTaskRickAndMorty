@@ -52,7 +52,6 @@ private extension AppCoordinator {
                                                         tag: navigationControllerKey.rawValue)
             navigationController.tabBarItem = tabBarItem
             navigationController.navigationBar.prefersLargeTitles = true
-            //navigationController.navigationItem.largeTitleDisplayMode = .always
             navigationController.navigationBar.sizeToFit()
             result[navigationControllerKey] = navigationController
         }
