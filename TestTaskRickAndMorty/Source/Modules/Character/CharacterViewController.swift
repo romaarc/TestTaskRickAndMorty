@@ -161,6 +161,7 @@ extension CharacterViewController: CharacterFilterDelegate {
 // MARK: - Search bar methods
 extension CharacterViewController: UISearchBarDelegate, UISearchResultsUpdating {
     private func setupSearchController() {
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Localize.Images.characterFilterSymbol, style:  .plain, target: self, action: #selector(filterButtonClicked))
         
