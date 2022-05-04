@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppCoordinator {
+final class AppCoordinator {
     
     private let window: UIWindow
     private lazy var tabBarController = UITabBarController()

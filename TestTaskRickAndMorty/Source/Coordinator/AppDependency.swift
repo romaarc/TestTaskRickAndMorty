@@ -13,7 +13,7 @@ protocol HasDependencies {
     var persistentProvider: PersistentProviderProtocol { get }
 }
 
-class AppDependency {
+final class AppDependency {
     let networkService: NetworkService
     let reachability: Reachability
     let persistent: PersistentProvider

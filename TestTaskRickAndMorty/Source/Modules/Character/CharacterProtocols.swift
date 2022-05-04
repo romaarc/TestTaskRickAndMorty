@@ -12,8 +12,7 @@ protocol CharacterModuleInput {
 	var moduleOutput: CharacterModuleOutput? { get }
 }
 
-protocol CharacterModuleOutput: AnyObject {
-}
+protocol CharacterModuleOutput: AnyObject {}
 
 protocol CharacterViewInput: ViewInput {
     func set(viewModels: [CharacterViewModel], isOffline: Bool)
