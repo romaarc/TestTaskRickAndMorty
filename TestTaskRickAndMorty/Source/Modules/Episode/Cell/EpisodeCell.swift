@@ -66,20 +66,20 @@ class EpisodeCell: BaseUITableViewCell {
 extension EpisodeCell {
     private func setupUI() {
         NSLayoutConstraint.activate([
-            self.label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6.5),
-            self.label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6.5),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            self.subLabel.topAnchor.constraint(equalTo: label.bottomAnchor),
-            self.subLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            subLabel.topAnchor.constraint(equalTo: label.bottomAnchor),
+            subLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            self.dateLabel.topAnchor.constraint(equalTo: subLabel.bottomAnchor, constant: 5.0),
-            self.dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            self.dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -11.5),
+            dateLabel.topAnchor.constraint(equalTo: subLabel.bottomAnchor, constant: 5.0),
+            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -11.5),
             
-            self.arrowImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 31.0),
-            self.arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18.0),
-            self.arrowImageView.heightAnchor.constraint(equalToConstant: 22.0),
-            self.arrowImageView.widthAnchor.constraint(equalToConstant: 13.0)
+            arrowImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 31.0),
+            arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18.0),
+            arrowImageView.heightAnchor.constraint(equalToConstant: 22.0),
+            arrowImageView.widthAnchor.constraint(equalToConstant: 13.0)
         ])
     }
     //MARK: - Update with ViewModel
