@@ -144,7 +144,7 @@ private extension EpisodeDetailViewController {
     }
 }
 //MARK: - UICollectionViewDataSource
-extension EpisodeDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension EpisodeDetailViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         charactersViewModels.count

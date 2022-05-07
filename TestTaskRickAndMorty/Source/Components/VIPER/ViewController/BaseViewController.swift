@@ -50,3 +50,22 @@ extension BaseViewController {
         activityIndicator.startAnimating()
     }
 }
+//MARK: - UICollectionViewDelegate
+extension BaseViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 1, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                cell.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 0.7, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+        }
+    }
+}

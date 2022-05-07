@@ -142,7 +142,7 @@ private extension LocationDetailViewController {
     }
 }
 //MARK: - UICollectionViewDataSource
-extension LocationDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension LocationDetailViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         charactersViewModels.count
