@@ -78,6 +78,7 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        animateOnTapCell(to: collectionView.cellForItem(at: indexPath))
         let generator = UISelectionFeedbackGenerator()
         let viewModel = viewModels[indexPath.row]
         generator.selectionChanged()
