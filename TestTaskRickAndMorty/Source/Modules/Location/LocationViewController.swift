@@ -99,17 +99,6 @@ private extension LocationViewController {
         collectionView.backgroundColor = .white
         collectionView.register(LocationCell.self)
     }
-    
-    func animateOnTapCell(to view: UIView?) {
-        guard let view = view else { return }
-        UIView.animate(withDuration: 1, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseOut) {
-            view.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.7, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                view.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }, completion: nil)
-        }
-    }
 }
 //MARK: - UICollectionViewDataSource
 extension LocationViewController: UICollectionViewDataSource {
@@ -140,7 +129,6 @@ extension LocationViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        animateOnTapCell(to: collectionView.cellForItem(at: indexPath))
         let generator = UISelectionFeedbackGenerator()
         let viewModel = viewModels[indexPath.row]
         generator.selectionChanged()
@@ -161,6 +149,22 @@ extension LocationViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return LocationConstants.Layout.minimumInteritemSpacingForSectionAt
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 1, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                cell.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 0.7, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+        }
     }
 }
 //MARK: - activityIndicator

@@ -78,7 +78,6 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        animateOnTapCell(to: collectionView.cellForItem(at: indexPath))
         let generator = UISelectionFeedbackGenerator()
         let viewModel = viewModels[indexPath.row]
         generator.selectionChanged()
@@ -99,6 +98,22 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         CharacterConstants.Layout.minimumInteritemSpacingForSectionAt
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 1, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                cell.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 0.7, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+        }
     }
 }
 //MARK: - CharacterViewInput from Presenter

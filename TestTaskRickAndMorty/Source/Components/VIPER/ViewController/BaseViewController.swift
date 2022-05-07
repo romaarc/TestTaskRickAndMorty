@@ -39,17 +39,6 @@ class BaseViewController: UIViewController {
     }
     
     func setupCollectionView() {}
-    
-    func animateOnTapCell(to view: UIView?) {
-        guard let view = view else { return }
-        UIView.animate(withDuration: 1, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseOut) {
-            view.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.7, delay: .zero, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                view.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }, completion: nil)
-        }
-    }
 }
 //MARK: - activityIndicator
 extension BaseViewController {
