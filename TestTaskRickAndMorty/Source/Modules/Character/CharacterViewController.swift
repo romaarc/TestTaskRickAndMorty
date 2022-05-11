@@ -80,6 +80,7 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let generator = UISelectionFeedbackGenerator()
         let viewModel = viewModels[indexPath.row]
+        generator.prepare()
         generator.selectionChanged()
         output.onCellTap(with: viewModel)
     }
@@ -137,6 +138,7 @@ extension CharacterViewController: CharacterViewInput {
 private extension CharacterViewController {
     @objc func filterButtonClicked() {
         let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
         generator.selectionChanged()
         output.onFilterButtonTap(with: filter)
     }

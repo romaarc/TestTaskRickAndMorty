@@ -192,6 +192,7 @@ class CharacterFilterViewController: UIViewController {
     
     @objc private func apply() {
         let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
         generator.selectionChanged()
         delegate?.didFilterTapped(with: filter)
         dismiss(animated: true)
@@ -199,6 +200,7 @@ class CharacterFilterViewController: UIViewController {
     
     @objc private func clear() {
         let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
         generator.selectionChanged()
         delegate?.didClearTapped()
         dismiss(animated: true)

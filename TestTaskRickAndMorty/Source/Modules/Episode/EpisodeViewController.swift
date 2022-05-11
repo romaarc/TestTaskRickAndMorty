@@ -129,6 +129,7 @@ extension EpisodeViewController: UITableViewDelegate {
         let seasonsKeys = Array(seasons.keys).sorted()
         let seasonEpisodes = viewModels.filter({ $0.episode.contains("S0" + String(seasonsKeys[indexPath.section] + 1)) })
         let viewModel = seasonEpisodes[indexPath.row]
+        generator.prepare()
         generator.selectionChanged()
         output.onRowTap(with: viewModel)
     }

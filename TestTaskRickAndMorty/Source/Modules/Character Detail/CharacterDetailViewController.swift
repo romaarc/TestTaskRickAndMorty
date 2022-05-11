@@ -187,11 +187,13 @@ extension CharacterDetailViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             guard let location = locationViewModel else { return }
+            generator.prepare()
             generator.selectionChanged()
             output.showLocation(with: location)
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
             let viewModel = episodeViewModels[indexPath.row]
+            generator.prepare()
             generator.selectionChanged()
             output.showEpisode(with: viewModel)
         }
