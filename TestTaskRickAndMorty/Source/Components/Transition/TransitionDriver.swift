@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransitionDriver: UIPercentDrivenInteractiveTransition {
+final class TransitionDriver: UIPercentDrivenInteractiveTransition {
     // MARK: - Linking
     func link(to controller: UIViewController) {
         presentedController = controller

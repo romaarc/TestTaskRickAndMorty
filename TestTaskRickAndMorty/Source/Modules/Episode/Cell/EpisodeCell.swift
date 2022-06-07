@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EpisodeCell: BaseUITableViewCell {
+final class EpisodeCell: BaseUITableViewCell {
     
     private let label: UILabel = {
         let label = UILabel()

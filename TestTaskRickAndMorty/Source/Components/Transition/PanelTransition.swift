@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PanelTransition: NSObject, UIViewControllerTransitioningDelegate {
+final class PanelTransition: NSObject, UIViewControllerTransitioningDelegate {
     // MARK: - Presentation controller
     private let driver = TransitionDriver()
     

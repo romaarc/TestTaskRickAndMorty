@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationHeaderDetailView: BaseUICollectionReusableView {
+final class LocationHeaderDetailView: BaseUICollectionReusableView {
     
     private let label: TopAlignedLabel = {
         let label = TopAlignedLabel()

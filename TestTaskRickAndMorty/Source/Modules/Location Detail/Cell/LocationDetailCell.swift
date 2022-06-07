@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationDetailCell: BaseUICollectionViewCell {
+final class LocationDetailCell: BaseUICollectionViewCell {
     private let characterImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false

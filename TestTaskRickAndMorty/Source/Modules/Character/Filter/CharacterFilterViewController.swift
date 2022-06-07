@@ -12,7 +12,7 @@ protocol CharacterFilterDelegate: AnyObject {
     func didClearTapped()
 }
 
-class CharacterFilterViewController: UIViewController {
+final class CharacterFilterViewController: UIViewController {
     
     weak var delegate: CharacterFilterDelegate?
     var filter = Filter(statusIndexPath: nil,

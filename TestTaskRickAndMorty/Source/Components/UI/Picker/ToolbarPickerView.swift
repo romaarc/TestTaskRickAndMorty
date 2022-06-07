@@ -13,7 +13,7 @@ protocol ToolbarPickerViewDelegate: AnyObject {
     func didTapCancel(_ pickerView: UIPickerView)
 }
 
-class ToolbarPickerView: UIPickerView {
+final class ToolbarPickerView: UIPickerView {
 
     public private(set) var toolbar: UIToolbar?
     public weak var toolbarDelegate: ToolbarPickerViewDelegate?

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilterCell: BaseUITableViewCell {
+final class FilterCell: BaseUITableViewCell {
     
     private let radioImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)

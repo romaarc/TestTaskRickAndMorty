@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationCell: BaseUICollectionViewCell {
+final class LocationCell: BaseUICollectionViewCell {
     private let typeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

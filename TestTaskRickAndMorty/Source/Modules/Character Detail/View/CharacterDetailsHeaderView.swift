@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterDetailsHeaderView: UIView {
+final class CharacterDetailsHeaderView: UIView {
 
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)

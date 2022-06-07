@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EpisodeHeaderSectionView: BaseUITableViewHeaderFooterView {
+final class EpisodeHeaderSectionView: BaseUITableViewHeaderFooterView {
     
     private let label: UILabel = {
         let label = UILabel()

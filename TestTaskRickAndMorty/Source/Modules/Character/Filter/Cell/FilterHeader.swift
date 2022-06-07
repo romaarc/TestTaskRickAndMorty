@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilterHeader: BaseUITableViewHeaderFooterView {
+final class FilterHeader: BaseUITableViewHeaderFooterView {
     
     private let label: UILabel = {
         let label = UILabel()

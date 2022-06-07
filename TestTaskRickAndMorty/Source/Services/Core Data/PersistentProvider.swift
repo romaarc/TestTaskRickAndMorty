@@ -8,7 +8,7 @@
 import CoreData
 import Foundation
 
-class PersistentProvider {
+final class PersistentProvider {
     private var persistentContainer: NSPersistentContainer!
     var mainViewContext: NSManagedObjectContext!
     var backgroundViewContext: NSManagedObjectContext!

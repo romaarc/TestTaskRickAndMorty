@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterCell: BaseUICollectionViewCell {
+final class CharacterCell: BaseUICollectionViewCell {
     private let characterImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false

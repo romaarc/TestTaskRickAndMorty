@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PresentAnimation: NSObject {
+final class PresentAnimation: NSObject {
     let duration: TimeInterval = 0.3
 
     private func animator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {

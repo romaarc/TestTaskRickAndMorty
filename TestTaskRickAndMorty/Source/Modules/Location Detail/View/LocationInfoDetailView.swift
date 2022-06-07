@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationInfoDetailView: BaseView {
+final class LocationInfoDetailView: BaseView {
 
     private let upLabel: UILabel = {
         let label = UILabel()
